@@ -1,0 +1,94 @@
+<!-- <div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - Add Race Class</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a routerLink="/producer/dashboard">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Add Race Class</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <form>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Race Class Name</label>
+                      <input type="text" class="form-control" id="inputRaceClassName" placeholder="Race Class Name">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+              </div>
+            </div>
+            <br>
+       
+            <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-check">
+                        <input type="checkbox" (change)="selectAll()" class="form-check-input" id="exampleCheck1">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Class Name</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Edit</h5>
+                    </div>
+                  </div>
+                  <div class="row" *ngFor="let racetype of raceClassDataReponse;let i=index">
+                      
+                    <div class="col-xs4-1">
+                      <mat-checkbox name="{{racetype._id}}{{i}}" [(ngModel)]="racetype.selected"  (change)="checkIfAllSelected()"></mat-checkbox>
+                    </div>
+                    <div class="col-xs4-2">
+                    <p *ngIf="!enableEdit || racetype._id!=editRaceId">{{racetype.rc_name}}</p>
+                    <div class="full-width" hintLabel="Max 10 characters" *ngIf="enableEdit && racetype._id==editRaceId">
+                        <input id="rc_name" name="rc_name" type="text" class="validate" placeholder="{{racetype.rc_name}}" [(ngModel)]="racetype.rc_name"  #input maxlength="10"
+                        >
+                    </div>
+                    </div>
+                    <div class="col-xs4-1">
+                    <a name="editData" *ngIf="!enableEdit || racetype._id!=editRaceId" (click)="editraceclasstype(racetype._id)">edit</a>
+                    <a name="editData" *ngIf="enableEdit && racetype._id==editRaceId" (click)="saveraceclasstype(racetype._id,racetype.rc_name)">save</a>
+                          </div>
+                        
+                      </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+   
+   -->

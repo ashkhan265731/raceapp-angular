@@ -1,0 +1,13 @@
+
+
+
+<input type="file" ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload"  multiple />
+
+<div *ngFor="let item of uploader.queue">
+{{item.file.name}}
+<a  (click)="item.upload()" >Upload</a>
+<button (click)="item.remove()" >Cancel</button>
+<br>
+</div>
+
+<a  (click)="uploader.uploadAll()" style="cursor: pointer">Upload All</a>

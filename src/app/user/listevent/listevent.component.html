@@ -1,0 +1,52 @@
+<div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - Events List</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+  
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="index.html">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Events List</li>
+              </ul>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <ul class="list-group">
+                    <li class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center" *ngFor="let events of eventsListData;let i=index">
+                        <a class="col-xs-12 col-sm-12 event-link"  [routerLink]="['/user/usereventsignup',events._id]">{{events.event_name}} 
+                        <span class="pull-right right-0"> <i class="fa fa-arrow-circle-right"></i></span>
+                        </a>
+                    </li>
+                  </ul>
+        </div>
+      </div>
+    </div>
+  </div>

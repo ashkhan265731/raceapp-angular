@@ -1,0 +1,87 @@
+<div class="content-wraper">
+
+  <div class="container-fluid" style="padding: 0px;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="page-header page-header-default">
+          <div class="page-header-content">
+            <div class="page-title">
+              <h4>
+                <i class="icon-arrow-left52 position-left"></i>
+                <span class="text-semibold">Home</span> - Registered Users List</h4>
+              <a class="heading-elements-toggle">
+                <i class="icon-more"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="breadcrumb-line">
+            <a class="breadcrumb-elements-toggle">
+              <i class="icon-menu-open"></i>
+            </a>
+            <ul class="breadcrumb">
+              <li>
+                <a href="index.html">
+                  <i class="icon-home2 position-left"></i> Home</a>
+              </li>
+              <li class="active">Registered Users List</li>
+            </ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" (click)="sort('c_fname')">Name &#x21C5;</th>
+                    <th scope="col">User Stalls</th>
+                    <th scope="col">Electric Quantity</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Total</th>
+                    <!-- <th>User Details</th> -->
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let users of eventSignedUpUsers ;let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{users.c_fname + ' '+ users.c_lname }}</td>
+                      <td>{{users.userStalls}}</td>
+                      <td>{{users.electric_quantity}}</td>
+                      <td>{{users.city}}</td>
+                      <td>{{users.total}}</td>
+                    
+                      <td>
+                        <a [routerLink]="['/producer/single-registeredusers-details',users._id]"  style="cursor:pointer">
+                          <i class="material-icons">chrome_reader_mode</i>
+                        </a>
+                        <a [routerLink]="['/producer/editusereventdetails',users._id]" >
+                          <i class="material-icons">mode_edit</i>                    
+                        </a>
+                        <a *ngIf="checkProducerAccess(users.producer_id)"  (click)="delete_user(users._id)">
+                            <i class="material-icons">close</i>
+                        </a>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

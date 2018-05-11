@@ -1,0 +1,82 @@
+<div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - Report</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+  
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="index.html">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Report</li>
+              </ul>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <div class="card p-2">
+        <div class="card-body">
+      
+      </div>
+        </div>
+
+          <div class="card m-t-10">
+            <div class="card-body">
+              <div class="table-responsive table-hover">
+                  <table id="basic-table" class="riders table">
+                      <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Sl.no</th>
+                            <th scope="col">user Name</th>
+                            <th scope="col">Ride Class</th>
+                            <th scope="col">Rider Name</th>
+                            <th scope="col">Horse Name</th>
+                            <th scope="col">Event Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let eventEntry of usersReportData;let i=index">
+                              <td>{{i+1}}</td>
+                              <td>{{eventEntry.user_firstname }} {{eventEntry.user_lastname }}</td>
+                              <td>{{eventEntry.ridetype[0] }}</td>
+                              <td>{{eventEntry.ridername }}</td>
+                              <td>{{eventEntry.horsename }}</td>
+                              <td>{{eventEntry.event_name}}</td>
+                            </tr>
+                      </tbody>
+                    </table>
+  <button  class="hide-on-print " (click)="generate()">Generate PDF</button>
+  <button  class="hide-on-print " (click)="print_instant()">Print report</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

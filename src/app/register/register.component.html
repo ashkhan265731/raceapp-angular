@@ -1,0 +1,140 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-register100 p-l-50 p-r-50 p-t-77 p-b-30">
+      <span class="login100-form-title p-b-55">
+        Register
+      </span>
+      <div class="container">
+        <div class="row">
+          <!-- <div class="col-md-6">
+              <div class="social text-center">
+                  <button class="btn btn-just-icon btn-round btn-twitter" mat-raised-button="">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                  <button class="btn btn-just-icon btn-round btn-dribbble" mat-raised-button="">
+                    <i class="fa fa-dribbble"></i>
+                  </button>
+                  <button class="btn btn-just-icon btn-round btn-facebook" mat-raised-button="">
+                    <i class="fa fa-facebook"> </i>
+                  </button>
+                  <h4 class="mt-3"> or be classical </h4>
+                </div>
+          </div> -->
+         
+            <form class="login100-form validate-form" (ngSubmit)="register()" #registerForm="ngForm">
+
+              <div class="col-md-12">
+              <div class="row">
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" placeholder="First Name" type="text" name="first_name" [(ngModel)]="user.first_name" required #f_name="ngModel"
+                pattern="[a-zA-Z _]*">
+                <div *ngIf="f_name.errors?.required  && (f_name.touched)" class="error">First Name is Required</div>
+                <div *ngIf="f_name.errors?.pattern && (f_name.touched || f_name.dirty)" class="error">Name Must Contain Only Characters</div>
+    
+                
+              </div>
+
+              <div class="col-md-6 wrap-input100 validate-input m-b-16">
+                <input class="input100" placeholder="Last Name" type="text" name="last_name" [(ngModel)]="user.last_name" required #l_name="ngModel"
+                pattern="[a-zA-Z _]*">
+                <div *ngIf="l_name.errors?.required  && (l_name.touched)" class="error">Last Name is Required</div>
+                <div *ngIf="l_name.errors?.pattern&& (l_name.touched || l_name.dirty)" class="error">Name Must Contain Only Characters</div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" placeholder="Email" type="email" name="email" [(ngModel)]="user.email" required #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                (blur)="checkEmailDuplication(email)">
+                <div *ngIf="email.errors?.required  && (email.touched)" class="error">Email is Required</div>
+                <div *ngIf="email.errors?.pattern && (email.touched || email.dirty)" class="error">Enter a valid Email</div>
+                <div class="error" *ngIf="verifyEmail" >Email Already Exists</div>
+              </div>
+
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                  <select class="input100" placeholder="Type of User" name="user_type" [(ngModel)]="user.user_type" required #user_type="ngModel">
+                    <option>Producer</option>
+                    <option>User</option>
+                  </select>
+                                 
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" placeholder="Password" type="password" name="password" [(ngModel)]="user.password" required #password="ngModel">
+                <div class="error" *ngIf="password.errors?.required && (password.touched || password.dirty)">Password is required</div>  
+              </div>
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" placeholder="Confirm Password" type="password" name="cpassword" required [(ngModel)]="cpass" #c_pass="ngModel">
+                <div class="error" *ngIf="c_pass.errors?.required && password.touched ">Confirm Password</div>
+                <div class="error" [hidden]="user.password==cpass">Fields Dont match</div>
+              </div>
+            </div>
+         
+            <div class="row">
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" placeholder="Phone" name="phone" [(ngModel)]="user.phone" #user_phone="ngModel" required pattern="[0-9]*">
+                <div class="error" *ngIf="user_phone.errors?.required && (user_phone.touched )">Phone cannot be empty</div>
+                <div class="error" *ngIf="user_phone.errors?.pattern && (user_phone.touched || user_phone.dirty)">Phone Must Contain only numbers</div>
+              </div>
+
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                <input class="input100" matInput placeholder="City" name="city" [(ngModel)]="user.city" #city="ngModel" required pattern="[a-z A-Z _]*">
+                <div class="error" *ngIf="city.errors?.required && (city.touched )">City cannot be empty</div>
+                <div class="error" *ngIf="city.errors?.pattern && (city.touched || city.dirty)">City is not valid</div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                      <select id="inputState" class="input100"  placeholder="State" name="state" [(ngModel)]="user.state" #state="ngModel">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let state of states">{{state}}</option>
+                      </select>
+                      <div class="error" *ngIf="state.errors?.required ">State cannot be empty</div>
+              </div>
+
+              <div class="col-md-6 wrap-input100 validate-input m-b-16" >
+                  <input class="input100" #zipcode="ngModel" maxlength="5" [(ngModel)]="user.zipcode" name="zipcode" placeholder="Postal Code" pattern="[0-9]{5}"
+                  required>
+                  <div class="error" *ngIf="zipcode.errors?.required && (zipcode.touched )">Zipcode cannot be empty</div>
+                  <div class="error" *ngIf="zipcode.errors?.pattern && (zipcode.touched || zipcode.dirty)">Zipcode is not valid</div>
+                </div>
+              </div>
+                <div class="wrap-input100 validate-input m-b-16" >
+                <input placeholder="Profile Picture" type="file" name="file" required (change)="fileChangeEvent($event)">
+                  </div>
+  
+              <div class="contact100-form-checkbox m-l-4">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <label class="label-checkbox100" for="ckb1">
+                    I agree to the terms and conditions.
+                </label>
+              </div>
+
+              <div class="container-login100-form-btn p-t-25">
+                <button class="login100-form-btn" [disabled]="registerForm.invalid || user.password!=cpass || verifyEmail" type="submit"
+                name="action">
+                  Sign Up
+                </button>
+              </div>
+
+             
+            
+              <div class="text-center w-full p-t-50">
+                <span class="txt1">
+                  Already a member?
+                </span>
+
+                <a class="txt1 bo1 hov1" href="#">
+                  Sign in now
+                </a>
+              </div>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

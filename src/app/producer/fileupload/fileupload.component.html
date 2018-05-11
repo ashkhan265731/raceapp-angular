@@ -1,0 +1,19 @@
+
+
+
+<input class="upld-btn" type="file" ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload" />
+
+<div *ngFor="let item of uploader.queue;let i =index" >
+
+
+<div *ngIf="i<1">
+ <!-- {{item.file.name}}  -->
+<!-- <div style="background: red; padding: 10px;" (click)="item.upload()" >Upload</div> -->
+
+ <a  id="add-rtype" (click)="item.upload()" style="cursor: default">
+              <i class="fa fa-upload">file_upload</i>
+             </a>
+<button  (click)="item.remove()" >cancel</button>
+<br>
+</div>
+</div>

@@ -1,0 +1,10 @@
+.error{
+    color: red;
+}
+.m-r-10{
+    margin-right: 10px;
+}
+.check-success{
+    position: absolute;
+    right: 20px;
+}
