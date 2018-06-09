@@ -16,6 +16,7 @@ import { UsereventsignupComponent } from './usereventsignup/usereventsignup.comp
 import { UserComponent } from './user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +37,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProfileEditComponent, 
     ThankYouComponent, 
     UsereventsignupComponent, 
-    UserComponent]
+    UserComponent, OrderSummaryComponent]
 })
 export class UserModule { }

@@ -1,0 +1,18 @@
+.checkbox{
+    height: 15px;
+    width: 15px;
+    margin: 2px 5px 0px 5px;
+}
+.navi{
+    font-size: 24px;
+    margin-right: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+.btn.swatch-pink {
+    color: #fff;
+    background-color: #e83e8c;
+}
+.error{
+    color: red;
+}

@@ -4,7 +4,7 @@
       <span class="login100-form-title p-b-55">
         Register
       </span>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <!-- <div class="col-md-6">
               <div class="social text-center">
@@ -21,13 +21,17 @@
                 </div>
           </div> -->
          
-            <form class="login100-form validate-form" (ngSubmit)="register()" #registerForm="ngForm">
+            <form class="login100-form validate-form" (ngSubmit)="register()" #registerForm="ngForm" enctype="multipart/form-data" >
 
               <div class="col-md-12">
               <div class="row">
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                <input class="input100" placeholder="First Name" type="text" name="first_name" [(ngModel)]="user.first_name" required #f_name="ngModel"
+                <input class="input100 registerinput100" placeholder="First Name" type="text" name="first_name" [(ngModel)]="user.first_name" required #f_name="ngModel"
                 pattern="[a-zA-Z _]*">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="material-icons">person</i>
+                  </span>
                 <div *ngIf="f_name.errors?.required  && (f_name.touched)" class="error">First Name is Required</div>
                 <div *ngIf="f_name.errors?.pattern && (f_name.touched || f_name.dirty)" class="error">Name Must Contain Only Characters</div>
     
@@ -35,7 +39,7 @@
               </div>
 
               <div class="col-md-6 wrap-input100 validate-input m-b-16">
-                <input class="input100" placeholder="Last Name" type="text" name="last_name" [(ngModel)]="user.last_name" required #l_name="ngModel"
+                <input class="input100 registerinput100" placeholder="Last Name" type="text" name="last_name" [(ngModel)]="user.last_name" required #l_name="ngModel"
                 pattern="[a-zA-Z _]*">
                 <div *ngIf="l_name.errors?.required  && (l_name.touched)" class="error">Last Name is Required</div>
                 <div *ngIf="l_name.errors?.pattern&& (l_name.touched || l_name.dirty)" class="error">Name Must Contain Only Characters</div>
@@ -44,17 +48,22 @@
             </div>
             <div class="row">
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                <input class="input100" placeholder="Email" type="email" name="email" [(ngModel)]="user.email" required #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                <input class="input100 registerinput100" placeholder="Email" type="email" name="email" [(ngModel)]="user.email" required #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                 (blur)="checkEmailDuplication(email)">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="material-icons">email</i>
+                  </span>
                 <div *ngIf="email.errors?.required  && (email.touched)" class="error">Email is Required</div>
                 <div *ngIf="email.errors?.pattern && (email.touched || email.dirty)" class="error">Enter a valid Email</div>
                 <div class="error" *ngIf="verifyEmail" >Email Already Exists</div>
               </div>
 
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                  <select class="input100" placeholder="Type of User" name="user_type" [(ngModel)]="user.user_type" required #user_type="ngModel">
-                    <option>Producer</option>
-                    <option>User</option>
+                  <select class="input100 registerinput100" name="user_type" [(ngModel)]="user.user_type" required #user_type="ngModel">
+                      <option value="select" disabled>Select User Type</option>
+                    <option value="producer" >Producer</option>
+                    <option value="user">User</option>
                   </select>
                                  
                 </div>
@@ -62,51 +71,75 @@
 
             <div class="row">
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                <input class="input100" placeholder="Password" type="password" name="password" [(ngModel)]="user.password" required #password="ngModel">
+                <input class="input100 registerinput100" placeholder="Password" type="password" name="password" [(ngModel)]="user.password" required #password="ngModel">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="material-icons">lock</i>
+                  </span>
                 <div class="error" *ngIf="password.errors?.required && (password.touched || password.dirty)">Password is required</div>  
               </div>
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                <input class="input100" placeholder="Confirm Password" type="password" name="cpassword" required [(ngModel)]="cpass" #c_pass="ngModel">
+                <input class="input100 registerinput100" placeholder="Confirm Password" type="password" name="cpassword" required [(ngModel)]="cpass" #c_pass="ngModel">
                 <div class="error" *ngIf="c_pass.errors?.required && password.touched ">Confirm Password</div>
                 <div class="error" [hidden]="user.password==cpass">Fields Dont match</div>
               </div>
             </div>
+
+
+            
          
             <div class="row">
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
                 <input class="input100" placeholder="Phone" name="phone" [(ngModel)]="user.phone" #user_phone="ngModel" required pattern="[0-9]*">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="material-icons">phone</i>
+                  </span>
                 <div class="error" *ngIf="user_phone.errors?.required && (user_phone.touched )">Phone cannot be empty</div>
                 <div class="error" *ngIf="user_phone.errors?.pattern && (user_phone.touched || user_phone.dirty)">Phone Must Contain only numbers</div>
               </div>
 
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                <input class="input100" matInput placeholder="City" name="city" [(ngModel)]="user.city" #city="ngModel" required pattern="[a-z A-Z _]*">
+                <input class="input100 registerinput100" matInput placeholder="City" name="city" [(ngModel)]="user.city" #city="ngModel" required pattern="[a-zA-Z. _]*">
+               
                 <div class="error" *ngIf="city.errors?.required && (city.touched )">City cannot be empty</div>
                 <div class="error" *ngIf="city.errors?.pattern && (city.touched || city.dirty)">City is not valid</div>
               </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 wrap-input100 validate-input m-b-16">
+                  <input class="input100 registerinput100" id="inputEventName4" placeholder="Address Line1"  name="addline1" [(ngModel)]="user.addline1" 
+                    required #addline1="ngModel">
+                    <div class="error" *ngIf="addline1.errors?.required && (addline1.touched )">Address cannot be empty</div>
+                    <div class="error" *ngIf="addline1.errors?.pattern && (addline1.touched || addline1.dirty)">Address is not valid</div>
+                </div>
+                <div class="col-md-6 wrap-input100 validate-input m-b-16">
+                  <input class="input100 registerinput100" id="inputEventName5" placeholder="Address Line2" name="addline2" [(ngModel)]="user.addline2"
+                    >
+                </div>
+              </div>
             
             <div class="row">
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                      <select id="inputState" class="input100"  placeholder="State" name="state" [(ngModel)]="user.state" #state="ngModel">
-                        <option selected>Choose...</option>
-                        <option *ngFor="let state of states">{{state}}</option>
+                      <select id="inputState" class="input100 registerinput100"  placeholder="State" name="state" [(ngModel)]="user.state" #state="ngModel">
+                        <option value="select" disabled>Choose State</option>
+                        <option *ngFor="let state of states" [value]="state">{{state}}</option>
                       </select>
                       <div class="error" *ngIf="state.errors?.required ">State cannot be empty</div>
               </div>
 
               <div class="col-md-6 wrap-input100 validate-input m-b-16" >
-                  <input class="input100" #zipcode="ngModel" maxlength="5" [(ngModel)]="user.zipcode" name="zipcode" placeholder="Postal Code" pattern="[0-9]{5}"
+                  <input class="input100 registerinput100" #zipcode="ngModel" maxlength="5" [(ngModel)]="user.zipcode" name="zipcode" placeholder="Postal Code" pattern="[0-9]{5}"
                   required>
                   <div class="error" *ngIf="zipcode.errors?.required && (zipcode.touched )">Zipcode cannot be empty</div>
                   <div class="error" *ngIf="zipcode.errors?.pattern && (zipcode.touched || zipcode.dirty)">Zipcode is not valid</div>
                 </div>
               </div>
-                <div class="wrap-input100 validate-input m-b-16" >
-                <input placeholder="Profile Picture" type="file" name="file" required (change)="fileChangeEvent($event)">
+                <div class="m-b-16" >
+                <input placeholder="Profile Picture" class="file" type="file" name="file" required (change)="fileChangeEvent($event)">
                   </div>
   
-              <div class="contact100-form-checkbox m-l-4">
+              <div class="contact100-form-checkbox m-b-16">
                 <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                 <label class="label-checkbox100" for="ckb1">
                     I agree to the terms and conditions.
@@ -127,7 +160,7 @@
                   Already a member?
                 </span>
 
-                <a class="txt1 bo1 hov1" href="#">
+                <a class="txt1 bo1 hov1" routerLink="/login">
                   Sign in now
                 </a>
               </div>

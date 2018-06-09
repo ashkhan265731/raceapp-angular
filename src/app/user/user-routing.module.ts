@@ -12,6 +12,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { MyeventsComponent } from './myevents/myevents.component';
 import { MyEventDetailsComponent } from './my-event-details/my-event-details.component';
 import { EditUsereventsignupComponent } from './edit-usereventsignup/edit-usereventsignup.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 
 const routes: Routes = [
@@ -46,13 +47,16 @@ const routes: Routes = [
       },
       {
         path: 'editusereventsignup/:eid/:uid/:type',component: EditUsereventsignupComponent,canActivateChild:[AuthGuardChildService]
-      }
+      },
+      {
+        path: 'ordersummery/:id',component: OrderSummaryComponent,canActivateChild:[AuthGuardChildService]
+      },
     ]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class UserRoutingModule { }

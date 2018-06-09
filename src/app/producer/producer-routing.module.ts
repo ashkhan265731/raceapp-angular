@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventsComponent } from './events/events.component';
@@ -16,6 +16,7 @@ import { EditUserEventDetailsComponent } from './edit-user-event-details/edit-us
 import { EditUsereventsignupComponent } from './edit-usereventsignup/edit-usereventsignup.component';
 import { UserReportByEventCategoryComponent } from './user-report-by-event-category/user-report-by-event-category.component';
 import { SignupGuestUsersComponent } from './signup-guest-users/signup-guest-users.component';
+import { GuestUserPaymentComponent } from './guest-user-payment/guest-user-payment.component';
 
 const routes: Routes = [
 
@@ -66,6 +67,9 @@ const routes: Routes = [
       { 
         path: 'addguestuser/:eid',component: SignupGuestUsersComponent
       },
+      {
+        path: 'guestuserpayment/:id',component: GuestUserPaymentComponent
+      }
     ]
   }
 ];
@@ -73,6 +77,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class ProducerRoutingModule { }

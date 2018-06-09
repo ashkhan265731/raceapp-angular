@@ -1,3 +1,95 @@
-<p>
-  user-report-by-event-category works!
-</p>
+<div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - Events List</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+  
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="index.html">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Events List</li>
+              </ul>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div class="card m-t-10">
+            <div class="card-body">
+              <div class="alert alert-info" role="alert" *ngIf="usersReportData?.length==0">
+                  
+                  No users registerd yet for this Category !!!
+              </div>
+              <div class="table-responsive table-hover">
+                <table id="report-table" class="riders table" *ngIf="usersReportData?.length>0">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>user Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <!-- <th>city</th> -->
+                        <th>Ride Class</th>
+                        <th>City</th>
+                        <th>Total</th>
+                        <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let eventEntry of usersReportData;let i=index">
+                          <td>{{i+1}}</td>
+                          <td>{{eventEntry.user_id.first_name }} {{eventEntry.user_id.last_name }}</td>
+                          <td>{{eventEntry.user_id.email }}</td>
+                          <td>{{eventEntry.user_id.email }}</td>
+                          <!-- <td>{{eventEntry.location }}</td> -->
+                          <!-- <td>{{seachValue}}</td> -->
+                          <td>{{eventEntry.racetypeList[0].ridetype[0]}}</td>
+                          <td>{{eventEntry.user_id.city}}</td>
+                          <td>{{eventEntry.total}}</td>
+                          <td>  
+                            <button class="btn btn-primary btn-sm edit" [routerLink]="['/producer/editusereventdetails',eventEntry._id]" >
+                            <i class="material-icons">edit</i>
+                            
+                          </button></td>
+                              
+                        </tr>
+                  </tbody>
+                </table>
+                <br>
+                <br>
+                <button  class="btn btn-light hide-on-print " (click)="generate()" *ngIf="usersReportData?.length>0">Generate PDF</button>
+                <button  class=" btn btn-light hide-on-print " (click)="print_instant()" *ngIf="usersReportData?.length>0">Print report</button>
+          
+                <!-- <ngb-pagination [collectionSize]="collectSize" [(page)]="currentPage" (click)="pageEvent(currentPage,$event)"></ngb-pagination> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

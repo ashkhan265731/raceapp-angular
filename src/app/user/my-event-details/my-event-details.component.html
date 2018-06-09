@@ -1,3 +1,616 @@
-<p>
-  my-event-details works!
-</p>
+<div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - My Event Details</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+  
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="index.html">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li>Events List</li>
+                <li class="active">My Event Details</li>
+              </ul>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div class="card p-2">
+            <div class="card-body">
+              <div class="main-pd-blk">
+                <div class="row bi-blk">
+                  <div class="col-sm-6 user-bi-blk">
+                    <h4 class="">User Information</h4>
+                    <div>
+                      <p class="user-para">{{singleUserData?.user_id?.first_name}} {{singleUserData?.user_id?.last_name}}</p>
+                      <p class="user-para">{{singleUserData?.user_id?.email}}</p>
+                      <p class="user-para">{{singleUserData?.user_id?.phone}}</p>
+                      <p class="user-para">{{singleUserData?.user_id?.addline1}} {{singleUserData?.user_id?.addline2}}</p>
+                      <p class="user-para">{{singleUserData?.user_id?.city}}, {{singleUserData?.user_id?.state}},{{singleUserData?.user_id?.zipcode}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 producer-bi-blk">
+                    <h4 class="">Producer Information</h4>
+                    <div>
+                      <p class="user-para">Name : {{producerData.first_name}} {{producerData.last_name}}</p>
+                      <p class="user-para">Email : {{producerData.email}}</p>
+                      <p class="user-para">Phone :{{producerData.phone}}</p>
+                    </div>
+                  </div>
+  
+                </div>
+                <div class="row bill-blk">
+                  <div class="col-sm-12 user-bill-blk table-responsive table-hover">
+  
+                    <table class="table" width="100%" id="table1">
+                      <caption>Rider and Horse Details
+                        <a class="btn btn-light" (click)="enterRaceclass(singleUserData.event_id._id,singleUserData.user_id._id,'racetype','add')" data-toggle="modal"
+                          data-target="#exampleModal">
+                          <i class="material-icons">add</i>
+                          </a>
+                      </caption>
+  
+                      <thead class="thead-light">
+                        <tr>
+                          <th width="50%">Rider/Horse</th>
+                          <th width="20%">Race Class</th>
+                          <th width="20%">Fees</th>
+                          <th width="10%">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+  
+                        <tr *ngFor="let rcdata of singleUserData.racetypeList;let i = index">
+                          <td><b>R-</b> {{rcdata.ridername}}
+                            <br/><b>H-</b> {{rcdata.horsename}}</td>
+                          <td>{{rcdata?.ridetype[0]}}</td>
+                          <td class="ralign">{{rcdata?.ridetype[1] }}</td>
+                          <td>
+                            <a class="btn btn-light" (click)="edit_racetype(rcdata,i,singleUserData.event_id._id,singleUserData.user_id._id,'racetype','edit',rcdata.id)"
+                              data-toggle="modal" data-target="#exampleModal">
+                              <i class="material-icons">edit</i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+  
+  
+                  </div>
+                </div>
+                <br/>
+                <div class="row bill-blk">
+                  <div class="col-sm-12 user-bill-blk table-responsive table-hover">
+                    <table class="table" width="100%" id="table2">
+                      <caption>Exhibitions
+                        <!-- <a class="pull-right" (click)="enterMoreExhibition(singleUserData.event_id._id,singleUserData.user_id._id,'exhibition','add')"
+                          data-toggle="modal" data-target="#exampleModal">Edit Exhibitions</a> -->
+                          <a class="btn btn-light " (click)="edit_exhibition(edata,i,singleUserData.event_id._id,singleUserData.user_id._id,'exhibition','edit')"
+                          data-toggle="modal" data-target="#exampleModal">
+                          <i class="material-icons">edit</i>
+                        </a>
+                      </caption>
+                      <thead class="thead-light">
+                        <tr>
+                          <th width="50%">Date</th>
+                          <th width="20%">Quantity</th>
+                          <th width="20%">Fees</th>
+                          <!-- <th width="10%">Edit</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let edata of singleUserData.etimeslots;let i = index" class="{{edata.selected?'':'hide'}}">
+                          <td>{{edata.exhibition_day}}
+                            <br/> {{edata.from.hour+":"+edata.from.minute}} - {{edata.to.hour+":"+edata.to.minute}}</td>
+                          <td>{{edata.entryQuantity}}</td>
+                          <td class="ralign">{{edata.exhibitions_entryFee | currency}}</td>
+                          <!-- <td>
+                            <a class="btn btn-light" (click)="edit_exhibition(edata,i,singleUserData.event_id._id,singleUserData.user_id._id,'exhibition','edit')"
+                              data-toggle="modal" data-target="#exampleModal">
+                              <i class="material-icons">edit</i>
+                            </a>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+  
+                <br/>
+                <div class="row bill-blk">
+                  <div class="col-sm-12 user-bill-blk table-responsive table-hover">
+                    <table class="table" width="100%" id="table3">
+                      <caption>Warmups
+                          <a class="btn btn-light " (click)="edit_warmup(wdata,i,singleUserData.event_id._id,singleUserData.user_id._id,'warmup','edit')"
+                          data-toggle="modal" data-target="#exampleModal">
+                          <i class="material-icons">edit</i>
+                        </a>
+                      </caption>
+                      <thead class="thead-light">
+                        <tr>
+                          <th width="60%">Date</th>
+                          <th width="20%">Quantity</th>
+                          <th width="20%">Fees</th>
+                          <!-- <th width="10%">Edit</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let wdata of singleUserData.wtimeslots">
+                          <td>{{wdata.warmup_day}}
+                            <br/>{{wdata.from.hour+":"+wdata.from.minute}} - {{wdata.to.hour+":"+wdata.to.minute}}</td>
+                          <td>{{wdata.wentryQuantity}}</td>
+                          <td class="ralign">{{wdata.warmup_entry_fee | currency}}</td>
+                          <!-- <td>
+                            <a class="btn btn-light" (click)="edit_warmup(wdata,i,singleUserData.event_id._id,singleUserData.user_id._id,'warmup','edit')"
+                              data-toggle="modal" data-target="#exampleModal">
+                              <i class="material-icons">edit</i>
+                            </a>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+  
+                <br/>
+                <div class="row bill-blk">
+                  <div class="col-sm-12 user-bill-blk table-responsive table-hover">
+                     
+                    <table class="table" width="100%" id="table4">
+                      <caption>Add Ons
+                          <a class="btn btn-light" (click)="edit_addons(singleUserData.event_id._id,singleUserData.user_id._id,'addons','edit')"
+                          data-toggle="modal" data-target="#exampleModal">
+                          <i class="material-icons">edit</i>
+                        </a>
+                      </caption>
+                    
+                      <thead class="thead-light">
+                        <tr>
+                          <th width="60%">Type</th>
+                          <th width="20%">Quantity</th>
+                          <th width="20%">Fees</th>
+                          <!-- <th width="10%">Edit</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Stalls</td>
+                          <td>{{singleUserData.userStalls}}</td>
+                          <td class="ralign">{{singleUserData.stalls_price | currency}}</td>
+                          <!-- <td>
+                             
+                            </td> -->
+                        </tr>
+                        <tr>
+                          <td>Electric Hook Ups</td>
+                          <td>{{singleUserData.electric_quantity }}</td>
+                          <td class="ralign">{{singleUserData.electric_price | currency}}</td>
+                        </tr>
+                        <tr>
+                          <td>Shavings</td>
+                          <td>-</td>
+                          <td class="ralign">{{singleUserData.shavings_price | currency}}</td>
+                        </tr>
+                        <tr>
+                          <td>Late Fee</td>
+                          <td>-</td>
+                          <td class="ralign">{{singleUserData.late_fee | currency}}</td>
+                        </tr>
+                        <tr>
+                          <td>Office Fee</td>
+                          <td>-</td>
+                          <td class="ralign">{{singleUserData.office_fee | currency}}</td>
+                        </tr>
+                   
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+  
+              <button class="btn btn-primary pull-right right-0" (click)="proceedToCheckout()">Check Out</button>
+  
+            </div>
+          </div>
+        </div>
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- add riders -->
+                <div class="card">
+                  <div class="card-body">
+                    <!-- raceclass starts -->
+                    <div class="card-content" *ngIf="eventType=='racetype' && formType=='edit'">
+                      <h5 class="card-title">Edit Rider/Horses</h5>
+                      <div class="card-text">
+                        <div *ngFor="let racetype of singleUserData.racetypeList;let i=index">
+                          <div class="row" *ngIf="i==index">
+                            <div class="col-xs-12 col-sm-12">
+                              <div class="form-row">
+                                <div class="form-group input-field form-group col-md-4">
+                                  <label for="inputState">Rider Type</label>
+                                  <select placeholder="Race class Type" class="form-control" name="ridetype" [(ngModel)]="racetype.ridetype" (change)="selecetRaceType(racetype.ridetype)"
+                                    required>
+                                    <option *ngFor="let types of singleUserData.event_id.racetype" value="{{types.type}}/{{types.price}}">
+                                      {{types.type}} - {{types.price}}
+                                    </option>
+                                  </select>
+                                  {{racetype.ridetype}}
+                                </div>
+                                <div class="form-group input-field col-md-4">
+                                  <label for="inputState">Rider Name</label>
+                                  <input type="text" class="form-control" name="ridername" [(ngModel)]="racetype.ridername" placeholder="Rider Name" required
+                                    minlength="10" #rider="ngModel" pattern="[a-zA-Z _]*" /> {{ridername}}
+                                </div>
+                                <div class="form-group input-field col-md-4">
+                                  <label for="inputState">Horse Name</label>
+                                  <input type="text" class="form-control" name="horsename" #horse="ngModel" pattern="[a-zA-Z _]*" [(ngModel)]="racetype.horsename"
+                                    placeholder="Horse Name" required/> {{horsename}}
+                                </div>
+                                <div class="form-group input-field form-group col-md-4">
+                                  <img height="50px" width="50px" [src]="serviceUrl+'/'+racetype.id+'/'+racetype.filename" >
+                                  <a class="btn btn-light btn-outline-dark swatch-pink" (click)="fileInput.click()">
+                                    <i class="material-icons navi">file_upload</i>Choose File</a>
+                                  <input hidden type="file" #fileInput ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload" [(ngModel)]="addraceclass.filename"
+                                  />
+                                  <div *ngFor="let item of uploader?.queue">
+                                    <i>attachment</i>{{item?.file?.name}}
+                                    <br>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group input-field">
+                                  <button type="button" class="btn btn-primary pull-right" (click)="saveRaceClass('edit');uploader.uploadAll();" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">Ok</span>
+                                    </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-content" *ngIf="eventType=='racetype' && formType=='add'">
+                      <h5 class="card-title">Add Rider/Horses</h5>
+                      <div class="card-text">
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12">
+                            <div class="form-row">
+                              <div class="form-group input-field form-group col-md-4">
+                                <label for="inputState">Rider Type</label>
+                                <select placeholder="Race class Type" class="form-control" name="ridetype" [(ngModel)]="addraceclass.ridetype" required>
+                                  <option *ngFor="let types of singleUserData.event_id.racetype" value="{{types.type}}/{{types.price}}">
+                                    {{types.type}} - {{types.price}}
+                                  </option>
+                                </select>
+                                {{addraceclass.ridetype}}
+                              </div>
+                              <div class="form-group input-field col-md-4">
+                                <label for="inputState">Rider Name</label>
+                                <input type="text" class="form-control" name="ridername" [(ngModel)]="addraceclass.ridername" placeholder="Rider Name" required
+                                  minlength="10" #rider="ngModel" pattern="[a-zA-Z _]*" /> {{addraceclass.ridername}}
+                              </div>
+                              <div class="form-group input-field col-md-4">
+                                <label for="inputState">Horse Name</label>
+                                <input type="text" class="form-control" name="horsename" #horse="ngModel" pattern="[a-zA-Z _]*" [(ngModel)]="addraceclass.horsename"
+                                  placeholder="Horse Name" required/> {{addraceclass.horsename}}
+                              </div>
+                              <div class="form-group input-field form-group col-md-4">
+  
+                                <a class="btn btn-primary swatch-pink" (click)="fileInput.click()">
+                                  <i class="material-icons navi">file_upload</i>Choose File</a>
+                                <input hidden type="file" #fileInput ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload" [(ngModel)]="addraceclass.filename"
+                                />
+                                <div *ngFor="let item of uploader?.queue">
+                                  <i>attachment</i>{{item?.file?.name}}
+                                  <br>
+        
+                                </div>
+                              </div>
+                   
+                            
+                            </div>
+                            <div class="form-group input-field">
+                                <!-- <button type="button" class="btn btn-light" name="save rider" (click)="saveRaceClass()" >
+                                  Add Rider
+                                </button> -->
+                                <button type="button" class="btn btn-primary pull-right" (click)="saveRaceClass('add')" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">Add Rider</span>
+                                  </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- raceclass ends -->
+  
+                    <!-- exhibition starts -->
+  
+                    <div class="card-content" *ngIf="eventType=='exhibition' && formType=='edit'">
+                      <h5 class="card-title">Edit Exhibitions</h5>
+                      <div class="card-text">
+                        {{singleUserData.etimeslots | json}}
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12">
+                            <div class="form-row">
+                              <div *ngFor="let time of singleUserData.etimeslots; let i = index;">
+                                <div class="form-row">
+                                  <input type="checkbox" class="form-group checkbox" name="selected_etimeslot" [(ngModel)]="time.selected">
+                                  <span>
+                                    <strong>{{time.exhibition_day}}</strong>
+                                  </span>{{time.from.hour+":"+time.from.minute}}-{{time.to.hour+":"+time.to.minute}}
+                                </div>
+  
+                                <div class="form-row">
+                                  <div class="full-width form-group input-field col-md-5">
+                                    <label for="inputEventName4">Enter No. of Exhibitions</label>
+  
+                                    <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_exhibition>
+                                      {{time.entryQuantity?time.exhibitions_quantity-time.entryQuantity:time.exhibitions_quantity}}
+                                    </span>
+                                    <input type="text" class="form-control" name="exhibitions_quantity{{i}}" (keyup)="validateExhibitionquantity($event,time.entryQuantity,time.exhibitions_quantity)"
+                                      value="{{0}}" [(ngModel)]="time.entryQuantity"  placeholder="Enter No. of Exhibitions "
+                                      [readonly]="!time.selected" #keyup_input #exhibitions_quantity="ngModel" required minlength="3"
+                                      maxlength="6" pattern="[0-9]*" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                      ondragstart="return false;" ondrop="return false;" />
+                                    <div class="error" *ngIf="exhibitions_quantity.invalid && (exhibitions_quantity.dirty || exhibitions_quantity.touched) && time.selected">
+                                      <div class="error" *ngIf="exhibitions_quantity.errors?.required"> exhibitions_quantity field can't be blank</div>
+                                      <div class="error" *ngIf="exhibitions_quantity.errors?.pattern && exhibitions_quantity.touched">The exhibitions_quantity doesn't seem right</div>
+                                    </div>
+                                  </div>
+  
+                                  <div class="full-width form-group  col-md-5 input-field">
+                                    <label for="inputEventName4">entryfee</label>
+                                    <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                                      ${{time.exhibitions_fee}}
+                                    </span>
+                                    <input type="text" class="form-control" name="entryfee" value="{{time.exhibitions_fee*time.entryQuantity}}" [(ngModel)]="time.exhibitions_entryFee"
+                                      placeholder="entryfee" readonly #keyup_entryfee #entryfee="ngModel" required minlength="3"
+                                      maxlength="6" pattern="[0-9]*" />
+                                    <div class="error" *ngIf="entryfee.invalid && (entryfee.dirty || entryfee.touched)">
+                                      <div class="error" *ngIf="entryfee.errors?.required"> entryfee field can't be blank</div>
+                                      <div class="error" *ngIf="entryfee.errors?.pattern && entryfee.touched">The entryfee doesn't seem right</div>
+                                    </div>
+                                  </div>
+  
+                                </div>
+                                <br>
+  
+                              </div>
+                              <div class="form-group input-field">
+                                  <button type="button" class="btn btn-primary pull-right " data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">Ok</span>
+                                    </button>
+                              </div>
+                              <!-- <div class="form-group input-field col-md-6">
+                                <input type="button" class="form-control" name="horsename" value="Add More Exhibition" (click)="saveExhibition()" />
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- exhibition ends -->
+  
+  <!-- warmup starts -->
+  
+  <div class="card-content" *ngIf="eventType=='warmup' && formType=='edit'">
+    <h5 class="card-title">Edit warmups</h5>
+    <div class="card-text">
+      <!-- {{singleUserData.wtimeslots | json}} -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div class="form-row">
+            <div *ngFor="let wtime of singleUserData.wtimeslots; let i = index;">
+              <div class="form-row">
+                <input type="checkbox" class="form-group checkbox" name="selected_wtimeslot" [(ngModel)]="wtime.selected">
+                <span>
+                  <strong>{{wtime.warmup_day}}</strong>
+                </span>{{wtime.from.hour+":"+wtime.from.minute}}-{{wtime.to.hour+":"+wtime.to.minute}}
+              </div>
+  
+              <div class="form-row">
+                <div class="full-width form-group input-field col-md-5">
+                  <label for="inputEventName4">Enter No. of warmups</label>
+  
+                  <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_warmup>
+                    {{wtime.wentryQuantity?wtime.warmup_quantity-wtime.wentryQuantity:wtime.warmup_quantity}}
+                  </span>
+                  <input type="text" class="form-control" name="exhibitions_quantity{{i}}" (keyup)="validateWarmupquantity($event,wtime.wentryQuantity,wtime.warmup_quantity)"
+                    value="{{0}}" [(ngModel)]="wtime.wentryQuantity"  placeholder="Enter No. of warmups "
+                    [readonly]="!wtime.selected" #keyup_input #warmup_quantity="ngModel" required minlength="3"
+                    maxlength="6" pattern="[0-9]*" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    ondragstart="return false;" ondrop="return false;" />
+                  <div class="error" *ngIf="warmup_quantity.invalid && (warmup_quantity.dirty || warmup_quantity.touched) && wtime.selected">
+                    <div class="error" *ngIf="warmup_quantity.errors?.required"> warmup_quantity field can't be blank</div>
+                    <div class="error" *ngIf="warmup_quantity.errors?.pattern && warmup_quantity.touched">The warmup_quantity doesn't seem right</div>
+                  </div>
+                </div>
+  
+                <div class="full-width form-group  col-md-5 input-field">
+                  <label for="inputEventName4">wentryfee</label>
+                  <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                    ${{wtime.warmup_fee}}
+                  </span>
+                  <input type="text" class="form-control" name="wentryfee" value="{{wtime.warmup_fee*wtime.wentryQuantity}}" [(ngModel)]="wtime.warmup_entry_fee"
+                    placeholder="wentryfee" readonly #keyup_wentryfee #wentryfee="ngModel" required minlength="3"
+                    maxlength="6" pattern="[0-9]*" />
+                  <div class="error" *ngIf="wentryfee.invalid && (wentryfee.dirty || wentryfee.touched)">
+                    <div class="error" *ngIf="wentryfee.errors?.required"> wentryfee field can't be blank</div>
+                    <div class="error" *ngIf="wentryfee.errors?.pattern && wentryfee.touched">The wentryfee doesn't seem right</div>
+                  </div>
+                </div>
+  
+              </div>
+              <br>
+  
+            </div>
+            <div class="form-group input-field">
+                <button type="button" class="btn btn-primary pull-right " data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Ok</span>
+                  </button>
+            </div>
+            <!-- <div class="form-group input-field col-md-6">
+              <input type="button" class="form-control" name="horsename" value="Add More Warmup" (click)="saveWarmup()" />
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- warmup ends -->
+  
+  <!-- add Ons Starts -->
+  
+  <div class="card-content" *ngIf="eventType=='addons' && formType=='edit'">
+      <h5 class="card-title">Edit Add Ons</h5>
+      <div class="card-text">
+      
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+           
+          
+                  <div class="form-row">
+  
+  
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Enter Number Of Stalls</label>
+                      {{eventData.stalls}} {{singleUserData.userStalls}}
+                      <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_ustall>
+                        {{(singleUserData.userStalls? (eventData.stalls-singleUserData.userStalls):eventData.stalls)}}
+                      </span>
+                      <input id="userStalls" type="text" class="form-control" name="userStalls" (keyup)="validateustall($event,singleUserData.userStalls,eventData.stalls)"
+                        [(ngModel)]="singleUserData.userStalls" #keyup_stallinput placeholder="Enter Number Of Stalls" 
+                        #userStalls="ngModel" required minlength="3" maxlength="6" pattern="[0-9]*" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        ondragstart="return false;" ondrop="return false;" />
+                      <div class="error" *ngIf="userStalls.errors?.pattern && userStalls.touched">The Stalls must contain only numbers</div>
+                    </div>
+  
+  
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Price</label>
+  
+                      <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                        ${{eventData.stalls_price}}
+                      </span>
+                      <input id="stalls_price" type="text" class="form-control" name="stalls_price" value="{{0}}" [(ngModel)]="singleUserData.stalls_price"
+                        placeholder="Price" readonly #keyup_stallfee/>
+                      <!-- <span matSuffix="end">.00</span>
+                                          <span matPrefix="start">$</span> -->
+                    </div>
+  
+                  </div>
+                  <div class="form-row">
+  
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Enter Electric Hookup</label>
+  
+                      <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_hookup>
+                        {{singleUserData.electric_quantity?eventData.electric_quantity-singleUserData.electric_quantity:eventData.electric_quantity}}
+                      </span>
+                      <input id="electric_quantity" type="number" class="form-control" name="electric_quantity" [(ngModel)]="singleUserData.electric_quantity"
+                        placeholder="Enter Electric Hookup"  #electric_quantity="ngModel" required
+                        minlength="3" maxlength="6" pattern="[0-9]*" (keyup)="validatehookupquantity($event,singleUserData.electric_quantity,eventData.electric_quantity)"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" ondragstart="return false;" ondrop="return false;"
+                        #keyup_hookupinput />
+                      <div class="error" *ngIf="electric_quantity.errors?.pattern && electric_quantity.touched">The Stalls must contain only numbers</div>
+                    </div>
+  
+  
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Electrical Hookup Price</label>
+  
+                      <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                        ${{eventData.electric_price}}
+                      </span>
+                      <input id="electric_price" type="number" class="form-control" name="electric_price" [(ngModel)]="singleUserData.electric_price"
+                        placeholder="Electrical Hookup Price" readonly #keyup_hookupfee/>
+                      <!-- <span matSuffix="end">.00</span> -->
+                      <!-- <span matPrefix="start">$</span> -->
+                    </div>
+  
+                  </div>
+                <br>
+    
+                <div class="form-group input-field">
+                    <button type="button" class="btn btn-primary pull-right " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Ok</span>
+                      </button>
+                </div>
+    
+              <!-- <div class="form-group input-field col-md-6">
+                <input type="button" class="form-control" name="horsename" value="Add More Warmup" (click)="saveWarmup()" />
+              </div> -->
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <!-- add Ons Ends -->
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      </div>
+    </div>
+  
+  </div>

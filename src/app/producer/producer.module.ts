@@ -22,6 +22,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from './../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GuestUserPaymentComponent } from './guest-user-payment/guest-user-payment.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RaceclasstypeComponent, 
     RacetypedetailsComponent, 
     ProfileEditComponent, 
-    ProducerComponent
+    ProducerComponent,
+    GuestUserPaymentComponent
   ]
 })
 export class ProducerModule { }

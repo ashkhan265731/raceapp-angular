@@ -1,0 +1,250 @@
+body{
+    padding-top: 0px !important;
+    overflow-y: auto;
+    line-height: 1;
+    font-family: 'Lato',sans-serif;
+}
+.row{
+    width: 100%;
+}
+
+.w-30{
+width: 30%;
+}
+.w-70{
+width: 70%;
+background: #ff8b8e;
+border-radius: 3px;
+}
+.main-header {
+    
+    font-weight: 700;
+}
+.main-header .navbar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    background: #fff;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.08);
+    border: 0 none;
+    border-radius: 0;
+    min-height: 64px;
+}
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+.navi{
+    font-size: 25px;
+    /* float: left; */
+    margin-top: -5px;
+    margin-right: 5px;
+    /* line-height: 25px; */
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+.container, .container-fluid {
+    font-weight: 400;
+}
+
+.main-header .navbar-header {
+    padding-left: 15px;
+    border-right: 1px solid #eaeaec;
+}
+:after, :before {
+    box-sizing: border-box;
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before,  .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before{
+    display: table;
+    content: " ";
+}
+.main-header .navbar-header > .navbar-brand img {
+    height: 32px;
+}
+.navbar-brand>img {
+    display: block;
+}
+img {
+    vertical-align: middle;
+}
+.main-header .navbar-header>.navbar-brand {
+    padding: 0;
+    margin-top: 16px;
+    margin-bottom: 18px;
+    margin-left: 0;
+    height: auto;
+    margin-right: 30px;
+}
+.main-header .navbar-collapse {
+    padding: 0;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav>li {
+    position: relative;
+    display: block;
+}
+.main-header .navbar-nav li {
+    padding: 25px 14px 24px;
+}
+.main-header .navbar-nav>li>a {
+    padding: 0;
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    line-height: 17px;
+    font-weight: 700;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #777;
+}
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+@media (min-width: 768px){
+    .navbar-nav>li {
+        float: left;
+    }
+.navbar {
+    border-radius: 4px;
+}
+/* .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: -15px;
+} */
+/* .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: 0;
+    margin-left: 0;
+} */
+/* .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: -15px;
+    margin-left: -15px;
+} */
+.navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+}
+.navbar-nav {
+    float: left;
+    margin: 0;
+}
+.navbar-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+}
+
+
+.logo img{
+    width: 150px;
+}
+
+.menus{
+    background: #ff8b8e;
+    height: 100%;
+    border-radius: 3px;
+}
+.menus a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.menus ul li{
+    display: inline;
+}
+
+.menus ul {
+    background: #ff8b8e;
+    line-height: 55px;
+    padding: 0px;
+    border-radius: 2px;
+}
+
+.menus li {
+    padding: 0px 10px;
+    color: #fff;
+}
+.mat-icon{
+    vertical-align: sub;
+}
+
+/************************* slider css ****************/
+.slider-wrapper{
+    position: relative;
+    width: 100%;
+}
+.slider-main ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.slider-main ul li img{
+    width: 100%;
+}
+
+.slider-wrapper .upvoming-events{
+    width: 300px;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    background: #f2f3f6c9;;
+}
+
+.upvoming-events h2{
+    padding: 0px 10px;
+    color: #e1161b;
+}
+
+.upvoming-events ul{
+    list-style-type: none;
+    padding: 0px;
+}
+
+.upvoming-events ul li{
+    padding: 10px;
+    margin: 10px 5px 15px 21px;
+    border-left: 2px solid #ff8b8e;
+}
+
+.upvoming-events ul li div:first-child{
+    font-size: 16px;
+    margin-top: -10px;
+    color: #170d53;
+    font-weight: bold;
+}
+
+.upvoming-events ul li div:last-child{
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.upvoming-events .register-events{
+    margin: 10px 20px 24px;
+}
+
+.upvoming-events .register-events button{
+    background: #ff8b8e;
+    color: #fff;
+}
+.upcoming-links {
+    margin-bottom: 30px;
+}

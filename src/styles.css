@@ -1,10 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0 !important; 
+}
+.content-wraper{
+    min-height: 1000px;
+}
 .pull-left{
     float: left;
 }
 .pull-right{
     float: right;
 }
+.capitalize {
+    text-transform: capitalize;
+ }
+ th,td,a{
+    text-transform: capitalize;
+}
+ul,li,a{
+    text-transform: capitalize;
+}
+.cursor{
+    cursor: auto;
+}
+.on-event{
+    color: green;
+}
+.u-event{
+    color: rgb(40, 115, 158);
+}
+.e-event{
+    color:red;
+}
+
+.material-icons.valign-icon{
+    vertical-align: middle ;
+  }
 @media (min-width: 769px){
     .page-container {
         width: 100%;
@@ -27,6 +62,7 @@
 
 .content-wrapper {
     width: 100%;
+  
 }
 
 .page-container {
@@ -214,7 +250,6 @@ body{
     color: #fff;
     position: relative;
     width: 100%;
-    display: none;
 }
 .sidebar-main {
     z-index: 99;
@@ -296,7 +331,7 @@ body{
     font-weight: 500;
 }
 .navigation li a {
-    color: rgba(255,255,255,.75);
+    color: #fff;
     display: block;
     -webkit-transition: background .15s linear,color .15s linear;
     -o-transition: background .15s linear,color .15s linear;
@@ -311,13 +346,7 @@ body{
     min-height: 44px;
     font-weight: 500;
 }
-.navigation li a {
-    color: rgba(255,255,255,.75);
-    display: block;
-    -webkit-transition: background .15s linear,color .15s linear;
-    -o-transition: background .15s linear,color .15s linear;
-    transition: background .15s linear,color .15s linear;
-}
+
 
 a, button, input, textarea {
     outline: 0;
@@ -342,10 +371,48 @@ a {
     -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.05);
     box-shadow: 0 1px 0 rgba(255,255,255,.05);
 }
-@media (min-width: 769px){
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 769px){
     .sidebar {
         display: table-cell;
         vertical-align: top;
         width: 260px;
     }
+
 }
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 0px )and (max-width : 576px) { 
+    .limiter .container-login100{
+      padding:0;
+    }
+   }
+  
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+     .limiter .container-login100{
+        padding:0;
+      }
+ }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .sidebar {
+        display: table-cell;
+        vertical-align: top;
+        width: 260px;
+    }
+    
+ }
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    
+ }
+
+ /* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    
+ }
+
+
+

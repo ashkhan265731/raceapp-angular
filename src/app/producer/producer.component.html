@@ -1,42 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <!-- <a class="navbar-brand" href="#">Race App</a> -->
-  <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+ 
+  <button type="button" class="btn btn-outline-secondary" (click)="isCollapsed = !isCollapsed"
   [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-<i class="material-icons">menu</i>
+<span class="navbar-toggler-icon"></span>
 </button>
 <span class="navbar-brand p-l-10">Race App</span>
 </nav>
 
 <div class="page-container">
   <div class="page-content">
-    <div class="sidebar sidebar-main" id="collapseExample" [ngbCollapse]="isCollapsed">
+    <div class="sidebar sidebar-main" id="collapseExample" [ngbCollapse]="!isCollapsed">
       <div class="sidebar-content">
         <!-- User menu -->
         <div class="sidebar-user">
           <div class="category-content">
             <div class="media">
               <a  class="media-left">
-                <img class="photo img-circle img-sm" src="../assets/images/my_ccount.png" *ngIf="!user_picture">
+                  <img class="photo img-circle img-sm" src="../../assets/images/my_ccount.png" *ngIf="!user_picture">
                 <img class="photo img-circle img-sm" [src]="serviceUrl+'/profile_pics/'+user_picture" *ngIf="user_picture">
               </a>
               <div class="media-body">
-                <span class="media-heading text-semibold">Ash Khan</span>
+                <span class="media-heading text-semibold capitalize">{{userData.first_name+" "+userData.last_name  }}</span>
                 <div class="text-size-mini text-muted">
-                  <i class="icon-pin text-size-small"></i> &nbsp;Rogers, MN
+                  <i class="icon-pin text-size-small capitalize"></i> &nbsp;{{userData.city}}
                 </div>
               </div>
-              <div class="media-right media-middle">
-                <ul class="icons-list">
-                  <li>
-                    <a href="#">
-                      <i class="icon-cog3"></i>
+              <div class="m-t-12" >
+                <a routerLink="/producer/profile/{{userid}}">
+                  <i class="material-icons">
+                      edit
+                      </i>
                     </a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
@@ -48,24 +43,24 @@
           <div class="category-content no-padding">
             <ul class="navigation navigation-main navigation-accordion">
               <!-- Main -->
-              <li class="navigation-header">
-                <span>Main</span>
-                <i class="icon-menu" title="" data-original-title="Main pages"></i>
-              </li>
+            
               <li class="{{pageTitle=='dashboard'?'active':''}}">
                 <a routerLink="/producer/dashboard">
+                  <i class="material-icons navi">dashboard</i>
                   <span>Dashboard</span>
                   <span class="menu-icons"><i class="fal fa-sign-out"></i></span>
                 </a>
               </li>
               <li class="{{pageTitle=='create_event'?'active':''}}">
                 <a routerLink="/producer/events" class="has-ul">
+                  <i class="material-icons navi">event</i>
                   <span>Create Event</span>
                   <span class="menu-icons"><i class="material-icons"></i></span>
                 </a>
               </li>
               <li class="{{pageTitle=='list_event'?'active':''}}">
                 <a routerLink="/producer/listevents" class="has-ul">
+                  <i class="material-icons navi">view_list</i>
                   <span>List Event</span>
                   <span class="menu-icons"><i class="material-icons"></i></span>
                 </a>
@@ -78,12 +73,14 @@
               </li> -->
               <li class="{{pageTitle=='event_report'?'active':''}}">
                 <a routerLink="/producer/eventreport" class="has-ul">
+                  <i class="material-icons navi">class</i>
                   <span>Report</span>
                   <span class="menu-icons"><i class="material-icons"></i></span>
                 </a>
               </li>
               <li>
                   <a  (click)="logout();" class="has-ul">
+                      <i class="material-icons navi">exit_to_app</i>
                     <span>Logout  </span>
                     <span class="menu-icons"><i class="material-icons"></i></span>
                   
@@ -92,54 +89,7 @@
              
               <!-- /main -->
 
-              <!-- Forms -->
-              <li class="navigation-header">
-                <span>Forms</span>
-                <i class="icon-menu" title="" data-original-title="Forms"></i>
-              </li>
-              <!-- <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-pencil3"></i>
-                  <span>Form components</span>
-                </a>
-
-              </li>
-              <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-file-css"></i>
-                  <span>JSON forms</span>
-                </a>
-
-              </li>
-              <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-footprint"></i>
-                  <span>Wizards</span>
-                </a>
-
-              </li>
-              <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-spell-check"></i>
-                  <span>Editors</span>
-                </a>
-
-              </li>
-              <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-select2"></i>
-                  <span>Pickers</span>
-                </a>
-
-              </li>
-              <li>
-                <a href="#" class="has-ul">
-                  <i class="icon-insert-template"></i>
-                  <span>Form layouts</span>
-                </a>
-
-              </li> -->
-              <!-- /forms -->
+            
             </ul>
           </div>
         </div>

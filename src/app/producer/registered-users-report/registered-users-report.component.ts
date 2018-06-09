@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
@@ -15,16 +15,19 @@ declare var jsPDF: any;
   styleUrls: ['./registered-users-report.component.css']
 })
 export class RegisteredUsersReportComponent implements OnInit {
+  @Output() alert: EventEmitter<any> = new EventEmitter();
   serviceUrl = environment.serviceUrl;
 
-  errorLog :any = false;
+  errorLog: any = false;
+  alertMessage: any = null;
+
   filter_from: any = Date.parse("1900-01-01T06:00:00.000Z");
   filter_to: any = Date.parse("2040-01-01T06:00:00.000Z");
   searchCriteria: any = {
     searchName: "",
     searchValue: ""
   };
-  
+
 
   // For example initialize to specific date (09.10.2018 - 19.10.2018). It is also possible
   // to set initial date range value using the selDateRange attribute.
@@ -35,8 +38,8 @@ export class RegisteredUsersReportComponent implements OnInit {
 
 
   searchNameOption = [
-    { value: 'first_name', viewValue: 'User First Name' },
-    { value: 'last_name', viewValue: 'User Last Name' },
+    { value: 'user_firstname', viewValue: 'User First Name' },
+    { value: 'user_lastname', viewValue: 'User Last Name' },
     { value: 'email', viewValue: 'User Email' },
     { value: 'ridetype', viewValue: 'Ride Class Type' },
     { value: 'ridername', viewValue: 'Rider Name' },
@@ -50,21 +53,23 @@ export class RegisteredUsersReportComponent implements OnInit {
   usersReportData: any = [];
   usersReportFilterData: any = [];
 
-
-
+  from_date: any = { year: 2010, month: 10, day: 9 };
+  to_date: any = { year: 2040, month: 10, day: 19 };
   constructor(
     private http: HttpClient,
     private router: Router,
-    private dataService:DataService
+    private dataService: DataService
   ) {
     this.dataService.changeMessage("event_report");
 
-   }
+  }
 
   ngOnInit() {
-    console.log("model" + this.model);
+  
+
+    // console.log("model" + this.model);
     this.entryList = JSON.stringify(this.eventsEntryUsers);
-    console.log(this.entryList);
+    // console.log(this.entryList);
     this.getEventEntriesUsers();
     this.getAllEventEntriesUsers();
 
@@ -72,16 +77,23 @@ export class RegisteredUsersReportComponent implements OnInit {
 
   }
 
-  dateFilter(range) {
-    console.log("range");
-    console.log(range);
+  dateFilter() {
 
-    var fromdate = range.beginDate;
-    fromdate = new Date(fromdate.month + "," + fromdate.day + "," + fromdate.year);
-    var todate = range.endDate;
-    todate = new Date(todate.month + "," + todate.day + "," + todate.year);
 
-    console.log(todate);
+    if (this.from_date && this.to_date) {
+
+      // console.log(this.from_date);
+      // console.log(this.to_date);
+
+      // var fromdate = this.from_date;
+
+      // this.from_date = new Date(fromdate.month + "," + fromdate.day + "," + fromdate.year);
+
+      // var todate = this.to_date;
+      // this.to_date = new Date(todate.month + "," + todate.day + "," + todate.year);
+
+    }
+
 
   }
 
@@ -118,49 +130,34 @@ export class RegisteredUsersReportComponent implements OnInit {
 
 
 
-  filter() {
-
-    // var fromdate = range.beginDate;
-    // fromdate = new Date(fromdate.month+","+fromdate.day+","+fromdate.year);
-    // var todate = range.endDate;
-    // todate = new Date(todate.month+","+todate.day+","+todate.year);
-
-    // this.filter_from = Date.parse(fromdate);
-    // this.filter_to = Date.parse(todate);
+  usersReportDataFilter() {
+    var searchBy = this.searchCriteria.searchName;
+    var searchValue = this.searchCriteria.searchValue;
+    var search_fromdate = this.model;
 
 
 
-    var fromdate = this.model.beginDate;
+    var fromdate = this.from_date;
     fromdate = new Date(fromdate.month + "," + fromdate.day + "," + fromdate.year);
-    var todate = this.model.endDate;
+
+    var todate = this.to_date;
     todate = new Date(todate.month + "," + todate.day + "," + todate.year);
 
     this.filter_from = Date.parse(fromdate);
     this.filter_to = Date.parse(todate);
 
 
-    //console.log(filter_from+"filter from");
-    //this.getEventEntriesUsers(this.filter_from,this.filter_to);
 
-  }
-
-  usersReportDataFilter() {
-    var searchBy = this.searchCriteria.searchName;
-    var searchValue = this.searchCriteria.searchValue;
-    var search_fromdate = this.model;
-
-    var fromdate = this.model.beginDate;
-    fromdate = new Date(fromdate.month + "," + fromdate.day + "," + fromdate.year);
-    
-    var todate = this.model.endDate;
-    todate = new Date(todate.month + "," + todate.day + "," + todate.year);
 
     fromdate = Date.parse(fromdate);
     todate = Date.parse(todate);
 
-   
+
 
     var result = this.usersReportFilterData.filter(function (el, index) {
+      // console.log(searchBy);
+      // console.log(searchValue);
+      // console.log(el);
       if (searchValue != "") {
         if (searchBy == "ridetype") {
           return el[searchBy][0] == searchValue && el.event_fromdate >= fromdate && el.event_todate <= todate;
@@ -177,6 +174,8 @@ export class RegisteredUsersReportComponent implements OnInit {
 
     this.usersReportData = result;
 
+    // console.log(this.usersReportData);
+
 
 
 
@@ -184,26 +183,29 @@ export class RegisteredUsersReportComponent implements OnInit {
 
   getAllEventEntriesUsers() {
     var current = this;
-    this.http.get(this.serviceUrl+"/getAllRegisteredUsersDetails")
+    this.http.get(this.serviceUrl + "/getAllRegisteredUsersDetails")
       .subscribe(function (response) {
         current.errorLog = false;
         current.allEventsEntryUsers = response;
+        // console.log(current.allEventsEntryUsers);
         current.allEventsEntryUsers.forEach((el, index) => {
-          for (var i = 0; i < el.racetypeList.length; i++) {
-            el.racetypeList[i].user_firstname = el.user_id.first_name;
-            el.racetypeList[i].user_lastname = el.user_id.last_name;
-            el.racetypeList[i].event_name = el.event_id['event_name'];
-            el.racetypeList[i].event_fromdate = el.event_id.from_date;
-            el.racetypeList[i].event_todate = el.event_id.to_date;
-            current.usersReportData.push(el.racetypeList[i]);
-            current.usersReportFilterData.push(el.racetypeList[i]);
+          if (el.event_id && el.user_id) {
+            for (var i = 0; i < el.racetypeList.length; i++) {
+              el.racetypeList[i].user_firstname = el.user_id.first_name;
+              el.racetypeList[i].user_lastname = el.user_id.last_name;
+              el.racetypeList[i].event_name = el.event_id['event_name'];
+              el.racetypeList[i].event_fromdate = el.event_id.from_date;
+              el.racetypeList[i].event_todate = el.event_id.to_date;
+              current.usersReportData.push(el.racetypeList[i]);
+              current.usersReportFilterData.push(el.racetypeList[i]);
+            }
           }
         });
-      },function(err){
+      }, function (err) {
         current.errorLog = true;
       }
-    
-    );
+
+      );
   }
 
 
@@ -220,14 +222,19 @@ export class RegisteredUsersReportComponent implements OnInit {
     var searchName = this.searchCriteria.searchName ? this.searchCriteria.searchName : null;
     var searchValue = this.searchCriteria.searchValue ? this.searchCriteria.searchValue : null;
 
-    this.http.get(this.serviceUrl+"/getevententriesusers/" + searchName + "/" + searchValue + "/" + filter_from + "/" + filter_to)
+    this.http.get(this.serviceUrl + "/getevententriesusers/" + searchName + "/" + searchValue + "/" + filter_from + "/" + filter_to)
       .subscribe(function (response) {
-      current.errorLog=false;
+        current.errorLog = false;
         current.eventsEntryUsers = response;
-      },function(err){
+      }, function (err) {
         current.errorLog = true;
+        current.alertMessage = {
+          type: 'danger',
+          title: 'Something Went wrong. Please Contact Administartor',
+          data: err
+        };
       }
-    );
+      );
   }
 
   print_instant() {
@@ -288,9 +295,5 @@ export class RegisteredUsersReportComponent implements OnInit {
         //          this allow the insertion of new lines after html
         pdf.save('report.pdf');
       }, margins);
-
-
   }
-
-
 }

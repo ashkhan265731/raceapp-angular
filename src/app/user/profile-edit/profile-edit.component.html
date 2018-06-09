@@ -1,3 +1,150 @@
-<p>
-  profile-edit works!
-</p>
+<div class="content-wraper">
+
+    <div class="container-fluid" style="padding: 0px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+  
+          <div class="page-header page-header-default">
+            <div class="page-header-content">
+              <div class="page-title">
+                <h4>
+                  <i class="icon-arrow-left52 position-left"></i>
+                  <span class="text-semibold">Home</span> - Profile Information</h4>
+                <a class="heading-elements-toggle">
+                  <i class="icon-more"></i>
+                </a>
+              </div>
+  
+            </div>
+  
+            <div class="breadcrumb-line">
+              <a class="breadcrumb-elements-toggle">
+                <i class="icon-menu-open"></i>
+              </a>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="index.html">
+                    <i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Profile Edit</li>
+              </ul>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <div class="card ">
+        <div class="card-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+            <div class="picture-container">
+                <div class="picture">
+                  
+                  <img class="img-cls" alt="..." src="../../../assets/images/profile_noimage.png" *ngIf="!userData.user_picture">
+                  <img class="img-cls" [src]="serviceUrl+'/'+'profile_pics/'+userData.user_picture" *ngIf="userData.user_picture" />
+                </div>
+                <div class="fileupload-block">
+                  <button type="button" class="btn btn-light" (click)="imgFileInput.click()">
+                    <i class="material-icons navi">add_a_photo</i>Choose Picture</button>
+                  <input hidden #imgFileInput class="upld-btn" type="file" ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload"
+                  />
+                  <div *ngFor="let item of uploader.queue;let i =index">
+                    <div *ngIf="i<1">
+                      {{item.file.name}}
+                      <br>
+                      <br>
+                      <button type="button" class="btn btn-light"  id="add-rtype" (click)="item.upload()" style="cursor: pointer">
+                        Upload
+                        <i class="material-icons ">file_upload</i>
+                      </button>
+                      <button type="button" class="btn btn-light" (click)="item.remove()">cancel</button>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+            <form name="user-form" novalidate #f="ngForm">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEventName4">First Name</label>
+                        <input class="form-control" id="inputEventName4"  placeholder="First name" name="first_name" [(ngModel)]="userData.first_name" 
+                          required>
+                     </div>
+                     <div class="form-group col-md-6">
+                        <label for="inputEventName4">Last Name</label>
+                        <input class="form-control" id="inputEventName4"   placeholder="Last name" name="last_name"  [(ngModel)]="userData.last_name" 
+                        required>
+                    </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEventName4">Email</label>
+                            <input class="form-control" id="inputEventName4" #email placeholder="Email" name="email" [(ngModel)]="userData.email" 
+                          required data-grouplength="3,3,4">
+                             </div>
+                             <div class="form-group col-md-6">
+                                <label for="inputEventName4">Phone</label>
+                                <input class="form-control" id="inputEventName4" placeholder="Phone" name="phone" [(ngModel)]="userData.phone"  required>
+                           
+                            </div>
+                            </div> 
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="inputEventName4">Address Line1</label>
+                                <input class="form-control" id="inputEventName4" placeholder="Address Line1"  name="addline1" [(ngModel)]="userData.addline1" 
+                                  required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="inputEventName4">Address Line2</label>
+                                <input class="form-control" id="inputEventName4" placeholder="Address Line2" name="addline2" [(ngModel)]="userData.addline2"
+                                  required>
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="inputEventName4">City</label>
+                                <input class="form-control" id="inputEventName4" placeholder="City"  name="city" [(ngModel)]="userData.city" required >
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="inputState">State</label>
+                                <select id="inputState" class="form-control"   [(ngModel)]="userData.state"  [(value)]="selected" name="state" required>
+                                  <option selected>Choose...</option>
+                                  <option *ngFor="let state of states">{{state}}</option>
+                                </select>
+                               
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="inputEventName4">Zipcode</label>
+                                <input class="form-control" id="inputEventName4" #zipcode maxlength="5" name="zipcode"  [(ngModel)]="userData.zipcode" placeholder="Postal Code" pattern="[0-9]{5}"
+                                required>
+                              <span align="end">{{zipcode.value.length}} / 5</span>
+                              </div>
+                            </div>
+                      
+                            <button type="button" class="btn btn-light" (click)="navigateBack()">Back</button>
+                            <button type="button" class="btn btn-light" (click)="update()">Submit</button>
+
+          
+                </form>
+
+          </div>
+      </div>
+
+        
+      </div>
+        </div>
+
+       
+        </div>
+      </div>
+    </div>
+  </div>

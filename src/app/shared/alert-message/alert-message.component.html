@@ -1,0 +1,11 @@
+
+<div *ngIf="alertMessage">
+<ngb-alert 
+type="{{alertMessage.type}}"
+*ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">
+<b>{{alertMessage?.title}}</b> <br>
+<b *ngIf="alertMessage.data">Error Details:</b> {{alertMessage?.data?.message}}
+</ngb-alert>
+
+</div>
+

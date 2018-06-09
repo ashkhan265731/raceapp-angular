@@ -1,39 +1,38 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Race App</a>
-    <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- <a class="navbar-brand" href="#">Race App</a> -->
+   
+    <button type="button" class="btn btn-outline-secondary" (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="navbar-brand p-l-10">Race App</span>
   </nav>
   
   <div class="page-container">
     <div class="page-content">
-      <div class="sidebar sidebar-main">
+      <div class="sidebar sidebar-main" id="collapseExample" [ngbCollapse]="!isCollapsed">
         <div class="sidebar-content">
           <!-- User menu -->
           <div class="sidebar-user">
             <div class="category-content">
               <div class="media">
                 <a href="#" class="media-left">
-                  <img src="assets/images/demo/users/face11.jpg" class="img-circle img-sm" alt="">
-                  <img class="photo img-circle img-sm" src="../assets/images/my_ccount.png" *ngIf="!user_picture">
+                  <img class="photo img-circle img-sm" src="../../assets/images/my_ccount.png" *ngIf="!user_picture">
                   <img class="photo img-circle img-sm" [src]="serviceUrl+'/profile_pics/'+user_picture" *ngIf="user_picture">
                 </a>
                 <div class="media-body">
-                  <span class="media-heading text-semibold">Victoria Baker</span>
-                  <div class="text-size-mini text-muted">
-                    <i class="icon-pin text-size-small"></i> &nbsp;Santa Ana, CA
+                    <span class="media-heading text-semibold capitalize">{{userData.first_name+" "+userData.last_name  }}</span>
+                    <div class="text-size-mini text-muted">
+                      <i class="icon-pin text-size-small capitalize"></i> &nbsp;{{userData.city}}
+                    </div>
                   </div>
-                </div>
-                <div class="media-right media-middle">
-                  <ul class="icons-list">
-                    <li>
-                      <a href="#">
-                        <i class="icon-cog3"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <div class="m-t-12" >
+                    <a routerLink="/user/profile/{{userid}}">
+                      <i class="material-icons">
+                          edit
+                          </i>
+                        </a>
+                  </div>
               </div>
             </div>
           </div>
@@ -44,54 +43,44 @@
             <div class="category-content no-padding">
               <ul class="navigation navigation-main navigation-accordion">
                 <!-- Main -->
-                <li class="navigation-header">
+                <!-- <li class="navigation-header">
                   <span>Main</span>
                   <i class="icon-menu" title="" data-original-title="Main pages"></i>
-                </li>
+                </li> -->
                 <li class="{{pageTitle=='dashboard'?'active':''}}">
                   <a routerLink="/user/dashboard">
+                    <i class="material-icons navi">dashboard</i>
                     <span>Dashboard</span>
                   </a>
                 </li>
-                <li class="{{pageTitle=='event_list'?'active':''}}">
+                <li class="{{pageTitle=='list_event'?'active':''}}">
                   <a routerLink="/user/listevent" class="has-ul">
+                    <i class="material-icons navi">view_list</i>
                     <span>List Event</span>
                   </a>
                 </li>
                 <li class="{{pageTitle=='my_event'?'active':''}}">
                   <a  routerLink="/user/myevents" class="has-ul">
+                    <i class="material-icons navi">event</i>
                     <span>My Events</span>
                   </a>
                 </li>
                 <li>
                     <a (click)="logout()" class="has-ul">
-                     
+                        <i class="material-icons navi">exit_to_app</i>
                       <span>Logout</span>
                     </a>
                   </li>
                
                 <!-- /main -->
   
-                <!-- Forms -->
-                <li class="navigation-header">
-                  <span>Forms</span>
-                  <i class="icon-menu" title="" data-original-title="Forms"></i>
-                </li>
-                <li>
-                  <a href="#" class="has-ul">
-                    <i class="icon-pencil3"></i>
-                    <span>Form components</span>
-                  </a>
-  
-                </li>
-             
-                <!-- /forms -->
+            
               </ul>
             </div>
           </div>
           <!-- /main navigation -->
         </div>
       </div>
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="componentAdded($event)"></router-outlet>
     </div>
   </div>

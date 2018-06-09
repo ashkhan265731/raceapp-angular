@@ -13,7 +13,10 @@ import { Location } from '@angular/common';
 })
 export class RegisterComponent implements OnInit {
   serviceUrl = environment.serviceUrl;
-  user: any = {};
+  user: any = {
+    user_type : 'select',
+    state: 'select'
+  };
   filesToUpload: Array<File> = [];
   selectedTab = 0;
   verifyEmail:any = false;
@@ -74,12 +77,14 @@ else{
       .subscribe(function (res) {
         console.log(response);
         return res;
+      }, function(err){
+        console.log(err)
       });
 
     if (response) {
       this.user = {};
-      this.router.navigate(["login"]);
-      location.reload();
+     this.router.navigate(["login"]);
+      //location.reload();
       this.alertService.success('Registered successfully ', true);
     }
     else{

@@ -41,13 +41,32 @@
     <div class="col-xs-12 col-sm-12">
       
       <ul class="list-group">
-        
+          <li class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center">
+              <a class="col-xs-12 col-sm-12 text-dark event-link-heading" >
+            <span class="col-xs-4 col-sm-4 pull-left f-b  ">Event Date</span>
+            <span class="col-xs-4 col-sm-4 f-b" > Event Name</span>
+            <!-- <span class="pull-right right-0"> <i class="fa fa-arrow-circle-right"></i></span> -->
+          <span class="col-xs-4 col-sm-4 pull-right right-0 f-b ">Location</span>    
+          </a>
+          </li>
+
                     <li class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center" *ngFor="let myevents of myEventsData;let i=$index">
+                        <a class="col-xs-12 col-sm-12 event-link"  [routerLink]="['/user/myeventdetails',myevents._id]">
+                      <span class="col-xs-4 col-sm-4 pull-left  ">{{myevents.event_id.from_date | date: 'dd/MM/yyyy'}} - {{myevents.event_id.to_date | date: 'dd/MM/yyyy'}}</span>
+                      <span class="col-xs-4 col-sm-4 f-b" >{{myevents.event_id.event_name}} </span>
+                      <!-- <span class="pull-right right-0"> <i class="fa fa-arrow-circle-right"></i></span> -->
+                    <span class="col-xs-4 col-sm-4 pull-right right-0  ">{{myevents.event_id.location}}</span>    
+                    </a>
+                    </li>
+                  
+                    <!-- <li class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center" *ngFor="let myevents of myEventsData;let i=$index">
                         <a class="col-xs-12 col-sm-12 event-link"  [routerLink]="['/user/myeventdetails',myevents._id]">{{myevents.event_id.event_name}}
                         <span class="pull-right right-0"> <i class="fa fa-arrow-circle-right"></i></span>
                         </a>
-                    </li>
+                    </li> -->
                   </ul>
+                  <br>
+                  <br>
         </div>
       </div>
     </div>

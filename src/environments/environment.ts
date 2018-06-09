@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
- serviceUrl: 'http://localhost:3000'
+  serviceUrl: 'http://localhost:3000'
   // serviceUrl: 'https://stark-forest-23499.herokuapp.com'
 };

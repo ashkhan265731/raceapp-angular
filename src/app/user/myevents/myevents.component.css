@@ -5,3 +5,10 @@ a{
 a span{
     color: #3f51b5;
 }
+.f-b{
+   font-weight: bold;
+}
+.event-link-heading span{
+    color : #646879;
+    
+}

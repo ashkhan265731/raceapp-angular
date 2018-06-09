@@ -1,214 +1,228 @@
 <div class="content-wraper">
 
-    <div class="container-fluid" style="padding: 0px;">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12">
-  
-          <div class="page-header page-header-default">
-            <div class="page-header-content">
-              <div class="page-title">
-                <h4>
-                  <i class="icon-arrow-left52 position-left"></i>
-                  <span class="text-semibold">Home</span> - Event Details</h4>
-                <a class="heading-elements-toggle">
-                  <i class="icon-more"></i>
-                </a>
-              </div>
-  
-            </div>
-  
-            <div class="breadcrumb-line">
-              <a class="breadcrumb-elements-toggle">
-                <i class="icon-menu-open"></i>
+  <div class="container-fluid" style="padding: 0px;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="page-header page-header-default">
+          <div class="page-header-content">
+            <div class="page-title">
+              <h4>
+                <i class="icon-arrow-left52 position-left"></i>
+                <span class="text-semibold">Home</span> - Event Details</h4>
+              <a class="heading-elements-toggle">
+                <i class="icon-more"></i>
               </a>
-              <ul class="breadcrumb">
-                <li>
-                  <a href="index.html">
-                    <i class="icon-home2 position-left"></i> Home</a>
-                </li>
-                <li >Event </li>
-                <li class="active">Event Details</li>
-              </ul>
-  
-  
             </div>
+
+          </div>
+
+          <div class="breadcrumb-line">
+            <a class="breadcrumb-elements-toggle">
+              <i class="icon-menu-open"></i>
+            </a>
+            <ul class="breadcrumb">
+              <li>
+                <a href="index.html">
+                  <i class="icon-home2 position-left"></i> Home</a>
+              </li>
+              <li>Event </li>
+              <li class="active">Event Details</li>
+            </ul>
+
+
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12">
-              <div class="jumbotron jumbotron-fluid">
-                  <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-6">
-                    <h5 class="display-4">{{eventData.event_name}}</h5>
-                    <hr class="display-4">
-                    <p class="lead"><b>From </b>{{eventData.from_date | date: 'MMMM d, y'}} - <b>To </b>{{eventData.to_date | date: 'MMMM d, y'}} </p>
-                    <p class="lead"><i class="material-icons icon">place</i><strong>{{eventData.location}}</strong></p>
-                    <p class="lead"  *ngIf="eventData.event_addline">{{eventData.event_addline}}, </p>
-                    <p class="lead" *ngIf="eventData.event_city || eventData.event_state">{{eventData.event_city}},{{eventData.event_state}},{{eventData.event_zipcode}} </p>
-                    <p class="lead"><span class="label">Sanctions :</span>
-                    <span *ngFor="let sanctions of eventData.sanctions" class="sanc">{{sanctions.sanction_name}} </span>
-                    </p>
+  </div>
+  <div class="container-fluid">
+      <app-alert-message [alertMessage]="alertMessage"></app-alert-message>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <h5 class="display-4">{{eventData.event_name}}</h5>
+                <hr class="display-4">
+                <p class="lead">
+                  <b>From </b>{{eventData.from_date | date: 'MMMM d, y'}} -
+                  <b>To </b>{{eventData.to_date | date: 'MMMM d, y'}} </p>
+                <p class="lead">
+                  <i class="material-icons icon">place</i>
+                  <strong>{{eventData.location}}</strong>
+                </p>
+                <p class="lead" *ngIf="eventData.event_addline">{{eventData.event_addline}}, </p>
+                <p class="lead" *ngIf="eventData.event_city || eventData.event_state">{{eventData.event_city}},{{eventData.event_state}},{{eventData.event_zipcode}} </p>
+                <p class="lead">
+                  <span class="label">Sanctions :</span>
+                  <span *ngFor="let sanctions of eventData.sanctions" class="sanc">{{sanctions.sanction_name}} </span>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                  <div class="fileinput-new thumbnail">
+                    <img alt="..." src="../../assets/images/image_placeholder.jpg" class="img-thumbnail rounded float-right" *ngIf="!eventData.event_picture">
+                    <img [src]="serviceUrl+'/'+eventData.event_picture" class="img-thumbnail rounded float-right" *ngIf="eventData.event_picture"
+                    />
                   </div>
-                    <div class="col-md-6">
-                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail">
-                              <img alt="..." src="../../assets/images/image_placeholder.jpg" class="img-thumbnail rounded float-right" *ngIf="!eventData.event_picture">
-                              <img [src]="serviceUrl+'/'+eventData.event_picture" class="img-thumbnail rounded float-right" *ngIf="eventData.event_picture" />
-                            </div>
-                            <div class="fileupload-block">
-                              <button  type="button" class="btn btn-light" (click)="imgFileInput.click()">
-                                <i class="material-icons navi">add_a_photo</i>Choose Picture</button>
-                              <input hidden #imgFileInput class="upld-btn" type="file" ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload"
-                              />
-                              <div *ngFor="let item of uploader.queue;let i =index">
-                                <div *ngIf="i<1">
-                                  <button type="button"  class="btn btn-primary" id="add-rtype" (click)="item.upload()" style="cursor: pointer">
-                                    Upload
-                                    <i class="material-icons">file_upload</i>
-                                  </button>
-                                  <button type="button" class="btn btn-primary" (click)="item.remove()">cancel</button>
-                                  <br>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    
-                    
+                  <div class="fileupload-block" *ngIf="eventData.producer_id==sessionid">
+                    <button type="button" class="btn btn-light" (click)="imgFileInput.click()">
+                      <i class="material-icons navi">add_a_photo</i>Choose Picture</button>
+                    <input hidden #imgFileInput class="upld-btn" type="file" ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload"
+                    />
+                    <div *ngFor="let item of uploader.queue;let i =index">
+                      <div *ngIf="i<1">
+                        <button type="button" class="btn btn-primary" id="add-rtype" (click)="item.upload()" style="cursor: pointer">
+                          Upload
+                          <i class="material-icons">file_upload</i>
+                        </button>
+                        <button type="button" class="btn btn-primary" (click)="item.remove()">cancel</button>
+                        <br>
                       </div>
                     </div>
                   </div>
                 </div>
-   
-    <!-- race class row starts -->
 
 
-            <div class="card ">
-              <div class="card-body ">
-                  <h5>Race Class
-                      <span class="edit ">
-                          <a  (click)="openDialog(eventData.racetype,'racetype','edit')">
-                              <i class="material-icons edit-icon">edit</i>
-                          </a>
-                        </span>
-                        <span class="edit marg-right">
-                          <a (click)="openDialog(eventData.racetype,'racetype','add')">
-                              <i class="material-icons add-icon">add</i>
-                          </a>
-                        </span>
-                  </h5>
-                <div class=" table-responsive table-hover">
-                  <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th  class="w-200">Name</th>
-                        <th scope="col">Fees</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let racetype of eventData.racetype;let i=index">
-                        <td scope="row" class="w-200">
-                          <a [routerLink]="['/producer/userreportbyeventdetails',eventId,racetype.type,'raceclass']" style="cursor:pointer; text-transform: capitalize">{{racetype.type}}</a>
-                        </td>
-                        <td>   {{racetype.rate | currency}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
               </div>
             </div>
-       
-    <!-- race class row ends -->
-<br>
-<br>
-
-    <!-- exhibition row starts -->
-
-    <div class="card">
-        <div class="card-body">
-            <h5>Exhibitions
-                <span class="edit">
-                  <a (click)="openDialog(eventData.etimeslot,'etimeslot','edit')">
-                      <i class="material-icons edit-icon">edit</i>
-                  </a>
-                </span>
-                <span class="edit marg-right">
-                  <a (click)="openDialog(eventData.etimeslot,'etimeslot','add')">
-                      <i class="material-icons add-icon">add</i>
-                  </a>
-                </span>
-            </h5>
-          <div class="table-responsive table-hover">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Day</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Fees</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let timeslot of eventData.etimeslot;let i=index">
-                      <td scope="row">
-                        <a [routerLink]="['/producer/userreportbyeventdetails',eventId,timeslot.exhibition_day,'exhibition']" style="cursor:pointer;">{{timeslot.exhibition_day}}</a>
-                      </td>
-                      <td>
-                        {{timeslot.from}} - {{timeslot.to}}
-                      </td>
-                      <td>
-                        {{timeslot.exhibitions_quantity}}
-                      </td>
-                      <td>
-                        {{timeslot.exhibitions_fee}}
-                      </td>
-                    </tr>
-              </tbody>
-            </table>
           </div>
         </div>
-      </div>
+
+        <!-- race class row starts -->
 
 
-    <!-- exhibition row ends -->
-    <br>
-    <br>
+        <div class="card ">
+          <div class="card-body ">
+            <h5>Race Class
 
-    <!-- warmup row begins -->
-    <div class="card">
-        <div class="card-body">
-            <h5>Warmups
-                <span class="edit">
-                    <a (click)="openDialog(eventData.wtimeslot,'wtimeslot','edit')">
-                        <i class="material-icons edit-icon">edit</i>
-                    </a>
-                  </span>
-                  <span class="edit marg-right">
-                    <a (click)="openDialog(eventData.wtimeslot,'wtimeslot','add')">
-                        <i class="material-icons add-icon">add</i>
-                    </a>
-                  </span>
+              <span class="edit marg-right" *ngIf="eventData.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                <a (click)="openDialog(eventData?.racetype,'racetype','add');modalTitle='Add Race Class Type';">
+                  <i class="material-icons add-icon">add</i>
+                </a>
+              </span>
             </h5>
-          <div class="table-responsive table-hover">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Day</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Fees</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let timeslot of eventData.wtimeslot;let i=index">
+            <div class=" table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="w-200">Name</th>
+                    <th scope="col">Fees</th>
+                    <th scope="col"> edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let racetype of eventData.racetype;let i=index">
+                    <td scope="row" class="w-200">
+                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,racetype?.type,'raceclass']" style="cursor:pointer; text-transform: capitalize">{{racetype?.type}}</a>
+                    </td>
+                    <td> {{racetype?.price | currency}}</td>
+                    <td>
+                      <span class="edit" *ngIf="eventData.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                        <a (click)="openDialog(eventData?.racetype,'racetype','edit',i);modalTitle='Edit Race Class Type';">
+                          <i class="material-icons edit-icon">edit</i>
+                        </a>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- race class row ends -->
+        <br>
+        <br>
+
+        <!-- exhibition row starts -->
+        <div class="card">
+          <div class="card-body">
+            <h5>Exhibitions
+
+              <span class="edit marg-right" *ngIf="eventData.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                <a (click)="openDialog(eventData?.etimeslot,'etimeslot','add');modalTitle='Add Exhibitions';">
+                  <i class="material-icons add-icon">add</i>
+                </a>
+              </span>
+            </h5>
+            <div class="table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Fees</th>
+                    <th scope="col">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let timeslot of eventData.etimeslot;let i=index">
                     <td scope="row">
-                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,timeslot.warmup_day,'warmup']" style="cursor:pointer;">{{timeslot.warmup_day}}</a>
+                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,timeslot?.exhibition_day,'exhibition']" style="cursor:pointer;">{{timeslot?.exhibition_day}}</a>
                     </td>
                     <td>
-                      {{timeslot.from}} - {{timeslot.to}}
+                      {{timeslot.from?.hour+":"+timeslot.from?.minute}} - {{timeslot.to?.hour+":"+timeslot.to?.minute}}
+                    </td>
+                    <td>
+                      {{timeslot.exhibitions_quantity}}
+                    </td>
+                    <td>
+                      {{timeslot.exhibitions_fee}}
+                    </td>
+                    <td>
+                      <span class="edit" *ngIf="eventData?.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                        <a (click)="openDialog(eventData?.etimeslot,'etimeslot','edit',i);modalTitle='Edit Exhibitions';">
+                          <i class="material-icons edit-icon">edit</i>
+                        </a>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- exhibition row ends -->
+        <br>
+        <br>
+
+        <!-- warmup row begins -->
+        <div class="card">
+          <div class="card-body">
+            <h5>Warmups
+
+              <span class="edit marg-right" *ngIf="eventData?.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                <a (click)="openDialog(eventData?.wtimeslot,'wtimeslot','add');;modalTitle='Add Warmups'">
+                  <i class="material-icons add-icon">add</i>
+                </a>
+              </span>
+            </h5>
+            <div class="table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Fees</th>
+                    <th scope="col">Edit</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let timeslot of eventData.wtimeslot;let i=index">
+                    <td scope="row">
+                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,timeslot?.warmup_day,'warmup']" style="cursor:pointer;">{{timeslot?.warmup_day}}</a>
+                    </td>
+                    <td>
+                      {{timeslot?.from?.hour+":"+timeslot?.from?.minute}} - {{timeslot?.to?.hour+":"+timeslot?.to?.minute}}
                     </td>
                     <td>
                       {{timeslot.warmup_quantity}}
@@ -216,76 +230,657 @@
                     <td>
                       {{timeslot.warmup_fee}}
                     </td>
+                    <td>
+                      <span class="edit" *ngIf="eventData.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                        <a (click)="openDialog(eventData?.wtimeslot,'wtimeslot','edit',i);modalTitle='Edit Warmups';">
+                          <i class="material-icons edit-icon">edit</i>
+                        </a>
+                      </span>
+                    </td>
                   </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
 
-    <!-- warmup row ends -->
-    <br>
-    <br>
+        <!-- warmup row ends -->
+        <br>
+        <br>
 
-    <!-- Add ons begins -->
-    <div class="card">
-        <div class="card-body">
+        <!-- Add ons begins -->
+        <div class="card">
+          <div class="card-body">
             <h5>Add ons
-                <span class="edit">
-                    <a (click)="openDialog(eventData,'addons','edit')">
-                        <i class="material-icons edit-icon">edit</i>
-                    </a>
-                  </span>
+              <span class="edit" *ngIf="eventData.producer_id==sessionid" data-toggle="modal" data-target="#exampleModal">
+                <a (click)="openDialog(eventData,'addons','edit');modalTitle='Addons Edit/Update'">
+                  <i class="material-icons edit-icon">edit</i>
+                </a>
+              </span>
             </h5>
-          <div class="table-responsive table-hover">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Fees</th>
-                </tr>
-              </thead>
-              <tbody>
+            <div class="table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Fees</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>
-                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,eventData.stalls,'stalls']" style="cursor:pointer;"> Stalls</a>
+                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,eventData?.stalls,'stalls']" style="cursor:pointer;"> Stalls</a>
                     </td>
-                    <td>{{eventData.stalls}}</td>
-                    <td>$ {{eventData.stalls_price}}.00</td>
+                    <td>{{eventData?.stalls}}</td>
+                    <td>$ {{eventData?.stalls_price}}.00</td>
                   </tr>
                   <tr>
                     <td>
-                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,eventData.electric_quantity,'e_hookup']" style="cursor:pointer;">Electrical Hookup</a>
+                      <a [routerLink]="['/producer/userreportbyeventdetails',eventId,eventData?.electric_quantity,'e_hookup']" style="cursor:pointer;">Electrical Hookup</a>
                     </td>
-                    <td>{{eventData.electric_quantity}}</td>
-                    <td>$ {{eventData.electric_price}}.00</td>
+                    <td>{{eventData?.electric_quantity}}</td>
+                    <td>$ {{eventData?.electric_price}}.00</td>
                   </tr>
                   <tr>
-                    <td>Shavings</td>
-                    <td>-</td>
-                    <td>$ {{eventData.shavings_price}}.00</td>
+                    <td>
+                        <a [routerLink]="['/producer/userreportbyeventdetails',eventId,eventData?.shavings_quantity,'shavings']" style="cursor:pointer;">Shavings
+                        </a></td>
+                    <td>{{eventData?.shavings_quantity}}</td>
+                    <td>$ {{eventData?.shavings_price}}.00</td>
                   </tr>
                   <tr>
                     <td>Office Fee</td>
                     <td>-</td>
-                    <td>$ {{eventData.office_fee}}.00</td>
+                    <td>$ {{eventData?.office_fee}}.00</td>
                   </tr>
                   <tr>
                     <td>Late Fee</td>
                     <td>-</td>
-                    <td>$ {{eventData.late_fee}}.00</td>
+                    <td>$ {{eventData?.late_fee}}.00</td>
                   </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
 
-    <!-- Add ons Ends -->
-<br>
-<br>
+        <!-- Add ons Ends -->
+        <br>
+        <br>
+
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Launch demo modal
+        </button> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- {{modalFormType}} {{modalFormAction}} -->
+
+                <!--- Race Class edit form -->
+                <form novalidate #f1="ngForm" *ngIf="modalFormType=='racetype' && modalFormAction=='edit'">
+                  <div class="card-text">
+                    <div class="form-row" *ngFor="let raceclass of eventData.racetype;let i = index">
+                      <div class="form-group col-md-6" *ngIf="modalFormIndex==i">
+                        <label for="inputEventName4">Type</label>
+                        <input type="text" class="form-control" id="inputEventName4" placeholder="Race Class Type" [(ngModel)]="raceclass.type" name="event_raceclass_type{{i}}"
+                          required minlength="2" pattern="[0-9a-zA-Z $,:_]*" #raceclasstype="ngModel">
+
+                        <div *ngIf="raceclasstype?.errors?.required && (raceclasstype.touched || raceclasstype.dirty)" class="error">
+                          Name is required
+                        </div>
+                        <div *ngIf="raceclasstype?.errors?.minlength  && (raceclasstype.touched || raceclasstype.dirty)" class="error">
+                          Minimum of 10 characters
+                        </div>
+                        <div *ngIf="raceclasstype?.errors?.pattern  && (raceclasstype.touched || raceclasstype.dirty)" class="error">
+                          Race Class Name is invalid
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6" *ngIf="modalFormIndex==i">
+                        <label for="inputVenueName4">Price</label>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+
+                          <input type="number" step="2" class="form-control" id="inputVenueName4" placeholder="Price" [(ngModel)]="raceclass.price"
+                            name="price{{i}}" required pattern="[0-9]*" #race_fee="ngModel">
+
+                          <span class="input-group-text">.00</span>
+                        </div>
+                        <div *ngIf="race_fee?.errors?.required && (race_fee.touched || race_fee.dirty)" class="error">
+                          Price is required
+                        </div>
+
+                        <div *ngIf="race_fee?.errors?.pattern  && (race_fee.touched || race_fee.dirty)" class="error">
+                          Race Class Name is invalid
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f1,'edit')">Close</button>
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f1,'edit')" *ngIf="f1.valid">Save changes</button>
+                  </div>
+
+                </form>
+
+
+
+
+
+                <!--- Addmore Race Class form -->
+                <form novalidate #f2="ngForm" *ngIf="modalFormType=='racetype' && modalFormAction=='add'">
+                  <div class="card-text">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputEventName4">Type</label>
+                        <input type="text" class="form-control" id="inputEventName4" placeholder="Race Class Type" [(ngModel)]="raceclass.type" name="event_raceclass_type"
+                          required minlength="2" pattern="[0-9a-zA-Z $,:_]*">
+                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.required && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                          class="error">
+                          Name is required
+                        </div>
+                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.minlength  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                          class="error">
+                          Minimum of 10 characters
+                        </div>
+                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.pattern  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                          class="error">
+                          Race Class Name is invalid
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputVenueName4">Price</label>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+
+                          <input type="number" step="2" class="form-control" id="inputVenueName4" placeholder="Price" [(ngModel)]="raceclass.price"
+                            name="price" required pattern="[0-9]*">
+                          <span class="input-group-text">.00</span>
+                        </div>
+                        <div *ngIf="f2.controls.price?.errors?.required && (f2.controls.price.touched || f2.controls.price.dirty)" class="error">
+                          Price is required
+                        </div>
+
+                        <div *ngIf="f2.controls.price?.errors?.pattern  && (f2.controls.price.touched || f2.controls.price.dirty)" class="error">
+                          Race Class Name is invalid
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <button class="card-link" (click)="updateEvent(raceclass)" *ngIf="!f2.controls.event_raceclass_type?.errors?.required
+                     && !f2.controls.event_raceclass_type?.errors?.minlength && !f2.controls.price?.errors?.required">Add</button>
+                  <button type="reset" class="card-link">Reset</button> -->
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f2,'add');">Close</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f2,'add');" *ngIf="!f2.controls.event_raceclass_type?.errors?.required
+                     && !f2.controls.event_raceclass_type?.errors?.minlength && !f2.controls.price?.errors?.required">
+                      Add Race Class</button>
+                  </div>
+                </form>
+
+
+
+                <!-- edit timeslot edit form -->
+                <form novalidate #f4="ngForm" novalidate *ngIf="modalFormType=='etimeslot' && modalFormAction=='edit'">
+                  <div class="card-text">
+                    <!-- {{eventData.etimeslot | json}} -->
+                    <div *ngFor="let exhibition of eventData.etimeslot;let i=index">
+                      <div class="form-row" *ngIf="modalFormIndex==i">
+                        <div class="form-group col-md-4">
+                          <label for="inputState">Exhibition Day</label>
+                          <select id="inputState" class="form-control" [(ngModel)]="exhibition.exhibition_day" name="e_day{{i}}" required #edite_day="ngModel">
+                            <option selected disabled>Choose...</option>
+                            <option *ngFor="let days of e_days; let j=index;" [selected]="exhibition.exhibition_day==days">{{days}}</option>
+                          </select>
+                          <div *ngIf="edite_day?.errors?.required && (edite_day.touched || edite_day.dirty)" class="error">
+                            Field Cannot be Empty
+                          </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputEventName4">Exhibitions Quantity</label>
+                          <input type="number" class="form-control" id="inputEventName4" placeholder="Exhibitions Quantity" [(ngModel)]="exhibition.exhibitions_quantity"
+                            name="exhibitions_quantity{{i}}" required #exhibitions_quantity="ngModel" pattern="[0-9]*">
+                          <div *ngIf="exhibitions_quantity?.errors?.required && (exhibitions_quantity.touched || exhibitions_quantity.dirty)" class="error">
+                            Exhibition Quantity is required
+                          </div>
+                          <div class="error" *ngIf="exhibitions_quantity.errors?.pattern && exhibitions_quantity.touched"> Exhibition Quantity doesn't seem right</div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputVenueName4">Exhibitions Fee</label>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Exhibitions Fee" [(ngModel)]="exhibition.exhibitions_fee"
+                              name="exhibitions_fee{{i}}" required #edite_fee="ngModel" pattern="[0-9]*">
+                            <span class="input-group-text">.00</span>
+                          </div>
+                          <div *ngIf="edite_fee?.errors?.required  && (edite_fee.touched || edite_fee.dirty)" class="error">
+                            Exhibition Fee is required
+                          </div>
+                          <div class="error" *ngIf="edite_fee.errors?.pattern && edite_fee.touched"> Exhibition Fee doesn't seem right</div>
+
+                        </div>
+                      </div>
+                      <div class="form-row" *ngIf="modalFormIndex==i">
+                        <div class="form-group col-md-5">
+                          <label for="inputState">From Time</label>
+                          <ngb-timepicker [(ngModel)]="exhibition.from" (ngModelChange)="getValidateEFromTime(exhibition.from)" name="from_time{{i}}"
+                            #edite_timefrom="ngModel" [meridian]="true"></ngb-timepicker>
+                          <div class="error" *ngIf="validateEFromTime">
+                            Invalid Time
+                          </div>
+                          <div class="error" *ngIf="edite_timefrom?.errors?.required"> Exhibitions From Time Required</div>
+                        </div>
+                        <div class="form-group col-md-5 offset-md-1">
+                          <label for="inputState">To Time</label>
+                          <ngb-timepicker [(ngModel)]="exhibition.to" (ngModelChange)="getValidateEToTime(exhibition.to)" name="to_time{{i}}" [meridian]="true"
+                            #edite_timeto="ngModel"></ngb-timepicker>
+                          <div class="error" *ngIf="validateEToTime">
+                            Invalid Time
+                          </div>
+                          <div class="error" *ngIf="edite_timeto?.errors?.required"> Exhibitions From Time Required</div>
+
+                        </div>
+                        <br>
+                        <!-- <button class="card-link" (click)="addExhibitionTimeSlot(exhibition)" *ngIf="f8.valid && !edite_timeto.errors?.required && !edite_timefrom.errors?.required">Add</button> -->
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f4,'edit')">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f4,'edit')" *ngIf="f4.valid && !edite_timeto?.errors?.required && !edite_timefrom?.errors?.required && !validateEFromTime && !validateEToTime">Save changes</button>
+                  </div>
+                  <!-- <button type="reset" class="card-link" (click)="resetETime()">Reset</button> -->
+                </form>
+
+
+                <!-- add etimeslot form -->
+                <form novalidate #f8="ngForm" novalidate #f2="ngForm" *ngIf="modalFormType=='etimeslot' && modalFormAction=='add'">
+                  <div class="card-text">
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="inputState">Exhibition Day</label>
+                        <select id="inputState" class="form-control" [(ngModel)]="exhibition.e_days" name="e_day" required>
+                          <option>Choose...</option>
+                          <option *ngFor="let days of e_days; let i=index;">{{days}}</option>
+                        </select>
+                        <div *ngIf="f8.controls.e_day?.errors?.required && (f8.controls.e_day.touched || f8.controls.e_day.dirty)" class="error">
+                          Field Cannot be Empty
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputEventName4">Exhibitions Quantity</label>
+                        <input type="number" class="form-control" id="inputEventName4" placeholder="Exhibitions Quantity" [(ngModel)]="exhibition.exhibitions_quantity"
+                          name="exhibitions_quantity" required #exhibitions_quantity="ngModel">
+                        <div *ngIf="f8.controls.exhibitions_quantity?.errors?.required && (f8.controls.exhibitions_quantity.touched || f8.controls.exhibitions_quantity.dirty)"
+                          class="error">
+                          Exhibition Quantity is required
+                        </div>
+
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputVenueName4">Exhibitions Fee</label>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                          <input type="number" class="form-control" id="inputVenueName4" placeholder="Exhibitions Fee" [(ngModel)]="exhibition.exhibitions_fee"
+                            name="exhibitions_fee" required>
+                          <span class="input-group-text">.00</span>
+                        </div>
+                        <div *ngIf="f8.controls.exhibitions_fee?.errors?.required  && (f8.controls.exhibitions_fee.touched || f8.controls.exhibitions_fee.dirty)"
+                          class="error">
+                          Exhibition Fee is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-5">
+                        <label for="inputState">From Time</label> {{exhibition.from_time}}
+                        <ngb-timepicker [(ngModel)]="exhibition.from_time" (ngModelChange)="getValidateEFromTime(exhibition.from_time)" name="from_time" [meridian]="true"></ngb-timepicker>
+                        <div class="error" *ngIf="validateEFromTime">
+                          Invalid Time
+                        </div>
+                      </div>
+                      <div class="form-group col-md-5 offset-md-1">
+                        <label for="inputState">To Time</label>
+                        <ngb-timepicker [(ngModel)]="exhibition.to_time" (ngModelChange)="getValidateEToTime(exhibition.to_time)" name="to_time" [meridian]="true"></ngb-timepicker>
+                        <div class="error" *ngIf="validateEToTime">
+                          Invalid Time
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- <button class="card-link" (click)="addExhibitionTimeSlot(exhibition)" *ngIf="f8.valid && exhibition.from_time && exhibition.to_time">Add</button>
+                  <button type="reset" class="card-link" (click)="resetETime()">Reset</button> -->
+
+                  <div class="modal-footer">
+
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f8,'add');">Close</button>
+                      <button type="reset" class="btn btn-secondary" (click)="resetETime()">Reset</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f8,'add');" *ngIf="f8.valid && exhibition?.from_time && exhibition?.to_time">
+                        Add Exhibitions</button>
+                    </div>
+                </form>
+
+
+                <!-- edit warmup -->
+                <form novalidate #f6="ngForm" *ngIf="modalFormType=='wtimeslot' && modalFormAction=='edit'">
+                  <div class="card-text">
+                    <div *ngFor="let warmup of eventData.wtimeslot;let i=index">
+                      <div class="form-row" *ngIf="modalFormIndex==i">
+                        <div class="form-group col-md-4">
+                          <label for="inputState">Warm Up Day</label>
+                          <select id="inputState" class="form-control" [(ngModel)]="warmup.warmup_day" name="w_day{{i}}" required>
+                            <option selected>Choose...</option>
+                            <option *ngFor="let days of w_days; let j=index;" [selected]="warmup.warmup_day==days">{{days}}</option>
+                          </select>
+                          <div *ngIf="f6.controls.w_day?.errors?.required && (f6.controls.w_day.touched || f6.controls.w_day.dirty)" class="error">
+                            Field Cannot be Empty
+                          </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputEventName4">Warm Up Quantity</label>
+                          <input type="text" class="form-control" id="inputEventName4" placeholder="Warm Up Quantity" [(ngModel)]="warmup.warmup_quantity"
+                            name="warmup_quantity{{i}}" required minlength="1" pattern="[0-9._]*" #warmup_quantity="ngModel">
+                          <div *ngIf="f6.controls.warmup_quantity?.errors?.required && (f6.controls.warmup_quantity.touched || f6.controls.warmup_quantity.dirty)"
+                            class="error">
+                            Warm Up Quantity is required
+                          </div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputVenueName4">Warm Ups Fee</label>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Warm Ups Fee" [(ngModel)]="warmup.warmup_fee"
+                              name="warmup_fee{{i}}" required>
+                            <span class="input-group-text">.00</span>
+                          </div>
+                          <div *ngIf="f6.controls.warmup_fee?.errors?.required && (f6.controls.warmup_fee.touched || f6.controls.warmup_fee.dirty)"
+                            class="error">
+                            Warm Up Fees is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row" *ngIf="modalFormIndex==i">
+                        <div class="form-group col-md-5">
+                          <label for="inputState">From Time</label>
+                          <ngb-timepicker [(ngModel)]="warmup.from" name="from_time{{i}}" [meridian]="true" (ngModelChange)="getValidateWFromTime(warmup.from)"></ngb-timepicker>
+                          <div class="error" *ngIf="validateWFromTime">
+                            Invalid Time
+                          </div>
+                        </div>
+                        <div class="form-group col-md-5 offset-md-1">
+                          <label for="inputState">To Time</label>
+                          <ngb-timepicker [(ngModel)]="warmup.to" name="to_time{{i}}" [meridian]="true" (ngModelChange)="getValidateWToTime(warmup.to)"></ngb-timepicker>
+                          <div class="error" *ngIf="validateWToTime">
+                            Invalid Time
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f6,'edit')">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f6,'edit')" *ngIf="f6.valid && !validateWFromTime && !validateWToTime">Save changes</button>
+                  </div>
+                  <!-- <button class="card-link" (click)="addWarmupTimeSlot(warmup)" *ngIf="f3.valid && warmup.from_time && warmup.to_time">Add</button> -->
+                </form>
+                <!-- add warmups -->
+
+                <form novalidate #f3="ngForm" *ngIf="modalFormType=='wtimeslot' && modalFormAction=='add'">
+                  <div class="card-text">
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="inputState">Warm Up Day</label>
+                        <select id="inputState" class="form-control" [(ngModel)]="warmup.w_days" name="w_day" required>
+                          <option selected disabled>Choose...</option>
+                          <option *ngFor="let days of w_days; let i=index;">{{days}}</option>
+                        </select>
+                        <div *ngIf="f3.controls.w_day?.errors?.required && (f3.controls.w_day.touched || f3.controls.w_day.dirty)" class="error">
+                          Field Cannot be Empty
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputEventName4">Warm Up Quantity</label>
+                        <input type="number" class="form-control" id="inputEventName4" placeholder="Warm Up Quantity" [(ngModel)]="warmup.warmup_quantity"
+                          name="warmup_quantity" required minlength="1" pattern="[0-9]*">
+                        <div *ngIf="f3.controls.warmup_quantity?.errors?.required && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                          class="error">
+                          Warm Up Quantity is required
+                        </div>
+                        <div *ngIf="f3.controls.warmup_quantity?.errors?.minlength  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                          class="error">
+                          Minimum of 1 characters
+                        </div>
+                        <div *ngIf="f3.controls.warmup_quantity?.errors?.pattern  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                          class="error">
+                          Warm Up Quantity is invalid
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputVenueName4">Warm Ups Fee</label>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                          <input type="number" class="form-control" id="inputVenueName4" placeholder="Warm Ups Fee" [(ngModel)]="warmup.warmup_fee"
+                            name="warmup_fee" required>
+                          <span class="input-group-text">.00</span>
+                        </div>
+                        <div *ngIf="f3.controls.warmup_fee?.errors?.required && (f3.controls.warmup_fee.touched || f3.controls.warmup_fee.dirty)"
+                          class="error">
+                          Warm Up Fees is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-5">
+                        <label for="inputState">From Time</label>
+                        <ngb-timepicker [(ngModel)]="warmup.from_time" name="from_time" [meridian]="true" (ngModelChange)="getValidateWFromTime(warmup.from_time)"></ngb-timepicker>
+                        <div class="error" *ngIf="validateWFromTime">
+                          Invalid Time
+                        </div>
+                      </div>
+                      <div class="form-group col-md-5 offset-md-1">
+                        <label for="inputState">To Time</label>
+                        <ngb-timepicker [(ngModel)]="warmup.to_time" name="to_time" [meridian]="true" (ngModelChange)="getValidateWToTime(warmup.to_time)"></ngb-timepicker>
+                        <div class="error" *ngIf="validateWToTime">
+                          Invalid Time
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <button class="card-link" (click)="addWarmupTimeSlot(warmup)" *ngIf="f3.valid && warmup.from_time && warmup.to_time">Add</button>
+                  <button type="reset" class="card-link" (click)="resetWTime()">Reset</button> -->
+                  <div class="modal-footer">
+
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f3,'add');">Close</button>
+                      <button type="reset" class="btn btn-secondary" (click)="resetETime()">Reset</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f3,'add');"
+                       *ngIf="f3.valid && warmup?.from_time && warmup?.to_time">
+                        Add Warmups</button>
+                    </div>
+                </form>
+                <!-- add ons edit form -->
+                <form novalidate #f5="ngForm" *ngIf="modalFormType=='addons' && modalFormAction=='edit'">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEventName4">Stalls Provided</label>
+                      <input type="number" class="form-control" id="inputEventName4" placeholder="Stalls Quantity" [(ngModel)]="eventData.stalls"
+                        name="stalls" minlength="1" pattern="[0-9._]*" (ngModelChange)="validateStalls()">
+
+                      <div *ngIf="f5.controls.stalls?.errors?.minlength  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.stalls?.errors?.pattern  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
+                        Stalls Quantity is invalid
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputVenueName4">Stalls Price</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inputVenueName4" placeholder="Stalls Price" [(ngModel)]="eventData.stalls_price"
+                          name="stalls_price" minlength="1" pattern="[0-9]*" (ngModelChange)="validateStalls()">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                      <div *ngIf="f5.controls.stalls_price?.errors?.minlength  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
+                        class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.stalls_price?.errors?.pattern  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
+                        class="error">
+                        Stalls Price is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                      <label for="inputEventName4">Electric Hookup Quantity</label>
+                      <input type="number" class="form-control" id="inputEventName4" placeholder="Electric Hookup Quantity" [(ngModel)]="eventData.electric_quantity"
+                        name="electric_quantity" minlength="1" pattern="[0-9]*" (ngModelChange)="validateElectric()">
+
+                      <div *ngIf="f5.controls.electric_quantity?.errors?.minlength  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
+                        class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.electric_quantity?.errors?.pattern  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
+                        class="error">
+                        Electric Hookup Quantity is invalid
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputVenueName4">Electric Hookup Price</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inputVenueName4" placeholder="Electric Hookup Price" [(ngModel)]="eventData.electric_price"
+                          name="electric_price" minlength="1" pattern="[0-9]*" (ngModelChange)="validateElectric()">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                      <div *ngIf="f5.controls.electric_price?.errors?.minlength  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
+                        class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.electric_price?.errors?.pattern  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
+                        class="error">
+                        Stalls Price is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="inputEventName4">Shavings Quantity</label>
+                          <input type="number" class="form-control" id="inputEventName4" placeholder="Shavings Quantity" [(ngModel)]="eventData.shavings_quantity"
+                            name="shavings_quantity" minlength="1" pattern="[0-9]*" (ngModelChange)="validateShavings()">
+    
+                          <div *ngIf="f5.controls.shavings_quantity?.errors?.minlength  && (f5.controls.shavings_quantity.touched || f5.controls.shavings_quantity.dirty)"
+                            class="error">
+                            Minimum of 1 characters
+                          </div>
+                          <div *ngIf="f5.controls.shavings_quantity?.errors?.pattern  && (f5.controls.shavings_quantity.touched || f5.controls.shavings_quantity.dirty)"
+                            class="error">
+                            Shavings Hookup Quantity is invalid
+                          </div>
+                        </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputVenueName4">Shavings Price</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inputVenueName4" placeholder="Shavings Fee" [(ngModel)]="eventData.shavings_price"
+                          name="shavings_price" minlength="1" pattern="[0-9]*">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                      <div *ngIf="f5.controls.shavings_price?.errors?.minlength  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
+                        class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.shavings_price?.errors?.pattern  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
+                        class="error">
+                        Shavings Price is invalid
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEventName4">Late Fee</label>
+
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inputEventName4" placeholder="Late Fee" [(ngModel)]="eventData.late_fee" name="late_fee"
+                          minlength="1" pattern="[0-9]*">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                      <div *ngIf="f5.controls.late_fee?.errors?.minlength  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.late_fee?.errors?.pattern  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
+                        Late Fee is invalid
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputVenueName4">Office Fee</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inputVenueName4" placeholder="Office Fee" [(ngModel)]="eventData.office_fee"
+                          name="office_fee" minlength="1" pattern="[0-9]*">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                      <div *ngIf="f5.controls.office_fee?.errors?.minlength  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
+                        class="error">
+                        Minimum of 1 characters
+                      </div>
+                      <div *ngIf="f5.controls.office_fee?.errors?.pattern  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
+                        class="error">
+                        Office Fee is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup(f5,'edit')">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEvent(f5,'edit')" *ngIf="f5.valid ">Save changes</button>
+                  </div>
+                </form>
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <button class="btn btn-primary pull-right" type="button" (click)="goBack()">Back</button>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
+  <br>
+  <br>
 </div>

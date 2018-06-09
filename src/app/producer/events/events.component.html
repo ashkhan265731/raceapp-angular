@@ -1,673 +1,757 @@
 <div class="content-wraper">
 
-  <div class="container-fluid" style="padding: 0px;">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12">
+    <div class="container-fluid" style="padding: 0px;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
 
-        <div class="page-header page-header-default">
-          <div class="page-header-content">
-            <div class="page-title">
-              <h4>
-                <i class="icon-arrow-left52 position-left"></i>
-                <span class="text-semibold">Home</span> - Events</h4>
-              <a class="heading-elements-toggle">
-                <i class="icon-more"></i>
-              </a>
+                <div class="page-header page-header-default">
+                    <div class="page-header-content">
+                        <div class="page-title">
+                            <h4>
+                                <i class="icon-arrow-left52 position-left"></i>
+                                <span class="text-semibold">Home</span> - Events</h4>
+                            <a class="heading-elements-toggle">
+                                <i class="icon-more"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="breadcrumb-line">
+                        <a class="breadcrumb-elements-toggle">
+                            <i class="icon-menu-open"></i>
+                        </a>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="index.html">
+                                    <i class="icon-home2 position-left"></i> Home</a>
+                            </li>
+                            <li class="active">Events</li>
+                        </ul>
+
+
+                    </div>
+                </div>
             </div>
-
-          </div>
-
-          <div class="breadcrumb-line">
-            <a class="breadcrumb-elements-toggle">
-              <i class="icon-menu-open"></i>
-            </a>
-            <ul class="breadcrumb">
-              <li>
-                <a href="index.html">
-                  <i class="icon-home2 position-left"></i> Home</a>
-              </li>
-              <li class="active">Events</li>
-            </ul>
-
-
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12">
-        <!-- Add Event Basic Info starts -->
-        <div class="card">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <!-- Add Event Basic Info starts -->
+                <div class="card">
 
-          <div class="card-body">
-            <img src="../../../assets/images/icons8-ok-48.png" *ngIf="f.valid" alt="" class="check-success">
-            <h5 class="card-title">Basic Event Info</h5>
-            <form novalidate #f="ngForm">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEventName4">Event Name</label>
-                  <input type="text" class="form-control" id="inputEventName4" placeholder="Event Name" [(ngModel)]="event.event_name" name="event_name"
-                    required minlength="10" pattern="[0-9a-zA-Z _]*">
-                  <div *ngIf="f.controls.event_name?.errors?.required && (f.controls.event_name.touched || f.controls.event_name.dirty)" class="error">
-                    Name is required
-                  </div>
-                  <div *ngIf="f.controls.event_name?.errors?.minlength  && (f.controls.event_name.touched || f.controls.event_name.dirty)"
-                    class="error">
-                    Minimum of 10 characters
-                  </div>
-                  <div *ngIf="f.controls.event_name?.errors?.pattern  && (f.controls.event_name.touched || f.controls.event_name.dirty)" class="error">
-                    Event name must contain only alphabets and numbers
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputVenueName4">Venue/Location Name</label>
-                  <input type="text" class="form-control" id="inputVenueName4" placeholder="Venue/Location Name" [(ngModel)]="event.location"
-                    name="location" required minlength="10" pattern="[0-9a-zA-Z., _]*">
-                  <div *ngIf="f.controls.location?.errors?.required && (f.controls.location.touched || f.controls.location.dirty)" class="error">
-                    Event Location is required
-                  </div>
-                  <div *ngIf="f.controls.location?.errors?.minlength  && (f.controls.location.touched || f.controls.location.dirty)" class="error">
-                    Minimum of 10 characters
-                  </div>
-                  <div *ngIf="f.controls.location?.errors?.pattern  && (f.controls.location.touched || f.controls.location.dirty)" class="error">
-                    Event Location is invalid
-                  </div>
-                </div>
-              </div>
+                    <div class="card-body">
+                        <img src="../../../assets/images/icons8-ok-48.png" *ngIf="f.valid" alt="" class="check-success">
+                        <h5 class="card-title">Basic Event Info</h5>
+                        <form novalidate #f="ngForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEventName4">Event Name</label>
+                                    <input type="text" class="form-control" id="inputEventName4" placeholder="Event Name" [(ngModel)]="event.event_name" name="event_name"
+                                        required minlength="2" pattern="[0-9a-zA-Z _]*">
+                                    <div *ngIf="f.controls.event_name?.errors?.required && (f.controls.event_name.touched || f.controls.event_name.dirty)" class="error">
+                                        Name is required
+                                    </div>
+                                    <div *ngIf="f.controls.event_name?.errors?.minlength  && (f.controls.event_name.touched || f.controls.event_name.dirty)"
+                                        class="error">
+                                        Event Name Too Small
+                                    </div>
+                                    <div *ngIf="f.controls.event_name?.errors?.pattern  && (f.controls.event_name.touched || f.controls.event_name.dirty)" class="error">
+                                        Event name must contain only alphabets and numbers
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputVenueName4">Venue/Location Name</label>
+                                    <input type="text" class="form-control" id="inputVenueName4" placeholder="Venue/Location Name" [(ngModel)]="event.location"
+                                        name="location" required minlength="3" pattern="[0-9a-zA-Z., _]*">
+                                    <div *ngIf="f.controls.location?.errors?.required && (f.controls.location.touched || f.controls.location.dirty)" class="error">
+                                        Event Location is required
+                                    </div>
+                                    <div *ngIf="f.controls.location?.errors?.minlength  && (f.controls.location.touched || f.controls.location.dirty)" class="error">
+                                        Minimum of 10 characters
+                                    </div>
+                                    <div *ngIf="f.controls.location?.errors?.pattern  && (f.controls.location.touched || f.controls.location.dirty)" class="error">
+                                        Event Location is invalid
+                                    </div>
+                                </div>
+                            </div>
 
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">From Date</label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.from_date" name="from_date" ngbDatepicker
-                      #d1="ngbDatepicker" required readonly (ngModelChange)="getValidateDate(event.from_date,event.to_date)">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                          <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                        </button>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">From Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.from_date" name="from_date" ngbDatepicker
+                                            #d1="ngbDatepicker" required readonly (ngModelChange)="getValidateDate(event.from_date,event.to_date)">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                                                <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="f.controls.from_date?.errors?.required && (f.controls.from_date.touched || f.controls.from_date.dirty)" class="error">
+                                        From Date is required
+                                    </div>
+                                    <div *ngIf="validateDate" class="error">
+                                        From Date should be lesser than To Date and Greater than Today
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">To Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.to_date" name="to_date" ngbDatepicker #d2="ngbDatepicker"
+                                            required readonly (ngModelChange)="getValidateDate(event.from_date,event.to_date)">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                                                <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="f.controls.to_date?.errors?.required && (f.controls.to_date.touched || f.controls.to_date.dirty)" class="error">
+                                        To Date is required
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="inputAddress2">Address</label>
+                                <input type="text" class="form-control" id="inputAddress2" placeholder="Street Address, Block Name.... " [(ngModel)]="event.address"
+                                    name="address" required minlength="5" pattern="[0-9a-zA-Z \/#$,.:_]*">
+                                <div *ngIf="f.controls.address?.errors?.required && (f.controls.address.touched || f.controls.address.dirty)" class="error">
+                                    Event Address is required
+                                </div>
+                                <div *ngIf="f.controls.address?.errors?.minlength  && (f.controls.address.touched || f.controls.address.dirty)" class="error">
+                                    Minimum of 5 characters Required
+                                </div>
+                                <div *ngIf="f.controls.v?.errors?.pattern  && (f.controls.address.touched || f.controls.address.dirty)" class="error">
+                                    Event Address is invalid
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">City</label>
+                                    <input type="text" class="form-control" id="inputCity" [(ngModel)]="event.city" name="city" required minlength="2" pattern="[a-zA-Z .,_]*">
+                                    <div *ngIf="f.controls.city?.errors?.required && (f.controls.city.touched || f.controls.city.dirty)" class="error">
+                                        City is required
+                                    </div>
+                                    <div *ngIf="f.controls.city?.errors?.minlength  && (f.controls.city.touched || f.controls.city.dirty)" class="error">
+                                        City Name is too Small
+                                    </div>
+                                    <div *ngIf="f.controls.city?.errors?.pattern  && (f.controls.city.touched || f.controls.city.dirty)" class="error">
+                                        City is invalid
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputState">State</label>
+                                    <select id="inputState" class="form-control" [(ngModel)]="event.state" name="state" required>
+                                        <option selected>Choose...</option>
+                                        <option *ngFor="let state of states">{{state}}</option>
+                                    </select>
+                                    <div *ngIf="f.controls.state?.errors?.required && (f.controls.state.touched || f.controls.state.dirty)" class="error">
+                                        State is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputZip">Zip</label>
+                                    <input type="text" class="form-control" id="inputZip" [(ngModel)]="event.zipcode" name="zipcode" required minlength="5" maxlength="5"
+                                        pattern="[0-9]*">
+                                    <div *ngIf="f.controls.zipcode?.errors?.required && (f.controls.zipcode.touched || f.controls.zipcode.dirty)" class="error">
+                                        ZipCode is required
+                                    </div>
+                                    <div *ngIf="f.controls.zipcode?.errors?.minlength && f.controls.zipcode?.errors?.maxlength && (f.controls.zipcode.touched || f.controls.event_zip.dirty)"
+                                        class="error">
+                                        Invalid Zipcode Must Contain 5 Digits
+                                    </div>
+                                    <div *ngIf="f.controls.zipcode?.errors?.pattern  && (f.controls.zipcode.touched || f.controls.zipcode.dirty)" class="error">
+                                        ZipCode is Invalid
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <div *ngIf="f.controls.from_date?.errors?.required && (f.controls.from_date.touched || f.controls.from_date.dirty)" class="error">
-                    From Date is required
-                  </div>
-                  <div *ngIf="validateDate" class="error">
-                    From Date sould be lesse than To Date
-                  </div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="inputCity">To Date</label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.to_date" name="to_date" ngbDatepicker #d2="ngbDatepicker"
-                      required readonly (ngModelChange)="getValidateDate(event.from_date,event.to_date)">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                        <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                      </button>
+                <!-- Add Event Basic Info ends -->
+                <br>
+                <br>
+                <!-- Add sanctions starts -->
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.sanctions.length>0" alt="" class="check-success">
+
+                        <h5 class="card-title">Add sanctions</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+                        <form novalidate #f4="ngForm">
+                            <div class="card-text">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Sanction Name</label>
+                                        <input type="text" class="form-control" id="inputEventName4" placeholder="Sanction Name" [(ngModel)]="sanction.sanction_name"
+                                            name="sanction_name" required minlength="3" pattern="[a-zA-Z _]*">
+                                        <div *ngIf="f4.controls.sanction_name?.errors?.required && event.sanctions.length==0 && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
+                                            class="error">
+                                            Sanction Name is required
+                                        </div>
+                                        <div *ngIf="f4.controls.sanction_name?.errors?.minlength  && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
+                                            class="error">
+                                            Minimum of 3 characters
+                                        </div>
+                                        <div *ngIf="f4.controls.sanction_name?.errors?.pattern  && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
+                                            class="error">
+                                            Sanction Name is invalid
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success btn-sm" (click)="addSanction(sanction)" *ngIf="!f4.controls.sanction_name?.errors?.required && !f4.controls.sanction_name?.errors?.minlength">Add</button>
+                            &nbsp; &nbsp;
+                            <button class="btn btn-secondary btn-sm" type="reset">Reset</button>
+                        </form>
+                        <br>
+                        <br>
+                        <div *ngIf="event.sanctions.length>0">
+
+                            <button type="button" class="btn btn-outline-dark m-r-10" *ngFor="let sanctions of event.sanctions;let i=index">
+                                {{sanctions.sanction_name | uppercase}}
+                                <span (click)="removeSanction(i)">
+                                    <i class="fas fa-times-circle"></i>
+                                </span>
+                                <span class="sr-only"></span>
+                            </button> &nbsp;&nbsp;
+                        </div>
                     </div>
-                  </div>
-                  <div *ngIf="f.controls.to_date?.errors?.required && (f.controls.to_date.touched || f.controls.to_date.dirty)" class="error">
-                    To Date is required
-                  </div>
+                    <!-- Add sanctions ends -->
                 </div>
-              </div>
+                <br>
+                <br>
+
+                <!-- Add raceclass starts -->
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.racetype.length>0" alt="" class="check-success">
+
+                        <h5 class="card-title">Add Race Class</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+                        <form novalidate #f2="ngForm">
+                            <div class="card-text">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Type</label>
+                                        <input type="text" class="form-control" id="inputEventName4" placeholder="Race Class Type" [(ngModel)]="raceclass.type" name="event_raceclass_type"
+                                            required minlength="3" pattern="[0-9a-zA-Z $,:_]*">
+                                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.required && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                                            class="error">
+                                            Name is required
+                                        </div>
+                                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.minlength  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                                            class="error">
+                                            Minimum of 10 characters
+                                        </div>
+                                        <div *ngIf="f2.controls.event_raceclass_type?.errors?.pattern  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
+                                            class="error">
+                                            Race Class Name is invalid
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVenueName4">Price</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Price" [(ngModel)]="raceclass.price" name="price"
+                                                required pattern="[0-9]*.[0-9]*">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f2.controls.price?.errors?.required && (f2.controls.price.touched || f2.controls.price.dirty)" class="error">
+                                            Price is required
+                                        </div>
+
+                                        <div *ngIf="f2.controls.price?.errors?.pattern  && (f2.controls.price.touched || f2.controls.price.dirty)" class="error">
+                                            Race Class Name is invalid
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="card-link btn btn-success btn-sm pull-right" (click)="addRaceClass(raceclass)" *ngIf="!f2.controls.event_raceclass_type?.errors?.required
+                   && !f2.controls.event_raceclass_type?.errors?.minlength && !f2.controls.price?.errors?.required">Add</button>
+                            <!-- <button type="reset" class="card-link">Reset</button> -->
+                        </form>
+                        <br>
+                        <br>
+                        <div class="table-responsive table-hover">
+                            <table class="table" *ngIf="event.racetype.length>0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let racetype of event.racetype;let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{racetype.type}}</td>
+                                        <td>{{racetype.price | currency}}</td>
+                                        <td>
+                                            <a (click)="removeRaceClass(i)">
+                                                <i class="material-icons del-icon">delete</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add raceclass ends -->
+
+                <br>
+                <br>
+                <!-- Add exhibition starts -->
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.etimeslot.length>0" alt="" class="check-success">
+
+                        <h5 class="card-title">Add Exhibitions</h5>
+                        <form novalidate #f8="ngForm">
+                            <div class="card-text">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">Exhibition Day</label>
+                                        <select id="inputState" class="form-control" [(ngModel)]="exhibition.e_days" name="e_day" required>
+                                            <option selected>Choose...</option>
+                                            <option *ngFor="let days of e_days; let i=index;">{{days}}</option>
+                                        </select>
+                                        <div *ngIf="f8.controls.e_day?.errors?.required && (f8.controls.e_day.touched || f8.controls.e_day.dirty)" class="error">
+                                            Field Cannot be Empty
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEventName4">Exhibitions Quantity</label>
+                                        <input type="text" class="form-control" id="inputEventName4" placeholder="Exhibitions Quantity" [(ngModel)]="exhibition.exhibitions_quantity"
+                                            name="exhibitions_quantity" required #exhibitions_quantity="ngModel" pattern="[0-9]*">
+                                        <div *ngIf="f8.controls.exhibitions_quantity?.errors?.required && (f8.controls.exhibitions_quantity.touched || f8.controls.exhibitions_quantity.dirty)"
+                                            class="error">
+                                            Exhibition Quantity is required
+                                        </div>
+                                        <div *ngIf="f8.controls.exhibitions_quantity?.errors?.pattern && (f8.controls.exhibitions_quantity.touched || f8.controls.exhibitions_quantity.dirty)"
+                                            class="error">
+                                            Exhibition Quantity is Invalid
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputVenueName4">Exhibitions Fee</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Exhibitions Fee" [(ngModel)]="exhibition.exhibitions_fee"
+                                                name="exhibitions_fee" required pattern="[0-9]*.[0-9]*">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f8.controls.exhibitions_fee?.errors?.required  && (f8.controls.exhibitions_fee.touched || f8.controls.exhibitions_fee.dirty)"
+                                            class="error">
+                                            Exhibition Fee is required
+                                        </div>
+                                        <div *ngIf="f8.controls.exhibitions_fee?.errors?.pattern  && (f8.controls.exhibitions_fee.touched || f8.controls.exhibitions_fee.dirty)"
+                                            class="error">
+                                            Exhibition Fee is Invalid
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label for="inputState">From Time</label>
+                                        <ngb-timepicker [(ngModel)]="exhibition.from_time" (ngModelChange)="getValidateEFromTime()" name="from_time" [meridian]="true"></ngb-timepicker>
+                                        <div class="error" *ngIf="validateEFromTime">
+                                            Invalid Time
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-5 offset-md-1">
+                                        <label for="inputState">To Time</label>
+                                        <ngb-timepicker [(ngModel)]="exhibition.to_time" (ngModelChange)="getValidateEToTime()" name="to_time" [meridian]="true"></ngb-timepicker>
+                                        <div class="error" *ngIf="validateEToTime">
+                                            Invalid Time
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="card-link btn btn-success btn-sm pull-right" (click)="addExhibitionTimeSlot(exhibition)" *ngIf="f8.valid && exhibition.from_time && exhibition.to_time">Add</button>
+                            <!-- <button type="reset" class="card-link" (click)="resetETime()">Reset</button> -->
+                        </form>
+                        <br>
+                        <br>
+                        <div class="table-responsive table-hover">
+                            <table class="table" *ngIf="event.etimeslot.length>0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Day</th>
+                                        <th scope="col">Time From</th>
+                                        <th scope="col">Time To</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Fees</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let etimeslot of event.etimeslot;let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{etimeslot.exhibition_day}}</td>
+                                        <td>{{etimeslot.from | timeConvertor}}</td>
+                                        <td>{{etimeslot.to | timeConvertor}}</td>
+                                        <td>{{etimeslot.exhibitions_quantity}}</td>
+                                        <td>{{etimeslot.exhibitions_fee | currency}}</td>
+                                        <td>
+                                            <a (click)="removeExhibitionTimeSlot(i)">
+                                                <i class="material-icons del-icon">delete</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add exhibition ends -->
+                <br>
+                <br>
+                <!-- Add Warmup starts -->
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.wtimeslot.length>0" alt="" class="check-success">
+
+                        <h5 class="card-title">Add Warm Ups</h5>
+                        <form novalidate #f3="ngForm">
+                            <div class="card-text">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">Warm Up Day</label>
+                                        <select id="inputState" class="form-control" [(ngModel)]="warmup.w_days" name="w_day" required>
+                                            <option selected>Choose...</option>
+                                            <option *ngFor="let days of w_days; let i=index;">{{days}}</option>
+                                        </select>
+                                        <div *ngIf="f3.controls.w_day?.errors?.required && (f3.controls.w_day.touched || f3.controls.w_day.dirty)" class="error">
+                                            Field Cannot be Empty
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEventName4">Warm Up Quantity</label>
+                                        <input type="text" class="form-control" id="inputEventName4" placeholder="Warm Up Quantity" [(ngModel)]="warmup.warmup_quantity"
+                                            name="warmup_quantity" required minlength="1" pattern="[0-9]*">
+                                        <div *ngIf="f3.controls.warmup_quantity?.errors?.required && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                                            class="error">
+                                            Warm Up Quantity is required
+                                        </div>
+                                        <div *ngIf="f3.controls.warmup_quantity?.errors?.minlength  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f3.controls.warmup_quantity?.errors?.pattern  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
+                                            class="error">
+                                            Warm Up Quantity is invalid
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputVenueName4">Warm Ups Fee</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Warm Ups Fee" [(ngModel)]="warmup.warmup_fee"
+                                                name="warmup_fee" required pattern="[0-9]*.[0-9]*">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f3.controls.warmup_fee?.errors?.required && (f3.controls.warmup_fee.touched || f3.controls.warmup_fee.dirty)"
+                                            class="error">
+                                            Warm Up Fees is required
+                                        </div>
+                                        <div *ngIf="f3.controls.warmup_fee?.errors?.pattern && (f3.controls.warmup_fee.touched || f3.controls.warmup_fee.dirty)"
+                                            class="error">
+                                            Warm Up Fees is invalid
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label for="inputState">From Time</label>
+                                        <ngb-timepicker [(ngModel)]="warmup.from_time" name="from_time" [meridian]="true" (ngModelChange)="getValidateWFromTime()"></ngb-timepicker>
+                                        <div class="error" *ngIf="validateWFromTime">
+                                            Invalid Time
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-5 offset-md-1">
+                                        <label for="inputState">To Time</label>
+                                        <ngb-timepicker [(ngModel)]="warmup.to_time" name="to_time" [meridian]="true" (ngModelChange)="getValidateWToTime()"></ngb-timepicker>
+                                        <div class="error" *ngIf="validateWToTime">
+                                            Invalid Time
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="card-link btn btn-success btn-sm pull-right" (click)="addWarmupTimeSlot(warmup)" *ngIf="f3.valid && warmup.from_time && warmup.to_time">Add</button>
+                            <!-- <button type="reset" class="card-link" (click)="resetWTime()">Reset</button> -->
+                        </form>
+
+                        <br>
+                        <br>
+                        <div class="table-responsive table-hover">
+                            <table class="table" *ngIf="event.wtimeslot.length>0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Day</th>
+                                        <th scope="col">Time From</th>
+                                        <th scope="col">Time To</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Fees</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let wtimeslot of event.wtimeslot;let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{wtimeslot.warmup_day}}</td>
+                                        <td>{{wtimeslot.from | timeConvertor}}</td>
+                                        <td>{{wtimeslot.to | timeConvertor}}</td>
+                                        <td>{{wtimeslot.warmup_quantity}}</td>
+                                        <td>{{wtimeslot.warmup_fee | currency}}</td>
+                                        <td>
+                                            <a (click)="removeWarmupTimeSlot(i)">
+                                                <i class="material-icons del-icon">delete</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add exhibition ends -->
+                <br>
+                <br>
+
+                <!-- Add Additional Info starts -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">Additional Information</h5>
+                        <div class="card-text">
+
+                            <form novalidate #f5="ngForm">
 
 
+                                <div class="form-row">
 
-              <div class="form-group">
-                <label for="inputAddress2">Address</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Street Address, Block Name.... " [(ngModel)]="event.address"
-                  name="address" required minlength="10" pattern="[0-9a-zA-Z \/#$,.:_]*">
-                <div *ngIf="f.controls.address?.errors?.required && (f.controls.address.touched || f.controls.address.dirty)" class="error">
-                  Event Address is required
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Stalls Provided</label>
+                                        <input type="number" class="form-control" id="inputEventName4" placeholder="Stalls Quantity" [(ngModel)]="event.stalls" name="stalls"
+                                            minlength="1" pattern="[0-9]*">
+
+                                        <div *ngIf="f5.controls.stalls?.errors?.minlength  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.stalls?.errors?.pattern  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
+                                            Stalls Quantity is invalid
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVenueName4">Stalls Price</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Stalls Price" [(ngModel)]="event.stalls_price"
+                                                name="stalls_price" minlength="1" pattern="[0-9]*.[0-9]*" *ngIf="event.stalls>0">
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Stalls Price" [(ngModel)]="event.stalls_price"
+                                                name="stalls_price" minlength="1" pattern="[0-9]*.[0-9]*" readonly *ngIf="event.stalls==0">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f5.controls.stalls_price?.errors?.minlength  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.stalls_price?.errors?.pattern  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
+                                            class="error">
+                                            Stalls Price is invalid
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Electric Hookup Quantity</label>
+                                        <input type="number" class="form-control" id="inputEventName4" placeholder="Electric Hookup Quantity" [(ngModel)]="event.electric_quantity"
+                                            name="electric_quantity" minlength="1" pattern="[0-9]*">
+
+                                        <div *ngIf="f5.controls.electric_quantity?.errors?.minlength  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.electric_quantity?.errors?.pattern  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
+                                            class="error">
+                                            Electric Hookup Quantity is invalid
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVenueName4">Electric Hookup Price</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Electric Hookup Price" [(ngModel)]="event.electric_price"
+                                                name="electric_price" minlength="1" pattern="[0-9]*.[0-9]*" *ngIf="event.electric_quantity>0">
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Electric Hookup Price" [(ngModel)]="event.electric_price"
+                                                name="electric_price" minlength="1" pattern="[0-9]*.[0-9]*" readonly *ngIf="event.electric_quantity==0">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f5.controls.electric_price?.errors?.minlength  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.electric_price?.errors?.pattern  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
+                                            class="error">
+                                            Electric Hookup Price is invalid
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Shavings Quantity</label>
+                                        <input type="number" class="form-control" id="inputEventName4" placeholder="Shavings Quantity" [(ngModel)]="event.shavings_quantity"
+                                            name="shavings_quantity" minlength="1" pattern="[0-9]*">
+
+                                        <div *ngIf="f5.controls.shavings_quantity?.errors?.minlength  && (f5.controls.shavings_quantity.touched || f5.controls.shavings_quantity.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.shavings_quantity?.errors?.pattern  && (f5.controls.shavings_quantity.touched || f5.controls.shavings_quantity.dirty)"
+                                            class="error">
+                                            Shavings Quantity is invalid
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVenueName4">Shavings Price</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Shavings Fee" [(ngModel)]="event.shavings_price"
+                                                name="shavings_price" minlength="1" pattern="[0-9]*.[0-9]*" *ngIf="event.shavings_quantity>0">
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Shavings Fee" [(ngModel)]="event.shavings_price"
+                                                name="shavings_price" minlength="1" pattern="[0-9]*.[0-9]*" readonly *ngIf="event.shavings_quantity==0">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f5.controls.shavings_price?.errors?.minlength  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.shavings_price?.errors?.pattern  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
+                                            class="error">
+                                            Shavings Price is Invalid
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEventName4">Late Fee</label>
+
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputEventName4" placeholder="Late Fee" [(ngModel)]="event.late_fee" name="late_fee"
+                                                minlength="1" pattern="[0-9]*.[0-9]*">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f5.controls.late_fee?.errors?.minlength  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.late_fee?.errors?.pattern  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
+                                            Late Fee is invalid
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVenueName4">Office Fee</label>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="inputVenueName4" placeholder="Office Fee" [(ngModel)]="event.office_fee" name="office_fee"
+                                                minlength="1" pattern="[0-9._]*">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div *ngIf="f5.controls.office_fee?.errors?.minlength  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
+                                            class="error">
+                                            Minimum of 1 characters
+                                        </div>
+                                        <div *ngIf="f5.controls.office_fee?.errors?.pattern  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
+                                            class="error">
+                                            Office Fee is invalid
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputCity">Due Date For Late Fee</label>
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.due_date" name="due_date" ngbDatepicker
+                                                #d3="ngbDatepicker" required readonly (ngModelChange)="getValidateDueDate(event?.from_date,event?.due_date)">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" (click)="d3.toggle()" type="button">
+                                                    <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="f5.controls.due_date?.errors?.required && (f5.controls.due_date.touched || f5.controls.due_date.dirty)" class="error">
+                                            Due Date is required
+                                        </div>
+                                        <div *ngIf="validateDueDate" class="error">
+                                            Due Date should be lesser than From Date
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                            <label for="inputCity">Registration Start/Bookings Open Date</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="event.registration_start_date" name="registration_start_date" ngbDatepicker
+                                                    #d4="ngbDatepicker" required readonly (ngModelChange)="getValidateRegStartDate(event.from_date,event.registration_start_date)">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="d4.toggle()" type="button">
+                                                        <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="f5.controls.registration_start_date?.errors?.required && (f5.controls.registration_start_date.touched || f5.controls.registration_start_date.dirty)" class="error">
+                                                Registration Date is required
+                                            </div>
+                                            <div *ngIf="validateRegStartDate" class="error">
+                                                Registration Date should be lesser than From Date and Greater than current Date
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEventName4">Website Link</label>
+                                            <input type="text" class="form-control" id="inputEventName4" placeholder="Website Link" [(ngModel)]="event.website_link" name="website_link"
+                                                  pattern="[0-9a-zA-Z _]*">
+                                                                                     
+                                            <div *ngIf="f.controls.website_link?.errors?.pattern  && (f.controls.website_link.touched || f.controls.website_link.dirty)" class="error">
+                                                    website link is invalid
+                                            </div>
+                                        </div>
+                                        </div>
+                            </form>
+                        </div>
+
+                        <br>
+                        <br>
+
+                    </div>
                 </div>
-                <div *ngIf="f.controls.address?.errors?.minlength  && (f.controls.address.touched || f.controls.address.dirty)" class="error">
-                  Minimum of 10 characters
-                </div>
-                <div *ngIf="f.controls.v?.errors?.pattern  && (f.controls.address.touched || f.controls.address.dirty)" class="error">
-                  Event Address is invalid
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">City</label>
-                  <input type="text" class="form-control" id="inputCity" [(ngModel)]="event.city" name="city" required minlength="5" pattern="[0-9a-zA-Z .,_]*">
-                  <div *ngIf="f.controls.city?.errors?.required && (f.controls.city.touched || f.controls.city.dirty)" class="error">
-                    City is required
-                  </div>
-                  <div *ngIf="f.controls.city?.errors?.minlength  && (f.controls.city.touched || f.controls.city.dirty)" class="error">
-                    Minimum of 5 characters
-                  </div>
-                  <div *ngIf="f.controls.city?.errors?.pattern  && (f.controls.city.touched || f.controls.city.dirty)" class="error">
-                    City is invalid
-                  </div>
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="inputState">State</label>
-                  <select id="inputState" class="form-control" [(ngModel)]="event.state" name="state" required>
-                    <option selected>Choose...</option>
-                    <option *ngFor="let state of states">{{state}}</option>
-                  </select>
-                  <div *ngIf="f.controls.state?.errors?.required && (f.controls.state.touched || f.controls.state.dirty)" class="error">
-                    State is required
-                  </div>
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip" [(ngModel)]="event.zipcode" name="zipcode" required minlength="5" maxlength="5"
-                    pattern="[0-9_]*">
-                  <div *ngIf="f.controls.zipcode?.errors?.required && (f.controls.zipcode.touched || f.controls.zipcode.dirty)" class="error">
-                    ZipCode is required
-                  </div>
-                  <div *ngIf="f.controls.zipcode?.errors?.minlength && f.controls.zipcode?.errors?.maxlength && (f.controls.zipcode.touched || f.controls.event_zip.dirty)"
-                    class="error">
-                    Invalid Zipcode Must Contain 5 Digits
-                  </div>
-                  <div *ngIf="f.controls.zipcode?.errors?.pattern  && (f.controls.zipcode.touched || f.controls.zipcode.dirty)" class="error">
-                    ZipCode Must contain only Numbers
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+                <!-- Add Additional Info ends -->
+                <br>
+                <br>
+                <button type="button" class="btn btn-primary pull-right" [disabled]="f.invalid || event.racetype.length==0" (click)="addEvent()">Add Event</button>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
         </div>
-        <!-- Add Event Basic Info ends -->
-<br>
-<br>
-        <!-- Add sanctions starts -->
-        <div class="card">
-          <div class="card-body">
-            <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.sanctions.length>0" alt="" class="check-success">
-
-            <h5 class="card-title">Add sanctions</h5>
-            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-            <form novalidate #f4="ngForm">
-              <div class="card-text">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEventName4">Sanction Name</label>
-                    <input type="text" class="form-control" id="inputEventName4" placeholder="Sanction Name" [(ngModel)]="sanction.sanction_name"
-                      name="sanction_name" required minlength="3" pattern="[a-zA-Z _]*">
-                    <div *ngIf="f4.controls.sanction_name?.errors?.required && event.sanctions.length==0 && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
-                      class="error">
-                      Sanction Name is required
-                    </div>
-                    <div *ngIf="f4.controls.sanction_name?.errors?.minlength  && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
-                      class="error">
-                      Minimum of 3 characters
-                    </div>
-                    <div *ngIf="f4.controls.sanction_name?.errors?.pattern  && (f4.controls.sanction_name.touched || f4.controls.sanction_name.dirty)"
-                      class="error">
-                      Sanction Name is invalid
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button (click)="addSanction(sanction)" *ngIf="!f4.controls.sanction_name?.errors?.required && !f4.controls.sanction_name?.errors?.minlength">Add</button>
-              &nbsp; &nbsp;<button type="reset">Reset</button>
-            </form>
-            <br>
-            <br>
-            <div  *ngIf="event.sanctions.length>0">
-
-              <button type="button" class="btn btn-outline-dark m-r-10" *ngFor="let sanctions of event.sanctions;let i=index">
-                {{sanctions.sanction_name | uppercase}}
-                <span  (click)="removeSanction(i)">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-                <span class="sr-only"></span>
-              </button> &nbsp;&nbsp;
-            </div>
-          </div>
-          <!-- Add sanctions ends -->
-        </div>
-        <br>
-        <br>
-
-        <!-- Add raceclass starts -->
-        <div class="card">
-          <div class="card-body">
-            <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.racetype.length>0" alt="" class="check-success">
-
-            <h5 class="card-title">Add Race Class</h5>
-            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-            <form novalidate #f2="ngForm">
-            <div class="card-text">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEventName4">Type</label>
-                    <input type="text" class="form-control" id="inputEventName4" placeholder="Race Class Type" [(ngModel)]="raceclass.type" name="event_raceclass_type"
-                      required minlength="10" pattern="[0-9a-zA-Z $,:_]*">
-                    <div *ngIf="f2.controls.event_raceclass_type?.errors?.required && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
-                      class="error">
-                      Name is required
-                    </div>
-                    <div *ngIf="f2.controls.event_raceclass_type?.errors?.minlength  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
-                      class="error">
-                      Minimum of 10 characters
-                    </div>
-                    <div *ngIf="f2.controls.event_raceclass_type?.errors?.pattern  && (f2.controls.event_raceclass_type.touched || f2.controls.event_raceclass_type.dirty)"
-                      class="error">
-                      Race Class Name is invalid
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputVenueName4">Price</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                 
-                      <input type="number" step="2" class="form-control" id="inputVenueName4" placeholder="Price" [(ngModel)]="raceclass.price" name="price"
-                      required  pattern="[0-9]*">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f2.controls.price?.errors?.required && (f2.controls.price.touched || f2.controls.price.dirty)"
-                    class="error">
-                    Price is required
-                  </div>
-                
-                  <div *ngIf="f2.controls.price?.errors?.pattern  && (f2.controls.price.touched || f2.controls.price.dirty)"
-                    class="error">
-                    Race Class Name is invalid
-                  </div>
-                  </div>
-                </div>
-            </div>
-            <button class="card-link" (click)="addRaceClass(raceclass)"
-             *ngIf="!f2.controls.event_raceclass_type?.errors?.required
-             && !f2.controls.event_raceclass_type?.errors?.minlength && !f2.controls.price?.errors?.required">Add</button>
-            <button type="reset" class="card-link">Reset</button>
-          </form>
-            <br>
-            <br>
-            <div class="table-responsive table-hover">
-              <table class="table" *ngIf="event.racetype.length>0">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let racetype of event.racetype;let i=index">
-                    <th scope="row">{{i}}</th>
-                    <td>{{racetype.type}}</td>
-                    <td>{{racetype.price | currency}}</td>
-                    <td>
-                      <a (click)="removeRaceClass(i)">remove</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- Add raceclass ends -->
-
-        <br>
-        <br>
-        <!-- Add exhibition starts -->
-        <div class="card">
-          <div class="card-body">
-            <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.etimeslot.length>0" alt="" class="check-success">
-
-            <h5 class="card-title">Add Exhibitions</h5>
-            <form novalidate #f8="ngForm">
-            <div class="card-text">
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="inputState">Exhibition Day</label>
-                    <select id="inputState" class="form-control" [(ngModel)]="exhibition.e_days" name="e_day" required>
-                      <option selected>Choose...</option>
-                      <option *ngFor="let days of e_days; let i=index;">{{days}}</option>
-                    </select>
-                    <div *ngIf="f8.controls.e_day?.errors?.required && (f8.controls.e_day.touched || f8.controls.e_day.dirty)" class="error">
-                      Field Cannot be Empty
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputEventName4">Exhibitions Quantity</label>
-                    <input type="number" class="form-control" id="inputEventName4" placeholder="Exhibitions Quantity" [(ngModel)]="exhibition.exhibitions_quantity"
-                      name="exhibitions_quantity" required #exhibitions_quantity="ngModel">
-                    <div *ngIf="f8.controls.exhibitions_quantity?.errors?.required && (f8.controls.exhibitions_quantity.touched || f8.controls.exhibitions_quantity.dirty)"
-                      class="error">
-                      Exhibition Quantity is required
-                    </div>
-                   
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputVenueName4">Exhibitions Fee</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="number" class="form-control" id="inputVenueName4" placeholder="Exhibitions Fee" [(ngModel)]="exhibition.exhibitions_fee"
-                        name="exhibitions_fee" required>
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f8.controls.exhibitions_fee?.errors?.required  && (f8.controls.exhibitions_fee.touched || f8.controls.exhibitions_fee.dirty)"
-                    class="error">
-                    Exhibition Fee is required
-                  </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-5">
-                    <label for="inputState">From Time</label> {{exhibition.from_time}}
-                    <ngb-timepicker [(ngModel)]="exhibition.from_time" (ngModelChange)="getValidateEFromTime()" name="from_time" [meridian]="true"></ngb-timepicker>
-                    <div class="error" *ngIf="validateEFromTime">
-                      Invalid Time
-                    </div>
-                  </div>
-                  <div class="form-group col-md-5 offset-md-1">
-                    <label for="inputState">To Time</label>
-                    <ngb-timepicker [(ngModel)]="exhibition.to_time" (ngModelChange)="getValidateEToTime()" name="to_time" [meridian]="true"></ngb-timepicker>
-                    <div class="error" *ngIf="validateEToTime">
-                      Invalid Time
-                    </div>
-                  </div>
-                </div>
-
-            </div>
-            <button class="card-link" (click)="addExhibitionTimeSlot(exhibition)" *ngIf="f8.valid && exhibition.from_time && exhibition.to_time">Add</button>
-            <button type="reset" class="card-link" (click)="resetETime()">Reset</button>
-          </form>
-            <br>
-            <br>
-            <div class="table-responsive table-hover">
-              <table class="table" *ngIf="event.etimeslot.length>0">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Day</th>
-                    <th scope="col">Time From</th>
-                    <th scope="col">Time To</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Fees</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let etimeslot of event.etimeslot;let i=index">
-                    <th scope="row">{{i}}</th>
-                    <td>{{etimeslot.exhibition_day}}</td>
-                    <td>{{etimeslot.from}}</td>
-                    <td>{{etimeslot.to}}</td>
-                    <td>{{etimeslot.exhibitions_quantity}}</td>
-                    <td>{{etimeslot.exhibitions_fee | currency}}</td>
-                    <td>
-                      <a (click)="removeExhibitionTimeSlot(i)">remove</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- Add exhibition ends -->
-        <br>
-        <br>
-        <!-- Add Warmup starts -->
-        <div class="card">
-          <div class="card-body">
-            <img src="../../../assets/images/icons8-ok-48.png" *ngIf="event.wtimeslot.length>0" alt="" class="check-success">
-
-            <h5 class="card-title">Add Warm Ups</h5>
-            <form novalidate #f3="ngForm">
-            <div class="card-text">
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="inputState">Warm Up Day</label>
-                    <select id="inputState" class="form-control" [(ngModel)]="warmup.w_days" name="w_day" required>
-                      <option selected>Choose...</option>
-                      <option *ngFor="let days of w_days; let i=index;">{{days}}</option>
-                    </select>
-                    <div *ngIf="f.controls.w_day?.errors?.required && (f.controls.w_day.touched || f.controls.w_day.dirty)" class="error">
-                      Field Cannot be Empty
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputEventName4">Warm Up Quantity</label>
-                    <input type="text" class="form-control" id="inputEventName4" placeholder="Warm Up Quantity" [(ngModel)]="warmup.warmup_quantity"
-                      name="warmup_quantity" required minlength="1" pattern="[0-9._]*">
-                    <div *ngIf="f3.controls.warmup_quantity?.errors?.required && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
-                      class="error">
-                      Warm Up Quantity is required
-                    </div>
-                    <div *ngIf="f3.controls.warmup_quantity?.errors?.minlength  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f3.controls.warmup_quantity?.errors?.pattern  && (f3.controls.warmup_quantity.touched || f3.controls.warmup_quantity.dirty)"
-                      class="error">
-                      Warm Up Quantity is invalid
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputVenueName4">Warm Ups Fee</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="number" class="form-control" id="inputVenueName4" placeholder="Warm Ups Fee" [(ngModel)]="warmup.warmup_fee" name="warmup_fee"
-                      required>
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f3.controls.warmup_fee?.errors?.required && (f3.controls.warmup_fee.touched || f3.controls.warmup_fee.dirty)"
-                      class="error">
-                      Warm Up Fees is required
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-5">
-                    <label for="inputState">From Time</label>
-                    <ngb-timepicker [(ngModel)]="warmup.from_time" name="from_time" [meridian]="true" (ngModelChange)="getValidateWFromTime()"></ngb-timepicker>
-                    <div class="error" *ngIf="validateWFromTime">
-                        Invalid Time
-                      </div>
-                  </div>
-                  <div class="form-group col-md-5 offset-md-1">
-                    <label for="inputState">To Time</label>
-                    <ngb-timepicker [(ngModel)]="warmup.to_time" name="to_time" [meridian]="true" (ngModelChange)="getValidateWToTime()"></ngb-timepicker>
-                    <div class="error" *ngIf="validateWToTime">
-                        Invalid Time
-                      </div>
-                  </div>
-                </div>
-            </div>
-            <button class="card-link" (click)="addWarmupTimeSlot(warmup)" *ngIf="f3.valid && warmup.from_time && warmup.to_time">Add</button>
-            <button type="reset" class="card-link"  (click)="resetWTime()">Reset</button>
-          </form>
-           
-            <br>
-            <br>
-            <div class="table-responsive table-hover">
-              <table class="table" *ngIf="event.wtimeslot.length>0">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Day</th>
-                    <th scope="col">Time From</th>
-                    <th scope="col">Time To</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Fees</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let wtimeslot of event.wtimeslot;let i=index">
-                    <th scope="row">{{i}}</th>
-                    <td>{{wtimeslot.warmup_day}}</td>
-                    <td>{{wtimeslot.from}}</td>
-                    <td>{{wtimeslot.to}}</td>
-                    <td>{{wtimeslot.warmup_quantity}}</td>
-                    <td>{{wtimeslot.warmup_fee | currency}}</td>
-                    <td>
-                      <a (click)="removeWarmupTimeSlot(i)">remove</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- Add exhibition ends -->
-        <br>
-        <br>
-
-        <!-- Add Additional Info starts -->
-        <div class="card">
-          <div class="card-body">
-
-            <h5 class="card-title">Additional Information</h5>
-            <div class="card-text">
-
-              <form novalidate #f5="ngForm">
-
-
-                <div class="form-row">
-
-                  <div class="form-group col-md-6">
-                    <label for="inputEventName4">Stalls Provided</label>
-                    <input type="text" class="form-control" id="inputEventName4" placeholder="Stalls Quantity" [(ngModel)]="event.stalls" name="stalls"
-                      minlength="1" pattern="[0-9._]*">
-
-                    <div *ngIf="f5.controls.stalls?.errors?.minlength  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.stalls?.errors?.pattern  && (f5.controls.stalls.touched || f5.controls.stalls.dirty)" class="error">
-                      Stalls Quantity is invalid
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputVenueName4">Stalls Price</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="text" class="form-control" id="inputVenueName4" placeholder="Stalls Price" [(ngModel)]="event.stalls_price"
-                        name="stalls_price" minlength="1" pattern="[0-9._]*"  *ngIf="event.stalls>0">
-                        <input type="text" class="form-control" id="inputVenueName4" placeholder="Stalls Price" [(ngModel)]="event.stalls_price"
-                        name="stalls_price" minlength="1" pattern="[0-9._]*" readonly *ngIf="event.stalls==0">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f5.controls.stalls_price?.errors?.minlength  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.stalls_price?.errors?.pattern  && (f5.controls.stalls_price.touched || f5.controls.stalls_price.dirty)"
-                      class="error">
-                      Stalls Price is invalid
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-
-                  <div class="form-group col-md-6">
-                    <label for="inputEventName4">Electric Hookup Quantity</label>
-                    <input type="text" class="form-control" id="inputEventName4" placeholder="Electric Hookup Quantity" [(ngModel)]="event.electric_quantity"
-                      name="electric_quantity" minlength="1" pattern="[0-9._]*">
-
-                    <div *ngIf="f5.controls.electric_quantity?.errors?.minlength  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.electric_quantity?.errors?.pattern  && (f5.controls.electric_quantity.touched || f5.controls.electric_quantity.dirty)"
-                      class="error">
-                      Stalls Quantity is invalid
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputVenueName4">Electric Hookup Price</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="text" class="form-control" id="inputVenueName4" placeholder="Electric Hookup Price" [(ngModel)]="event.electric_price"
-                        name="electric_price" minlength="1" pattern="[0-9._]*" *ngIf="event.electric_quantity>0">
-                        <input type="text" class="form-control" id="inputVenueName4" placeholder="Electric Hookup Price" [(ngModel)]="event.electric_price"
-                        name="electric_price" minlength="1" pattern="[0-9._]*" readonly *ngIf="event.electric_quantity==0">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f5.controls.electric_price?.errors?.minlength  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.electric_price?.errors?.pattern  && (f5.controls.electric_price.touched || f5.controls.electric_price.dirty)"
-                      class="error">
-                      Stalls Price is invalid
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputVenueName4">Shavings Price</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="text" class="form-control" id="inputVenueName4" placeholder="Shavings Fee" [(ngModel)]="event.shavings_price"
-                        name="stalls_price" minlength="1" pattern="[0-9._]*">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f5.controls.shavings_price?.errors?.minlength  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.shavings_price?.errors?.pattern  && (f5.controls.shavings_price.touched || f5.controls.shavings_price.dirty)"
-                      class="error">
-                      Shavings Price is invalid
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEventName4">Late Fee</label>
-
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="text" class="form-control" id="inputEventName4" placeholder="Late Fee" [(ngModel)]="event.late_fee" name="late_fee"
-                        minlength="1" pattern="[0-9._]*">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f5.controls.late_fee?.errors?.minlength  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.late_fee?.errors?.pattern  && (f5.controls.late_fee.touched || f5.controls.late_fee.dirty)" class="error">
-                      Late Fee is invalid
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputVenueName4">Office Fee</label>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                      <input type="text" class="form-control" id="inputVenueName4" placeholder="Office Fee" [(ngModel)]="event.office_fee" name="office_fee"
-                        minlength="1" pattern="[0-9._]*">
-                      <span class="input-group-text">0.00</span>
-                    </div>
-                    <div *ngIf="f5.controls.office_fee?.errors?.minlength  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
-                      class="error">
-                      Minimum of 1 characters
-                    </div>
-                    <div *ngIf="f5.controls.office_fee?.errors?.pattern  && (f5.controls.office_fee.touched || f5.controls.office_fee.dirty)"
-                      class="error">
-                      Office Fee is invalid
-                    </div>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-
-            <br>
-            <br>
-
-          </div>
-        </div>
-        <!-- Add Additional Info ends -->
-        <br>
-        <br>
-        <button type="button" class="btn btn-primary pull-right" [disabled]="f.invalid || f2.invalid" (click)="addEvent()">Add Event</button>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
     </div>
-  </div>
 </div>

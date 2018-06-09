@@ -33,78 +33,134 @@
     </div>
   </div>
 
+<div class="container">
+    <app-alert-message [alertMessage]="alertMessage"></app-alert-message>
+
+  <div class="row">
+<div class="col-xs-1 col-sm-3 col-md-3 col-lg-3">
+    <div class="card" >
+        <div class="card-body">
+          <a routerLink="/producer/events">
+        <img alt="..." src="../../../assets/images/ADD-YOUR-EVENT.png" class="card-img-top card-img">
+      </a>  
+      </div>
+      </div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="card" >
+        <div class="card-body">
+           
+        </div>
+      </div>
+</div>
+  </div>
+</div>
+<br>
+<br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+       
+          <div class="card" >
+              <div class="card-header">
+                <h5 class="capitalize"><b >{{fname}}'s Events</b></h5>
+              </div>
+              <ul class="list-group list-group-flush" *ngFor="let events of producerEvents;let i=index">
+                <li *ngIf="i<5" class="list-group-item list-group-item-action capitalize">
+                  {{events.event_name}}
+                <span class="pull-right ">
+                  <span *ngIf="events.from_date<currentDate && events.to_date>currentDate" class="on-event">On Going</span>
+                  <span *ngIf="events.from_date<currentDate && events.to_date<currentDate" class="e-event">Expired</span>
+                  <span *ngIf="events.from_date>currentDate" class="u-event">Upcoming</span>
+                </span>
+                
+                </li>
+              </ul>
+              <ul class="list-group list-group-flush" >
+                  <li class="list-group-item list-group-item-action capitalize view-link" routerLink="/producer/listevents"><a class="view-link" routerLink="/producer/listevents">View More Events</a></li>
+              </ul>
+            </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+         <div class="card" >
+              <div class="card-header">
+                <h5 class="capitalize"><b >All Events</b></h5>
+              </div>
+              <ul class="list-group list-group-flush" *ngFor="let events of eventList;let i=index">
+                  <li *ngIf="i<5" class="list-group-item list-group-item-action capitalize">
+                    {{events.event_name}}
+                  <span class="pull-right">
+                      <span *ngIf="events.from_date<currentDate && events.to_date>currentDate" class="on-event">On Going</span>
+                        <span *ngIf="events.from_date<currentDate && events.to_date<currentDate" class="e-event">Expired</span>
+                        <span *ngIf="events.from_date>currentDate" class="u-event">Upcoming</span>
+                  </span>
+                  </li>
+                </ul>
+                <ul class="list-group list-group-flush " >
+                    <li class="list-group-item list-group-item-action capitalize view-link" ><a routerLink="/producer/listevents" class="view-link">View More Events</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+  <br>
   <div class="container">
       <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="card-round card-stats">
-                  <div class="card-header" data-background-color="orange">
-                      <i class="material-icons">event</i>
+              <div class="card">
+                  <div class="card-header" >
+                      <i class="material-icons" data-background-color="orange">event</i>
                   </div>
                   <div class="card-content">
                       <p class="category">Total Events</p>
                       <h3 class="card-title">{{countData.event_total | json}}</h3>
                   </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          
-                          <i class="material-icons">update</i> Just Updated
-                      </div>
-                  </div>
+                 
               </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="card-round card-stats">
-                  <div class="card-header" data-background-color="red">
-                      <i class="material-icons">person</i>
+              <div class="card">
+                  <div class="card-header" >
+                      <i class="material-icons" data-background-color="red"> person</i>
                   </div>
                   <div class="card-content">
                       <p class="category">Total Users</p>
                       <h3 class="card-title">{{countData.user_total | json}}</h3>
                   </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                              <i class="material-icons">update</i> Just Updated
-                      </div>
-                  </div>
+                 
               </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="card-round card-stats">
-                  <div class="card-header" data-background-color="green">
-                      <i class="material-icons">equalizer</i>
+              <div class="card">
+                  <div class="card-header" >
+                      <i class="material-icons" data-background-color="green">equalizer</i>
                   </div>
                   <div class="card-content">
                       <p class="category">Total signedup users for events</p>
                       <h3 class="card-title">{{countData.evententries_total}}</h3>
                   </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">date_range</i> Last 24 Hours
-                      </div>
-                  </div>
+              
               </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <div class="card-round card-stats">
-                  <div class="card-header" data-background-color="blue">
-                      <i class="material-icons">supervisor_account</i>
+              <div class="card ">
+                  <div class="card-header" >
+                      <i class="material-icons" data-background-color="blue">supervisor_account</i>
                   </div>
                   <div class="card-content">
                       <p class="category">Total Producers</p>
                       <h3 class="card-title">{{countData.producer_total | json}}</h3>
                   </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">update</i> Just Updated
-                      </div>
-                  </div>
+                
               </div>
           </div>
       </div>
 
   </div>
-
-  <div class="container-fluid">
+<br>
+<br>
+  <!-- <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-12">
         <div class="alert alert-primary" role="alert">
@@ -305,5 +361,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

@@ -1,6 +1,6 @@
 /* round card */
 
-.card-round {
+/* .card-round {
     padding: 5px;
     display: inline-block;
     position: relative;
@@ -83,5 +83,48 @@
     line-height: 56px;
     width: 56px;
     height: 56px;
-  }
+  } */
   /* round card */
+  .card-title {
+    margin: 0;
+    color: #3c4858;
+    text-decoration: none;
+  }
+  .card-content {
+    text-align: right;
+    padding-top: 10px;
+    padding: 15px 20px;
+    position: relative;
+  }
+  .cursor_pointer{
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.card-header {
+  
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.card-header i[data-background-color=orange] {
+  color: #ffa726;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0), 0 7px 10px -5px rgba(255,152,0,.4);
+}
+.card-header i[data-background-color=red] {
+  color: #e53935;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0), 0 7px 10px -5px rgba(244,67,54,.4);
+}
+.card-header  i[data-background-color=green] {
+  color: #43a047;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0), 0 7px 10px -5px rgba(76,175,80,.4);
+}
+.card-header  i[data-background-color=blue]{
+  color: #00acc1;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0), 0 7px 10px -5px rgba(0,188,212,.4);
+}
+.view-link{
+  color: blue;
+  text-align: center;
+}
+.view-link :hover{
+  text-decoration: underline;
+}

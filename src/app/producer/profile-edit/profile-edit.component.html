@@ -45,8 +45,8 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="picture-container">
                 <div class="picture">
-                  <img class="img-cls" alt="..." src="../../assets/images/profile_noimage.jpg" *ngIf="!userData.user_picture">
-                  <img class="img-cls" [src]="serviceUrl+'/'+userData.user_picture" *ngIf="userData.user_picture" />
+                  <img class="img-cls" alt="..." src="../../../assets/images/profile_noimage.png" *ngIf="!userData.user_picture">
+                  <img class="img-cls" [src]="serviceUrl+'/profile_pics/'+userData.user_picture" *ngIf="userData.user_picture" />
                 </div>
                 <div class="fileupload-block">
                   <button type="button" class="btn btn-light" (click)="imgFileInput.click()">
@@ -92,7 +92,7 @@
                              </div>
                              <div class="form-group col-md-6">
                                 <label for="inputEventName4">Phone</label>
-                                <input class="form-control" id="inputEventName4" placeholder="Phone" name="phone"  required>
+                                <input class="form-control" id="inputEventName4" placeholder="Phone" name="phone" [(ngModel)]="userData.phone"  required>
                            
                             </div>
                             </div> 
@@ -129,7 +129,7 @@
                               </div>
                             </div>
                       
-                            <button type="button" class="btn btn-light">Back</button>
+                            <button type="button" class="btn btn-light" (click)="navigateBack()">Back</button>
                             <button type="button" class="btn btn-light" (click)="update()">Submit</button>
 
           

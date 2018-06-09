@@ -1,101 +1,97 @@
 <div class="content-wraper">
 
-    <div class="container-fluid" style="padding: 0px;">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12">
-  
-          <div class="page-header page-header-default">
-            <div class="page-header-content">
-              <div class="page-title">
-                <h4>
-                  <i class="icon-arrow-left52 position-left"></i>
-                  <span class="text-semibold">Home</span> - Events List</h4>
-                <a class="heading-elements-toggle">
-                  <i class="icon-more"></i>
-                </a>
-              </div>
-  
-            </div>
-  
-            <div class="breadcrumb-line">
-              <a class="breadcrumb-elements-toggle">
-                <i class="icon-menu-open"></i>
+  <div class="container-fluid" style="padding: 0px;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="page-header page-header-default">
+          <div class="page-header-content">
+            <div class="page-title">
+              <h4>
+                <i class="icon-arrow-left52 position-left"></i>
+                <span class="text-semibold">Home</span> - Events List</h4>
+              <a class="heading-elements-toggle">
+                <i class="icon-more"></i>
               </a>
-              <ul class="breadcrumb">
-                <li>
-                  <a href="index.html">
-                    <i class="icon-home2 position-left"></i> Home</a>
-                </li>
-                <li class="active">Events List</li>
-              </ul>
-  
-  
             </div>
+
+          </div>
+
+          <div class="breadcrumb-line">
+            <a class="breadcrumb-elements-toggle">
+              <i class="icon-menu-open"></i>
+            </a>
+            <ul class="breadcrumb">
+              <li>
+                <a href="index.html">
+                  <i class="icon-home2 position-left"></i> Home</a>
+              </li>
+              <li class="active">Events List</li>
+            </ul>
+
+
           </div>
         </div>
       </div>
     </div>
-  
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12">
-      <div class="card p-2">
-        <div class="card-body">
-          <div class="col-3 ">
-            <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search Records">
-          </div>
+  </div>
 
-          
-          <div class="col-9">
-                  <form class="form-datefilter " name="datefilter" (ngSubmit)="save()">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">From Date</label>
-                            <div class="input-group">
-                              <input class="form-control" placeholder="From Date" name="dp" [(ngModel)]="from_date" name="from_date" ngbDatepicker
-                                #d1="ngbDatepicker" required readonly (ngModelChange)="dateFilter()">
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                                  <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                                </button>
-                              </div>
-                            </div>
-                         
-                          </div>
-                          <div class="form-group col-md-6">
-                              <label for="inputCity">To Date</label>
-                              <div class="input-group">
-                                <input class="form-control" placeholder="To Date" name="dp" [(ngModel)]="to_date" name="to_date" ngbDatepicker
-                                  #d2="ngbDatepicker" required readonly (ngModelChange)="dateFilter()">
-                                <div class="input-group-append">
-                                  <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                                    <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                                  </button>
-                                </div>
-                              </div>
-                           
-                            </div>
-
-
-                      <a class="col-md-4"  id="add-rtype" (click)="filter(from_date,to_date)"
-                        style="cursor: pointer">
-                        Ok
-                      </a>
-                    </div>
+  <div class="container-fluid">
+        <app-alert-message [alertMessage]="alertMessage">
         
-                  </form>
-           
+        </app-alert-message>
 
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <div class="card p-2">
+          <div class="card-body row">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 m-b-10" >
+              <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search Records">
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+              <form class="form-datefilter " name="datefilter">
+                <div class="form-row">
+                  <div class="form-group  col-sm-4 col-md-5">
+                    <!-- <label for="inputCity">From Date</label> -->
+                    <div class="input-group">
+                      <input class="form-control" placeholder="From Date" name="dp" [(ngModel)]="from_date" name="from_date" ngbDatepicker #d1="ngbDatepicker"
+                        required readonly >
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                          <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-4 col-md-5">
+                    <!-- <label for="inputCity">To Date</label> -->
+                    <div class="input-group">
+                      <input class="form-control" placeholder="To Date" name="dp" [(ngModel)]="to_date" name="to_date" ngbDatepicker #d2="ngbDatepicker"
+                        required readonly >
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                          <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-4 col-md-2">
+                  <button class="btn btn-primary" id="add-rtype" (click)="filter(from_date,to_date)" >
+                    Ok
+                  </button>
+                </div>
+                </div>
+              </form>
+            </div>
           </div>
-      </div>
         </div>
 
-          <div class="card m-t-10">
-            <div class="card-body">
-              <div class="table-responsive table-hover">
-                <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
+        <div class="card m-t-10">
+          <div class="card-body">
+            <div class="table-responsive table-hover">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
                     <th scope="col">#</th>
                     <th scope="col" (click)="sort('event_name')">Name
                       <span style="color: #00BCD4;">&#x21C5;</span>
@@ -106,29 +102,40 @@
                     <th scope="col">Event Details</th>
                     <th scope="col">Registered Users</th>
                     <th scope="col">Register Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let events of eventsListData;let i=index">
-                          <td>{{page_from + i+1}}</td>
-                          <td>{{events.event_name}}</td>
-                          <td>{{events.from_date | date: 'dd/MM/yyyy'}}-{{events.to_date | date: 'dd/MM/yyyy'}}</td>
-                          <td>
-                            <a [routerLink]="['/producer/event_details',events._id]" class="link-btn">View More</a>
-                          </td>
-                          <td>
-                            <a [routerLink]="['/producer/registeredusers-details',events._id]" class="link-btn">View More</a>
-                          </td>
-                          <td>
-                            <a [routerLink]="['/producer/addguestuser',events._id]" class="link-btn">Signup Guest</a>
-                          </td>
-                        </tr>
-                  </tbody>
-                </table>
-              </div>
+                    <th scope="col">Event Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let events of eventsListData;let i=index">
+                    <td>{{page_from + i+1}}</td>
+                    <td>{{events.event_name}}</td>
+                    <td>{{events.from_date | date: 'dd/MM/yyyy'}}-{{events.to_date | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                      <a [routerLink]="['/producer/event_details',events._id]" class="link-btn">View More</a>
+                    </td>
+                    <td>
+                      <a [routerLink]="['/producer/registeredusers-details',events._id]" class="link-btn">View More</a>
+                    </td>
+                    <td>
+                      <a *ngIf="events.from_date>currentDate" [routerLink]="['/producer/addguestuser',events._id]" class="link-btn cursor_pointer">Signup Guest</a>
+                      <a *ngIf="events.from_date<currentDate" class="cursor" style="text-decoration: line-through;">Signup Guest</a>
+                    </td>
+                    <td>
+                      <div *ngIf="events.from_date<currentDate && events.to_date>currentDate" class="on-event">On Going</div>
+                      <div *ngIf="events.from_date<currentDate && events.to_date<currentDate" class="e-event">Expired</div>
+                      <div *ngIf="events.from_date>currentDate" class="u-event">Upcoming</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <br>
+              
+              <ngb-pagination [collectionSize]="collectSize" [(page)]="currentPage" (click)="pageEvent(currentPage,$event)"></ngb-pagination>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

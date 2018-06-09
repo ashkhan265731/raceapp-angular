@@ -1,3 +1,580 @@
-<p>
-  signup-guest-users works!
-</p>
+<div class="content-wraper">
+
+  <div class="container-fluid" style="padding: 0px;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="page-header page-header-default">
+          <div class="page-header-content">
+            <div class="page-title">
+              <h4>
+                <i class="icon-arrow-left52 position-left"></i>
+                <span class="text-semibold">Event Registration</span>
+              </h4>
+              <a class="heading-elements-toggle">
+                <i class="icon-more"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="breadcrumb-line">
+            <a class="breadcrumb-elements-toggle">
+              <i class="icon-menu-open"></i>
+            </a>
+            <ul class="breadcrumb">
+              <li>
+                <a href="index.html">
+                  <i class="icon-home2 position-left"></i> Home</a>
+              </li>
+              <li>
+                <a routerLink="/user/listevent">
+                  <i class=""></i> Events List</a>
+              </li>
+              <li class="active">Guest User Event Registration</li>
+            </ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class=" thumbnail">
+                  <img alt="..." src="../../../assets/images/image_placeholder.jpg" class="img-thumbnail rounded float-right" *ngIf="!singleEventData.event_picture">
+                  <img [src]="serviceUrl+'/'+singleEventData.event_picture" class="img-thumbnail rounded float-right" *ngIf="singleEventData.event_picture"
+                    onError="this.src='../../../assets/images/image_placeholder.jpg';" />
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <h5 class="display-4">{{singleEventData.event_name}}</h5>
+                <hr class="display-4">
+                <p class="lead">
+                  <b>From </b>{{singleEventData.from_date | date: 'MMMM d, y'}} -
+                  <b>To </b>{{singleEventData.to_date | date: 'MMMM d, y'}} </p>
+                <p class="lead">
+                  <i class="material-icons icon">place</i>
+                  <strong>{{singleEventData.location}}</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div *ngIf="user_id">
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <p> User Info added Succesfully</p>
+            <hr>
+            <p class="mb-0">Please register for event by filling below form!!</p>
+          </div>
+
+        </div>
+        <form name="guest-user-form" (ngSubmit)="addGuestUser()" #guestUserForm="ngForm">
+          <div class="card" *ngIf="!user_id">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h5 class="card-title">User Info</h5>
+                  <div class="form-row">
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">First Name</label>
+                      <input type="text" class="form-control" name="c_fname" [(ngModel)]="eventSignUpData.c_fname" placeholder="First Name" #c_fname="ngModel"
+                        required minlength="1" pattern="[a-zA-Z _]*" />
+                        
+                        <div class="error" *ngIf="c_fname.errors?.required && (c_fname.touched)"  > Name field can't be blank</div>
+                        <div class="error" *ngIf="c_fname.errors?.pattern && c_fname.touched">The Name must contain only alphabets</div>
+                        <div class="error" *ngIf="c_fname.errors?.minLength && c_fname.touched">The Name must atleast contain minimum 2 char</div>
+                    </div>
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">Last Name</label>
+                      <input type="text" class="form-control" name="c_lname" [(ngModel)]="eventSignUpData.c_lname" placeholder="Last Name" #c_lname="ngModel"
+                        required pattern="[a-zA-Z ]*" />
+                        <div class="error" *ngIf="c_lname.errors?.required && (c_lname.touched)"  > Last Name field can't be blank</div>
+                        <div class="error" *ngIf="c_lname.errors?.pattern && c_lname.touched">The must contain only alphabets</div>
+                      
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">Email</label>
+                      <input type="email" class="form-control" name="email" [(ngModel)]="eventSignUpData.email" placeholder="Email" #email="ngModel"
+                        required minlength="4" pattern="[^ @]*@[^ @]*" (blur)="checkEmailDuplication(email)" />
+                      <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div class="error" *ngIf="email.errors?.required"> Email field can't be blank</div>
+                        <div class="error" *ngIf="email.errors?.pattern && email.touched">The Email doesn't seem right</div>
+                      </div>
+                      <div class="c-pass-error error" *ngIf="verifyEmail">Email Already Exists</div>
+                    </div>
+
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">Phone</label>
+                      <input class="form-control" placeholder="Phone" name="phone" [(ngModel)]="eventSignUpData.phone" #phone="ngModel" #user_phone
+                        required pattern="[0-9]{10}" max-len>
+                      <!-- <i class="material-icons">phone</i> -->
+                      <div class="error" *ngIf="phone.errors?.required && phone.touched ">Phone cannot be empty</div>
+                      <div class="error" *ngIf="phone.errors?.pattern  && (phone.touched || phone.dirty)">Phone Number is invalid</div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">Address Line 1</label>
+                      <input type="text" class="form-control" name="address1" [(ngModel)]="eventSignUpData.address1" placeholder="Address Line1"
+                        #address1="ngModel" required minlength="4" />
+                      <div class="error" *ngIf="address1.invalid && (address1.dirty || address1.touched)">
+                        <div class="error" *ngIf="address1.errors?.required"> address field can't be blank</div>
+                      </div>
+                    </div>
+                    <div class="form-group input-field col-xs-12 col-md-6 col-sm-12 col-lg-6">
+                      <label for="inputState">Address Line 2</label>
+                      <input type="text" class="form-control" name="address2" [(ngModel)]="eventSignUpData.address2" placeholder="Address Line2"
+                        #address2="ngModel"  />
+                      <!-- <div class="error" *ngIf="address2.invalid && (address2.dirty || address2.touched)">
+                        <div class="error" *ngIf="address2.errors?.required"> Fname field can't be blank</div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group input-field col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                      <label for="inputState">City</label>
+                      <input type="text" class="form-control" name="city" [(ngModel)]="eventSignUpData.city" placeholder="city" #city="ngModel"
+                        required pattern="[a-zA-Z ._]*" />
+                      <div class="error" *ngIf="city.invalid && (city.dirty || city.touched)">
+                        <div class="error" *ngIf="city.errors?.required"> city field can't be blank</div>
+                        <div class="error" *ngIf="city.errors?.pattern ">The city doesn't seem right</div>
+                      </div>
+                    </div>
+                    <div class="form-group input-field  col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                      <label for="inputState">State</label>
+                      <select id="inputState" class="form-control" placeholder="State" name="state" [(ngModel)]="eventSignUpData.state" #state="ngModel"
+                        required>
+                        <option value="select" disabled>Choose State</option>
+                        <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                      </select>
+                      <div class="error" *ngIf="state.invalid && (state.dirty || state.touched)">
+                        <div class="error" *ngIf="state.errors?.required"> state field can't be blank</div>
+                      </div>
+                    </div>
+                    <div class="form-group input-field  col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                      <label for="inputState">Zip</label>
+                      <input type="text" class="form-control" name="zip" [(ngModel)]="eventSignUpData.zip" placeholder="zip" #zip="ngModel" #zipcode
+                        required maxlength="5" pattern="[0-9]{5}" />
+                      <div align="end">{{zipcode.value.length}} / 5</div>
+                      <div class="error" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
+                        <div class="error" *ngIf="zip.errors?.required"> zip field can't be blank</div>
+                        <div class="error" *ngIf="zip.errors?.pattern">zip field must have only numbers</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary pull-right" type="submit" name="user-action" *ngIf="!user_id" [disabled]="guestUserForm.invalid || verifyEmail">
+            Add User Info
+          </button>
+        </form>
+
+        <br>
+        <br>
+        <!--- form starts -->
+
+        <form name="user-form" (ngSubmit)="eventSignUp()" #validateForm="ngForm" novalidate *ngIf="user_id">
+
+          <!-- Basic Info -->
+          <div class="card">
+            <div class="card-body">
+              <div class="card-content">
+                <h5 class="card-title">Sanctions</h5>
+                <div class="card-text">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                      <div class="form-row">
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngFor="let snames of singleEventData.sanctions; let i=index;">
+                          <label for="inputEventName4">{{snames.sanction_name}}</label>
+                          <input type="text" class="form-control col-md-12" name="{{snames.sanction_name}}" [(ngModel)]="snames.sanction_value" placeholder="{{snames.sanction_name}}"
+                            #sanction_name="ngModel" required  maxlength="12" pattern="[0-9]+(-[0-9]+)+" />
+                          <div class="error" *ngIf="sanction_name.invalid && (sanction_name.dirty || sanction_name.touched)">
+                            <div *ngIf="sanction_name.errors?.required"> sanction name field can't be blank</div>
+                            <div *ngIf="sanction_name.errors?.pattern && sanction_name.touched">Please Enter a Valid Sanction Number</div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <!-- add riders -->
+          <div class="card">
+            <div class="card-body">
+              <div class="card-content">
+                <h5 class="card-title">Add Rider/Horses</h5>
+
+                <div class="card-text">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                      <div class="form-row">
+                        <div class="form-group input-field form-group col-md-4">
+                          <label for="inputState">Rider Type</label>
+                          <select placeholder="Race class Type" class="form-control" name="ridetype" (ngModelChange)="getTotal()" [(ngModel)]="racetype.ridetype"
+                            required #rideType="ngModel">
+                            <option disabled>Select Race Class Type...</option>
+                            <option *ngFor="let types of singleEventData.racetype" value="{{types.type}}/{{types.price}}" ngDefaultControl>
+                              {{types.type}} - {{types.price}}
+                            </option>
+                          </select>
+                          <div class="error" *ngIf=" rideType.errors?.required && rideType.invalid && (rideType.dirty || rideType.touched) && racetypeList.length==0">
+                          Race Class Type field can't be blank</div>
+
+                          {{ridetype}}
+                        </div>
+                        <div class="form-group input-field col-md-4">
+                          <label for="inputState">Rider Name</label>
+                          <input type="text" class="form-control" name="ridername" [(ngModel)]="racetype.ridername" placeholder="Rider Name" required
+                            minlength="1" #rider="ngModel" pattern="[a-zA-Z _]*" /> {{ridername}}
+                          <div class="error" *ngIf="rider.invalid && (rider.dirty || rider.touched)">
+                            <div class="error" *ngIf="rider.errors?.required && (rider.dirty || rider.touched) && racetypeList.length==0"> rider name field can't be blank</div>
+                            <div class="error" *ngIf="rider.errors?.pattern  && (rider.dirty || rider.touched)">The rider name doesn't seem right</div>
+                          </div>
+                        </div>
+                        <div class="form-group input-field col-md-4">
+                          <label for="inputState">Horse Name</label>
+                          <input type="text" class="form-control" name="horsename" #horse="ngModel" pattern="[a-zA-Z _]*" [(ngModel)]="racetype.horsename"
+                            placeholder="Horse Name" required/> {{horsename}} {{horse.length}}
+                          <div class="error" *ngIf=" horse.invalid && (horse.dirty || horse.touched)">
+                            <div class="error" *ngIf="horse.errors?.required && racetypeList.length==0"> horse name field can't be blank</div>
+                            <div class="error" *ngIf="horse.errors?.pattern && horse.touched">The horse name doesn't seem right</div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group input-field form-group col-md-9">
+                          <input type="checkbox" class="checkbox" name="minor" [(ngModel)]="racetype.minor">Minor &nbsp;&nbsp;
+                          <input type="text" class="form-control col-md-8" placeholder="Guardian Name" pattern="[a-zA-Z _]*" name="guardian_name" *ngIf="racetype.minor"
+                            [(ngModel)]="racetype.parentname" />
+                          <div class="error" *ngIf="  racetype.minor && parentname.invalid && (parentname.dirty || parentname.touched)">
+                            <div class="error" *ngIf="racetype.minor && parentname.errors?.required && racetypeList.length==0"> Guardian name field can't be blank</div>
+                            <div class="error" *ngIf="racetype.minor && parentname.errors?.pattern && parentname.touched">The horse name doesn't seem right</div>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group input-field form-group col-md-3">
+
+                          <a class="btn swatch-pink" (click)="fileInput.click()">
+                            <i class="material-icons navi">file_upload</i>Choose File</a>
+                          <input hidden type="file" #fileInput ng2FileSelect [uploader]="uploader" name="fileupload" id="fileupload" [(ngModel)]="racetype.filename"
+                          />
+                          <div *ngFor="let item of uploader.queue">
+                            <i>attachment</i>{{item.file.name}}
+                            <br>
+
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="form-row">
+                        <div class="form-group input-field form-group col-md-7">
+                          <button class="btn btn-light btn-sm" *ngIf="rideType.valid && rider.valid && horse.valid" (click)="saveRacetypeLists()">Add</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                      <table class="table table-bordered table-sm" *ngIf="racetypeList.length>0">
+                        <thead>
+                          <tr>
+                            <th>Race Type</th>
+                            <th>Rider Name</th>
+                            <th>Horse Name</th>
+                            <th>Price</th>
+                            <th>Filename</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let racelist of racetypeList">
+                            <td> {{racelist.ridetype[0]}}</td>
+                            <td> {{racelist.ridername}}</td>
+                            <td>{{racelist.horsename}}</td>
+                            <td>{{racelist.ridetype[1] | currency}}</td>
+                            <td>{{racelist.filename}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <!-- Exhibition form -->
+          <div class="card">
+            <div class="card-body">
+              <div class="card-content">
+                <h5 class="card-title">Exhibition</h5>
+
+                <div class="card-text">
+                  <div *ngIf="singleEventData?.etimeslot?.length==0">
+                    <p class="text-info">Exhibition Not Available For This Event</p>
+                  </div>
+                  <div *ngFor="let time of singleEventData.etimeslot; let i = index;">
+                    <div class="form-row">
+                      <input type="checkbox" class="form-group checkbox" name="selected_etimeslot" [(ngModel)]="time.selected">
+                      <span>
+                        <strong>{{time.exhibition_day}}</strong>
+                      </span>{{time.from.hour+":"+time.from.minute}}-{{time.to.hour+":"+time.to.minute}}
+                    </div>
+
+                    <div class="form-row">
+                      <div class="full-width form-group input-field col-md-5">
+                        <label for="inputEventName4">Enter No. of Exhibitions</label>
+
+                        <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_exhibition>
+                          {{time.entryQuantity?time.exhibitions_quantity-time.entryQuantity:time.exhibitions_quantity}}
+                        </span>
+                        <input type="text" class="form-control" name="exhibitions_quantity{{i}}" (keyup)="validateExhibitionquantity($event,time.entryQuantity,time.exhibitions_quantity)"
+                          value="{{0}}" [(ngModel)]="time.entryQuantity" (ngModelChange)="getTotal()" placeholder="Enter No. of Exhibitions "
+                          [readonly]="!time.selected" #keyup_input #exhibitions_quantity="ngModel" required minlength="3" maxlength="6"
+                          pattern="[0-9]*" onkeypress="return event.charCode >= 48 && event.charCode <= 57" ondragstart="return false;"
+                          ondrop="return false;" />
+                        <div class="error" *ngIf="exhibitions_quantity.invalid && (exhibitions_quantity.dirty || exhibitions_quantity.touched) && time.selected">
+                          <div class="error" *ngIf="exhibitions_quantity.errors?.required"> exhibitions_quantity field can't be blank</div>
+                          <div class="error" *ngIf="exhibitions_quantity.errors?.pattern && exhibitions_quantity.touched">The exhibitions_quantity doesn't seem right</div>
+                        </div>
+                      </div>
+
+                      <div class="full-width form-group  col-md-5 input-field">
+                        <label for="inputEventName4">entryfee</label>
+                        <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                          ${{time.exhibitions_fee}}
+                        </span>
+                        <input type="text" class="form-control" name="entryfee" value="{{time.exhibitions_fee*time.entryQuantity}}" [(ngModel)]="eventSignUpData.exhibitions_fee"
+                          placeholder="entryfee" readonly #keyup_entryfee #entryfee="ngModel" required minlength="3" maxlength="6"
+                          pattern="[0-9]*" />
+                        <div class="error" *ngIf="entryfee.invalid && (entryfee.dirty || entryfee.touched)">
+                          <div class="error" *ngIf="entryfee.errors?.required"> entryfee field can't be blank</div>
+                          <div class="error" *ngIf="entryfee.errors?.pattern && entryfee.touched">The entryfee doesn't seem right</div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="card-content">
+                <h5 class="card-title">Warm Up</h5>
+                <div class="card-text">
+                  <div *ngIf="singleEventData?.wtimeslot?.length == 0">
+                    <p class="text-info">Warmups Not Available For This Event</p>
+                  </div>
+                  <div *ngFor="let wtime of singleEventData.wtimeslot; let i = index;">
+                    <div class="form-row">
+                      <input type="checkbox" class="form-group checkbox" name="selected_wtimeslot" [(ngModel)]="wtime.selected">
+                      <span>
+                        <strong>{{wtime.warmup_day}}</strong>
+                      </span>{{wtime.from.hour+":"+wtime.from.minute}}-{{wtime.to.hour+":"+wtime.to.minute}}
+                    </div>
+
+                    <div class="form-row">
+                      <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                        <label for="inputEventName4">warmup_quantity</label>
+                        <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_warmup>
+                          {{wtime.wentryQuantity?wtime.warmup_quantity-wtime.wentryQuantity:wtime.warmup_quantity}}</span>
+                        <input type="text" class="form-control" name="warmup_quantity{{i}}" (keyup)="validateWarmupquantity($event,wtime.wentryQuantity,wtime.warmup_quantity)"
+                          value="{{0}}" [(ngModel)]="wtime.wentryQuantity" (ngModelChange)="getTotal()" placeholder="Enter No. of Warmups "
+                          [readonly]="!wtime.selected" #warmup_quantity="ngModel" required minlength="3" maxlength="6" pattern="[0-9]*"
+                          #keyup_winput onkeypress="return event.charCode >= 48 && event.charCode <= 57" ondragstart="return false;"
+                          ondrop="return false;" />
+                        <div class="error" *ngIf="warmup_quantity.invalid && (warmup_quantity.dirty || warmup_quantity.touched)">
+                          <div class="error" *ngIf="warmup_quantity.errors?.required"> warmup_quantity field can't be blank</div>
+                          <div class="error" *ngIf="warmup_quantity.errors?.pattern && warmup_quantity.touched">The warmup_quantity doesn't seem right</div>
+                        </div>
+                      </div>
+
+                      <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                        <label for="inputEventName4">wentryfee</label>
+                        <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                          ${{wtime.warmup_fee}}
+                        </span>
+                        <input type="text" class="form-control" name="wentryfee" value="{{wtime.warmup_fee*wtime.wentryQuantity}}" [(ngModel)]="eventSignUpData.warmup_fee"
+                          placeholder="wentryfee" readonly #keyup_wentryfee #wentryfee="ngModel" required minlength="3" maxlength="6"
+                          pattern="[0-9]*" />
+                        <!-- <span matSuffix="end">.00</span>
+                                                  <span matPrefix="start">$</span> -->
+                        <div class="error" *ngIf="wentryfee.invalid && (wentryfee.dirty || wentryfee.touched)">
+                          <div class="error" *ngIf="wentryfee.errors?.required"> wentryfee field can't be blank</div>
+                          <div class="error" *ngIf="wentryfee.errors?.pattern && wentryfee.touched">The wentryfee doesn't seem right</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <!-- Add On Fees Form -->
+          <div class="card">
+            <div class="card-body">
+              <div class="card-content">
+                <h5 class="card-title"> Add On Fees</h5>
+
+                <div class="card-text">
+                  <div class="form-row">
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Enter Number Of Stalls</label>
+                      <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_ustall>
+                        {{(eventSignUpData.userStalls? (singleEventData.stalls-eventSignUpData.userStalls):singleEventData.stalls)}}
+                      </span>
+                      <input id="userStalls" type="text" class="form-control" name="userStalls" (keyup)="validateustall($event,eventSignUpData.userStalls,singleEventData.stalls)"
+                        [(ngModel)]="eventSignUpData.userStalls" #keyup_stallinput placeholder="Enter Number Of Stalls" (ngModelChange)="getTotal()"
+                        #userStalls="ngModel" required minlength="3" maxlength="6" pattern="[0-9]*" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        ondragstart="return false;" ondrop="return false;" />
+                      <div class="error" *ngIf="userStalls.errors?.pattern && userStalls.touched">The Stalls must contain only numbers</div>
+                    </div>
+
+
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Price</label>
+                      <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                        ${{singleEventData.stalls_price}}
+                      </span>
+                      <input id="stalls_price" type="text" class="form-control" name="stalls_price" value="{{0}}" [(ngModel)]="eventSignUpData.stalls_price"
+                        placeholder="Price" readonly #keyup_stallfee/>
+                      <!-- <span matSuffix="end">.00</span>
+                                          <span matPrefix="start">$</span> -->
+                    </div>
+
+                  </div>
+                  <div class="form-row">
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Enter Electric Hookup</label>
+                      <span class="badge badge-pill badge-success" data-badge-caption="Available" #keyup_hookup>
+                        {{eventSignUpData.electric_quantity?singleEventData.electric_quantity-eventSignUpData.electric_quantity:singleEventData.electric_quantity}}
+                      </span>
+                      <input id="electric_quantity" type="number" class="form-control" name="electric_quantity" [(ngModel)]="eventSignUpData.electric_quantity"
+                        placeholder="Enter Electric Hookup" (ngModelChange)="getTotal()" #electric_quantity="ngModel" required
+                        minlength="3" maxlength="6" pattern="[0-9]*" (keyup)="validatehookupquantity($event,eventSignUpData.electric_quantity,singleEventData.electric_quantity)"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" ondragstart="return false;" ondrop="return false;"
+                        #keyup_hookupinput />
+                      <div class="error" *ngIf="electric_quantity.errors?.pattern && electric_quantity.touched">The Stalls must contain only numbers</div>
+                    </div>
+
+
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Electrical Hookup Price</label>
+                      <span class="badge badge-pill badge-success" data-badge-caption="./each">
+                        ${{singleEventData.electric_price}}
+                      </span>
+                      <input id="electric_price" type="number" class="form-control" name="electric_price" value="{{0}}" [(ngModel)]="eventSignUpData.electric_price"
+                        placeholder="Electrical Hookup Price" readonly #keyup_hookupfee/>
+                      <!-- <span matSuffix="end">.00</span> -->
+                      <!-- <span matPrefix="start">$</span> -->
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">Shaving Fee</label>
+                      <span class="badge badge-pill badge-success"></span>
+                      <input id="shavings_price" type="number" class="form-control" name="shavings_price" value="{{0}}" [(ngModel)]="eventSignUpData.shavings_price"
+                        placeholder="Shaving Fee " readonly pattern="[0-9]*" />
+                      <!-- <span matSuffix="end">.00</span>
+                                          <span matPrefix="start">$</span> -->
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">late Fee</label>
+
+                      <span class="badge badge-pill badge-success"></span>
+                      <input id="late_fee" type="text" class="form-control" name="late_fee" value="{{0}}" [(ngModel)]="eventSignUpData.late_fee"
+                        placeholder="late Fee" readonly/>
+                      <!-- <span matSuffix="end">.00</span> -->
+                      <!-- <span matPrefix="start">$</span> -->
+                    </div>
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <label for="inputEventName4">office Fee</label>
+
+                      <span class="badge badge-pill badge-success"></span>
+                      <input id="office_fee" type="text" class="form-control" name="office_fee" value="{{0}}" [(ngModel)]="eventSignUpData.office_fee"
+                        placeholder="office Fee " readonly/>
+                      <!-- <span matSuffix="end">.00</span> -->
+                      <!-- <span matPrefix="start">$</span> -->
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="full-width col-xs-5 col-md-5 form-group input-field">
+                      <span class="badge badge-pill badge-success"></span>
+                      <input id="total" type="text" class="form-control" name="total" value="{{singleEventData.total}}" [(ngModel)]="eventSignUpData.total_amount"
+                        readonly/>
+                      <div>
+                        Total Amount
+                      </div>
+                      <!-- <span matSuffix="end">.00</span> -->
+                      <!-- <span matPrefix="start">$</span> -->
+                    </div>
+                  </div>
+                  <button class="btn btn-primary " type="submit" name="action">
+                    <i class="material-icons">done</i> Save
+                  </button>
+                  {{message}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+       
+
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+
+
+</div>

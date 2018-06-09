@@ -1,6 +1,118 @@
-<p>
-  home works!
-</p>
+<header>
+    <div class="main-header ">
 
-<ngb-datepicker [(ngModel)]="model" [disabled]="disabled"></ngb-datepicker>
-
+        <nav class="navbar navbar-expand-sm navbar-light ">
+            <!-- Brand -->
+            <a href="#" class="navbar-brand logo w-30"  title="raceapp logo">
+                <img src="../../assets/images/race-box-logo (2).png" alt="">
+              </a>
+          
+            <!-- Links -->
+            <ul class="navbar-nav w-70">
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#"> 
+                  <i class="navi material-icons">home</i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+          
+              <!-- Dropdown -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                  Events
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" [routerLink]="['/login']"> 
+                    <i class="navi material-icons">  fingerprint</i>
+                    Login
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/register']"> 
+                      <i class="navi material-icons">  person_add</i>
+                      Register
+                    </a>
+                  </li>
+            </ul>
+          </nav>
+    
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="slider-wrapper">
+        <div class="slider-main">
+          <ul>
+            <li>
+              <a href="#">
+                <img src="../../assets/images/barrelracing.jpg" alt="race image one" />
+              </a>
+            </li>
+          </ul>
+  
+        </div>
+  
+        <div class="upvoming-events">
+          <div class="event_header">
+            <h2>Upcoming Events</h2>
+          </div>
+          <div class="event_container">
+            <ul>
+              <li>
+                <a class="upcoming-links">
+                <div>
+                  Event Name
+                </div>
+                
+                <div>
+                    <i class="icon material-icons">place</i> <span>Maddisson</span> 
+                  <br> <i class="icon material-icons">date_range</i> <span>29-03-2018</span>
+                  <br> <i class="icon material-icons">event</i><span>Wednesday</span>
+                </div>
+                </a>
+              </li>
+              <li>
+                  <a class="upcoming-links">
+                <div>
+                  Event Name
+                </div>
+                
+                <div>
+                    <i class="icon material-icons">place</i> <span>Maddisson</span> 
+                  <br> <i class="icon material-icons">date_range</i> <span>29-03-2018</span>
+                  <br> <i class="icon  material-icons">event</i><span>Wednesday</span>
+                </div>
+              </a>
+              </li>
+  
+            </ul>
+  
+  
+            <div class="register-events">
+                <button mat-raised-button> Register Now </button>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row">
+      about raceapp
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>

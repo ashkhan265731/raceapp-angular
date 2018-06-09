@@ -17,6 +17,10 @@ import { AlertService } from './services/alert.service';
 import { DataService } from './services/data.service';
 import { DaysBetweenTwoDatesService } from './services/days-between-two-dates.service';
 import { PostFormDataService } from './services/post-form-data.service';
+import { SocketIoService } from './services/socket-io.service';
+
+
+
 import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -30,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     PasswordResetComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DataService,
     DaysBetweenTwoDatesService,
     PostFormDataService,
+    SocketIoService,
   ],
   bootstrap: [AppComponent]
 })

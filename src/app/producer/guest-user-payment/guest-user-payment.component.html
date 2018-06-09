@@ -1,0 +1,157 @@
+<div id="invoice-POS">
+
+  <div id="top">
+    <div class="logo"></div>
+    <div class="info">
+      <h3>RaceBox </h3>
+    </div>
+    <!--End Info-->
+  </div>
+  <!--End InvoiceTop-->
+
+  <div id="mid">
+    <div class="info">
+      <h5>Contact Info</h5>
+      <p>
+        Address : {{singleUserData?.user_id?.addline1}},{{singleUserData?.user_id?.city}}, {{singleUserData?.user_id?.state}},{{singleUserData?.user_id?.zipcode}}
+        <br> Email : {{singleUserData?.user_id?.email}}
+        <br> Phone : {{singleUserData?.user_id?.phone}}
+        <br>
+      </p>
+    </div>
+  </div>
+  <!--End Invoice Mid-->
+
+  <div id="bot">
+
+    <div id="table">
+      <table>
+        <tr class="tabletitle">
+          <td class="item ">
+            <h5>Item</h5>
+          </td>
+          <td class="Hours">
+            <h5>Qty</h5>
+          </td>
+          <td class="Rate">
+            <h5>Sub Total</h5>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Exhibitions</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">{{exhibition_qty_total }}</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{exhibition_total | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Warmups</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">{{warmup_qty_total }}</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{warmup_total | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Stalls</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">{{singleUserData.userStalls}}</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{singleUserData.stalls_price | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Electric Hookup</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">{{singleUserData.electric_quantity}}</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{singleUserData.electric_price | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Late Fee</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">-</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{singleUserData.late_fee | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="service">
+          <td class="tableitem">
+            <p class="itemtext">Office Fee</p>
+          </td>
+          <td class="tableitem">
+            <p class="itemtext">-</p>
+          </td>
+          <td class="tableitem Rate">
+            <p class="itemtext">{{singleUserData.office_fee | currency}}</p>
+          </td>
+        </tr>
+
+        <tr class="tabletitle">
+          <td></td>
+          <td class="Rate">
+            <h5>Total</h5>
+          </td>
+          <td class="payment Rate">
+            <h5>
+              {{total_fees | currency}}
+            </h5>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+    <!--End Table-->
+
+    <div id="legalcopy">
+      <p class="legal">
+        <strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that
+        time. There will be a 5% interest charge per month on late invoices.
+      </p>
+    </div>
+
+    <div class="form-group row">
+      <label for="exampleFormControlSelect1">Choose Payment Method</label>
+      <select class="form-control col-md-4" id="exampleFormControlSelect1" name="payment_type" [(ngModel)]="payment_type">
+        <option disabled selected>Choose Payment Method</option>
+        <option value="online">online</option>
+        <option value="cash">cash</option>
+      </select>
+      &nbsp;      &nbsp;
+      &nbsp;
+
+      <button class="btn btn-primary col-md-4" *ngIf="payment_type=='cash'">
+          Payment Now
+        </button>
+        <button class="btn btn-primary col-md-4" *ngIf="payment_type=='online'">
+          Payment Not Available
+        </button>
+    </div>
+
+  </div>
+  <!--End InvoiceBot-->
+</div>
+<!--End Invoice-->
